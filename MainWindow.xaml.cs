@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿// TODO later make a Scene class, learn pipelines
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -37,13 +38,13 @@ namespace RECOVER
             DateTime currentFrameTime = DateTime.Now;
             double deltaTime = (currentFrameTime - lastFrameTime).TotalSeconds;
 
-            Update(deltaTime);
+            UpdateGameObjects(deltaTime);
             Render();
 
             lastFrameTime = currentFrameTime;
         }
 
-        private void Update(double deltaTime)
+        private void UpdateGameObjects(double deltaTime)
         {
             foreach (var go in gameObjects)
                 go.Update(deltaTime);
