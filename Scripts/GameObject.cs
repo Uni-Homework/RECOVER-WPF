@@ -2,23 +2,41 @@
 
 namespace RECOVER.Scripts;
 
-public class GameObject
+public class GameObject : DeafNotificationObject
 {
-    public Transform Transform { get; } = new Transform();
-    private List<Component> _components = new();
+    private List<Component> components;
+    private Transform transform;
+
+    public GameObject()
+    {
+        Components = new List<Component>();
+        Transform = new Transform();
+    }
+
+    public List<Component> Components
+    {
+        get => components;
+        private set => Set(ref components, value);
+    }
+
+    public Transform Transform
+    {
+        get => transform; 
+        set => Set(ref transform, value);
+    }
 
     public T AddComponent<T>(T component) where T : Component
     {
         component.GameObject = this;
-        _components.Add(component);
+        components.Add(component);
         return component;
     }
 
-    public T GetComponent<T>() where T : Component => _components.OfType<T>().FirstOrDefault();
+    public T GetComponent<T>() where T : Component => components.OfType<T>().FirstOrDefault();
 
     public void Update(double deltaTime)
     {
-        foreach (var component in _components)
+        foreach (var component in components)
             component.Update(deltaTime);
     }
 }

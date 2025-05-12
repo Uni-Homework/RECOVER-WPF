@@ -1,6 +1,6 @@
-// TODO later make a Scene class, learn pipelines
+// TODO later make a MainScene class, learn pipelines
+
 using System.Windows;
-using System.Windows.Media;
 
 namespace RECOVER
 {
@@ -9,30 +9,9 @@ namespace RECOVER
     /// </summary>
     public partial class MainWindow : Window
     {
-        private DateTime lastFrameTime;
-
         public MainWindow()
         {
             InitializeComponent();
-            Start();
-        }
-
-        private void Start()
-        {
-            lastFrameTime = DateTime.Now;
-            App.CurrentScene.Start();
-            CompositionTarget.Rendering += GameLoop;
-        }
-
-        private void GameLoop(object sender, EventArgs e)
-        {
-            DateTime currentFrameTime = DateTime.Now;
-            double deltaTime = (currentFrameTime - lastFrameTime).TotalSeconds;
-
-            App.CurrentScene.Update(deltaTime);
-            App.CurrentScene.Render(GameCanvas);
-
-            lastFrameTime = currentFrameTime;
         }
     }
 }
