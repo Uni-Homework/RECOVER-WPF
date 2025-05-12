@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using RECOVER.Scripts;
+using RECOVER.Scripts.Engine;
 
-public class PlayerController : Engine.Component
+public class PlayerController : Component
 {
     public override void Update(double deltaTime)
     {
