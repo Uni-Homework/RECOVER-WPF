@@ -7,4 +7,5 @@ namespace RECOVER;
 /// </summary>
 public partial class App : Application
 {
+    public static Scene CurrentScene = new Scene();
 }
