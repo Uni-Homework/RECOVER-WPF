@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
 using RECOVER.Scenes;
+using RECOVER.Type;
 
 namespace RECOVER;
 
@@ -13,6 +14,7 @@ public partial class App : Application, INotifyPropertyChanged
 {
     private DateTime lastFrameTime;
     private SceneView currentScene;
+    private Dictionary<SceneType, SceneView> cacheScenes;
 
     protected override void OnStartup(StartupEventArgs e)
     {
@@ -23,15 +25,32 @@ public partial class App : Application, INotifyPropertyChanged
     public SceneView CurrentScene
     {
         get => currentScene;
-        set => Set(ref currentScene, value);
+        private set => Set(ref currentScene, value);
     }
 
     private void Start()
     {
         lastFrameTime = DateTime.Now;
-        CurrentScene = new MainPage(new MainScene());
-        CurrentScene.Scene.Start();
+        cacheScenes = new Dictionary<SceneType, SceneView>();
+
+        SetScene(SceneType.MainScene);
         CompositionTarget.Rendering += GameLoop;
+    }
+
+    public void SetScene(SceneType type)
+    {
+        if (cacheScenes.TryGetValue(type, out var sceneView))
+        {
+            CurrentScene = sceneView;
+        }
+        else
+        {
+            CurrentScene = type switch
+            {
+                SceneType.MainScene => new MainPage(new MainScene())
+            };
+            CurrentScene.Scene.Start();
+        }
     }
 
     private void GameLoop(object sender, EventArgs e)
@@ -46,17 +65,12 @@ public partial class App : Application, INotifyPropertyChanged
 
     public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-    private void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
     protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
     {
         if (Equals(field, value))
             return false;
         field = value;
-        OnPropertyChanged(propertyName);
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         return true;
     }
 }
