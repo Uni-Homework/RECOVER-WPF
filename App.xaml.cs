@@ -33,7 +33,7 @@ public partial class App : Application, INotifyPropertyChanged
         lastFrameTime = DateTime.Now;
         cacheScenes = new Dictionary<SceneType, SceneView>();
 
-        SetScene(SceneType.MainScene);
+        SetScene(SceneType.MainBaseScene);
         CompositionTarget.Rendering += GameLoop;
     }
 
@@ -47,9 +47,9 @@ public partial class App : Application, INotifyPropertyChanged
         {
             CurrentScene = type switch
             {
-                SceneType.MainScene => new MainPage(new MainScene())
+                SceneType.MainBaseScene => new MainBase(new MainBaseScene())
             };
-            CurrentScene.Scene.Start();
+            CurrentScene.BaseScene.Start();
         }
     }
 
@@ -58,7 +58,7 @@ public partial class App : Application, INotifyPropertyChanged
         DateTime currentFrameTime = DateTime.Now;
         double deltaTime = (currentFrameTime - lastFrameTime).TotalSeconds;
 
-        CurrentScene.Scene.Update(deltaTime);
+        CurrentScene.BaseScene.Update(deltaTime);
 
         lastFrameTime = currentFrameTime;
     }

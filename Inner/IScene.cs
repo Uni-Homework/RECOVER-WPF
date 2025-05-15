@@ -1,4 +1,4 @@
-﻿namespace RECOVER;
+﻿namespace RECOVER.Inner;
 
 public interface IScene
 {

@@ -1,4 +1,4 @@
-// TODO later make a MainScene class, learn pipelines
+// TODO later make a MainBaseScene class, learn pipelines
 
 using System.Windows;
 

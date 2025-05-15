@@ -2,5 +2,5 @@
 
 public enum SceneType
 {
-    MainScene
+    MainBaseScene
 }

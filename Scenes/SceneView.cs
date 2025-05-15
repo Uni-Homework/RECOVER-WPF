@@ -1,15 +1,16 @@
 ﻿using System.Windows.Controls;
+using RECOVER.Inner;
 
 namespace RECOVER.Scenes;
 
 public partial class SceneView : Page
 {
-    private IScene scene;
+    private IScene _baseScene;
 
-    public SceneView(IScene scene)
+    public SceneView(IScene baseScene)
     {
-        this.scene = scene;
+        this._baseScene = baseScene;
     }
 
-    public IScene Scene => scene;
+    public IScene BaseScene => _baseScene;
 }
