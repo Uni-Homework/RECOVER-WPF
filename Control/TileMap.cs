@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using RECOVER.Scripts.Model;
 
 namespace RECOVER.Control;
@@ -21,30 +22,26 @@ public class TileMap : Grid
         IList<Cell> cells = (IList<Cell>)e.NewValue;
 
         tileMap.Children.Clear();
-        GridLength gl = new GridLength(64);
+        GridLength gl = new GridLength(tileMap.WidthOfCell);
 
         Add<ColumnDefinition>(cells.Max(c => c.X), tileMap.ColumnDefinitions, cs => cs.Width = gl);
         Add<RowDefinition>(cells.Max(c => c.Y), tileMap.RowDefinitions, cs => cs.Height = gl);
-        
+
         foreach (var c in cells)
         {
-            Button text = new Button();
-            text.SetBinding(ColumnProperty, new Binding
+            Image image = new Image();
+            image.Source = (ImageSource)App.Current.Resources[c.Type.ToString()];
+            image.SetBinding(ColumnProperty, new Binding
             {
-                Source = c, // элемент-источник
+                Source = c,
                 Path = new PropertyPath(nameof(c.X))
             });
-            text.SetBinding(RowProperty, new Binding
+            image.SetBinding(RowProperty, new Binding
             {
-                Source = c, // элемент-источник
+                Source = c,
                 Path = new PropertyPath(nameof(c.Y))
             });
-            text.SetBinding(ContentControl.ContentProperty, new Binding
-            {
-                Source = c, // элемент-источник
-                Path = new PropertyPath(nameof(c.Type))
-            });
-            tileMap.Children.Add(text);
+            tileMap.Children.Add(image);
         }
     }
 
@@ -70,4 +67,40 @@ public class TileMap : Grid
     }
 
     #endregion
+
+    #region WidthOfCellDependencyProperty
+
+    public static readonly DependencyProperty WidthOfCellDependencyProperty = DependencyProperty.Register(
+        nameof(WidthOfCell),
+        typeof(double), typeof(TileMap),
+        new FrameworkPropertyMetadata(64.0, OnWidthOfCellChanged));
+
+    static void OnWidthOfCellChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        TileMap tileMap = (TileMap)d;
+        GridLength gl = new GridLength(tileMap.WidthOfCell);
+
+        foreach (var column in tileMap.ColumnDefinitions)
+        {
+            column.Width = gl;
+        }
+
+        foreach (var column in tileMap.RowDefinitions)
+        {
+            column.Height = gl;
+        }
+    }
+
+    public double WidthOfCell
+    {
+        get => (double)GetValue(WidthOfCellDependencyProperty);
+        set => SetValue(WidthOfCellDependencyProperty, value);
+    }
+
+    #endregion
+
+    public TileMap()
+    {
+        ShowGridLines = false;
+    }
 }

@@ -51,7 +51,12 @@ public class MapLayoutLoader
 {
     public static List<Cell> GetMapsBy(SceneType mainBaseScene)
     {
-        string d = "11111111\n12221121\n12222221\n12222121\n12222221\n11111111";
+        string d = "1111111111\n" +
+                   "1222111121\n" +
+                   "1222211221\n" +
+                   "1222211121\n" +
+                   "1222221121\n" +
+                   "1111111111";
         string[] s = d.Split("\n");
         List<Cell> cells = new List<Cell>();
 
@@ -59,7 +64,7 @@ public class MapLayoutLoader
         {
             for (int y = 0; y < s[x].Length; y++)
             {
-                cells.Add(new Cell(x, y, int.Parse(s[x].Substring(y, 1))));
+                cells.Add(new Cell(y, x, Enum.GetValues<TileType>()[int.Parse(s[x].Substring(y, 1)) - 1]));
             }
         }
 

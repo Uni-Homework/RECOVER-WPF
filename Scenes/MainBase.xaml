@@ -5,15 +5,39 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:recover="clr-namespace:RECOVER"
       xmlns:c="clr-namespace:RECOVER.Control"
+      xmlns:conv="clr-namespace:RECOVER.Converter"
       mc:Ignorable="d"
-      Title="MainBase" Height="450" Width="800"
+      x:Name="ThisPage"
       d:DataContext="{d:DesignInstance recover:MainBaseScene, IsDesignTimeCreatable=True}">
-    <Grid>
-        <Canvas Background="Black">
-            <c:TileMap ItemSource="{Binding BaseMap}"></c:TileMap>
-            <Ellipse Width="20" Height="20" Fill="White"
-                     Canvas.Left="{Binding Player.Transform.Position.X}"
-                     Canvas.Top="{Binding Player.Transform.Position.Y}" />
-        </Canvas>
-    </Grid>
+
+    <Page.Resources>
+        <conv:NegativeDoubleConvert x:Key="NegativeDoubleConvert" />
+    </Page.Resources>
+
+    <Canvas Width="{Binding ElementName=ThisPage, Path=ActualWidth}" 
+            Height="{Binding ElementName=ThisPage, Path=ActualHeight}">
+
+        <Canvas.RenderTransform>
+            <TranslateTransform>
+                <TranslateTransform.X>
+                    <MultiBinding Converter="{StaticResource NegativeDoubleConvert}">
+                        <Binding Path="Player.Transform.Position.X" />
+                        <Binding ElementName="ThisPage" Path="ActualWidth" />
+                    </MultiBinding>
+                </TranslateTransform.X>
+                <TranslateTransform.Y>
+                    <MultiBinding Converter="{StaticResource NegativeDoubleConvert}">
+                        <Binding Path="Player.Transform.Position.Y" />
+                        <Binding ElementName="ThisPage" Path="ActualHeight" />
+                    </MultiBinding>
+                </TranslateTransform.Y>
+            </TranslateTransform>
+        </Canvas.RenderTransform>
+
+        <c:TileMap ItemSource="{Binding BaseMap}" WidthOfCell="64"></c:TileMap>
+
+        <Ellipse Width="20" Height="20" Fill="White"
+                 Canvas.Left="{Binding Player.Transform.Position.X}"
+                 Canvas.Top="{Binding Player.Transform.Position.Y}" />
+    </Canvas>
 </Page>

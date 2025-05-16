@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-
+        <BitmapImage UriSource="Resource/Tile/floor.png" x:Key="FloorMainBaseTile"></BitmapImage>
+        <BitmapImage UriSource="Resource/Tile/shipwall.png" x:Key="ShipwallMainBaseTile"></BitmapImage>
     </Application.Resources>
 </Application>

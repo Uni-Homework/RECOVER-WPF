@@ -8,4 +8,11 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <None Remove="Resource\Tile\shipwall.png" />
+      <Resource Include="Resource\Tile\shipwall.png" />
+      <None Remove="Resource\Tile\floor.png" />
+      <Resource Include="Resource\Tile\floor.png" />
+    </ItemGroup>
+
 </Project>
