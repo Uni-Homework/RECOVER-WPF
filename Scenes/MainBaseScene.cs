@@ -39,6 +39,7 @@ public class MainBaseScene : DeafNotificationObject, IScene, ITangible
         Player.AddComponent(new RigidBody { IsKinematic = false });
         Player.AddComponent(new PlayerController());
         Player.AddComponent(new BoxCollider(20, 20));
+        Player.AddComponent(new PlayerColliderController());
 
         Map = MapLayoutLoader.GetMapsBy(SceneType.MainBaseScene, player);
 
