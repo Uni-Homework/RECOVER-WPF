@@ -1,0 +1,1 @@
+﻿Folder for WPF<->Engine interaction (MVVM, converters, etc.)

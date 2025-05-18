@@ -1,56 +1,37 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
-using RECOVER.Scenes;
-using RECOVER.Type;
+using RECOVER.Assets.Scenes;
 
 namespace RECOVER;
 
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
-public partial class App : Application, INotifyPropertyChanged
+public partial class App : Application
 {
     private DateTime lastFrameTime;
-    private SceneView currentScene;
-    private Dictionary<SceneType, SceneView> cacheScenes;
+    private MainWindow mainWindow;
 
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+        mainWindow = new MainWindow();
+        mainWindow.Show();
         Start();
-    }
-
-    public SceneView CurrentScene
-    {
-        get => currentScene;
-        private set => Set(ref currentScene, value);
     }
 
     private void Start()
     {
         lastFrameTime = DateTime.Now;
-        cacheScenes = new Dictionary<SceneType, SceneView>();
-
-        SetScene(SceneType.MainBaseScene);
+        SetScene();
         CompositionTarget.Rendering += GameLoop;
     }
 
-    public void SetScene(SceneType type)
+    private void SetScene()
     {
-        if (cacheScenes.TryGetValue(type, out var sceneView))
-        {
-            CurrentScene = sceneView;
-        }
-        else
-        {
-            CurrentScene = type switch
-            {
-                SceneType.MainBaseScene => new MainBase(new MainBaseScene())
-            };
-            CurrentScene.BaseScene.Start();
-        }
+        var scene = new MainBaseScene();
+        mainWindow.Content = new MainBase();
+        scene.Start();
     }
 
     private void GameLoop(object sender, EventArgs e)
@@ -58,19 +39,12 @@ public partial class App : Application, INotifyPropertyChanged
         DateTime currentFrameTime = DateTime.Now;
         double deltaTime = (currentFrameTime - lastFrameTime).TotalSeconds;
 
-        CurrentScene.BaseScene.Update(deltaTime);
+        if (mainWindow.Content is MainBase mainBase && mainBase.BaseScene != null)
+        {
+            mainBase.BaseScene.Update(deltaTime);
+            mainBase.BaseScene.UpdatePhysics(deltaTime);
+        }
 
         lastFrameTime = currentFrameTime;
-    }
-
-    public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-    protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-    {
-        if (Equals(field, value))
-            return false;
-        field = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        return true;
     }
 }
