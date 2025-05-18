@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:recover="clr-namespace:RECOVER"
       xmlns:c="clr-namespace:RECOVER.Control"
       xmlns:conv="clr-namespace:RECOVER.Converter"
       xmlns:scenes="clr-namespace:RECOVER.Scenes"
@@ -24,13 +23,13 @@
             <TransformGroup>
                 <TranslateTransform>
                     <TranslateTransform.X>
-                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}">
+                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}" ConverterParameter="15">
                             <Binding Path="Player.Transform.Position.X" />
                             <Binding ElementName="ThisPage" Path="ActualWidth" />
                         </MultiBinding>
                     </TranslateTransform.X>
                     <TranslateTransform.Y>
-                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}">
+                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}" ConverterParameter="15">
                             <Binding Path="Player.Transform.Position.Y" />
                             <Binding ElementName="ThisPage" Path="ActualHeight" />
                         </MultiBinding>
@@ -47,7 +46,7 @@
             <c:TileMap ItemSource="{Binding Map.CellsOfMap}" WidthOfCell="64" HeightOfCell="64"  />
         </Grid>
 
-        <Image Width="30" Height="30" Name="PlayerImage"
+        <Image Width="30" Height="30"
            Canvas.Left="{Binding Player.Transform.Position.X}"
            Canvas.Top="{Binding Player.Transform.Position.Y}">
             <Image.RenderTransform>
