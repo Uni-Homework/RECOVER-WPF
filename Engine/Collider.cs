@@ -7,10 +7,11 @@ public abstract class Collider : Component, IDisposable
 {
     private bool _isTrigger;
 
-    protected Collider()
-    {
-        ColliderMap.RegisterGlobal(this);
-    }
+    // TODO
+    // protected Collider()
+    // {
+    //     ColliderMap.RegisterGlobal(this);
+    // }
 
     public virtual Rect Bounds { get; }
 
@@ -23,10 +24,11 @@ public abstract class Collider : Component, IDisposable
     public abstract bool Intersects(Collider other);
     public abstract bool IntersectsDelta(Collider other, double deltaTime);
 
-    public void Dispose()
-    {
-        ColliderMap.RemoveGlobal(this);
-    }
+    // TODO
+    // public void Dispose()
+    // {
+    //     ColliderMap.RemoveGlobal(this);
+    // }
 }
 
 public class BoxCollider(double wight, double height) : Collider

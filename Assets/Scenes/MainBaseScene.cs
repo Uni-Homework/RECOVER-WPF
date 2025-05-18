@@ -5,17 +5,18 @@ using RECOVER.Scripts.Engine;
 using RECOVER.Scripts.Model;
 using RECOVER.Type;
 
-public class MainBaseScene : DeafNotificationObject, IScene, ITangible
+public class MainBaseScene : DeafNotificationObject, IScene
 {
     private GameObject player;
     private List<GameObject> gameObjects;
-    private Map map;
-    private ColliderMap colliderMap;
+    // TODO
+    // private Map map;
+    // private ColliderMap colliderMap;
 
     public MainBaseScene()
     {
         this.gameObjects = new List<GameObject>();
-        this.colliderMap = new ColliderMap();
+        // this.colliderMap = new ColliderMap();
     }
 
     public GameObject Player
@@ -24,11 +25,12 @@ public class MainBaseScene : DeafNotificationObject, IScene, ITangible
         private set => Set(ref player, value);
     }
 
-    public Map Map
-    {
-        get => map;
-        private set => Set(ref map, value);
-    }
+    // TODO
+    // public Map Map
+    // {
+    //     get => map;
+    //     private set => Set(ref map, value);
+    // }
 
     public void Start()
     {
@@ -39,13 +41,15 @@ public class MainBaseScene : DeafNotificationObject, IScene, ITangible
         Player.AddComponent(new BoxCollider(20, 20));
         Player.AddComponent(new PlayerColliderController());
 
-        Map = MapLayoutLoader.GetMapsBy(SceneType.MainBaseScene, player);
+        // TODO: re-enable the TileMap here
+        // Map = MapLayoutLoader.GetMapsBy(SceneType.MainBaseScene, player);
 
         gameObjects.Add(Player);
-        gameObjects.Add(new GameObject
-        {
-            Components = { Map }
-        });
+        // TODO
+        // gameObjects.Add(new GameObject
+        // {
+        //     Components = { Map }
+        // });
     }
 
     public void Update(double deltaTime)
@@ -54,5 +58,5 @@ public class MainBaseScene : DeafNotificationObject, IScene, ITangible
             go.Update(deltaTime);
     }
 
-    public ColliderMap ColliderMap => colliderMap;
+    // public ColliderMap ColliderMap => colliderMap;
 }
