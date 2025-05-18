@@ -1,7 +1,6 @@
 ﻿using System.Windows;
-using RECOVER.Inner;
 
-namespace RECOVER.Scripts.Engine;
+namespace RECOVER.Engine;
 
 public class RigidBody : Component
 {
@@ -10,6 +9,7 @@ public class RigidBody : Component
 
     public override void Update(double deltaTime)
     {
+        base.Update(deltaTime);
         if (!IsKinematic)
         {
             if (UseGravity)

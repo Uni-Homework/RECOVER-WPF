@@ -1,7 +1,6 @@
 ﻿using RECOVER.Inner;
-using RECOVER.Scripts.Engine;
 
-namespace RECOVER.Scripts;
+namespace RECOVER.Engine;
 
 public class GameObject : DeafNotificationObject
 {

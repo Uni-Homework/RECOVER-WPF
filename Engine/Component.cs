@@ -1,6 +1,7 @@
 ﻿using RECOVER.Inner;
+using RECOVER.Scripts;
 
-namespace RECOVER.Scripts.Engine;
+namespace RECOVER.Engine;
 
 public abstract class Component : DeafNotificationObject
 {

@@ -1,4 +1,4 @@
-﻿namespace RECOVER.Scripts.Engine;
+﻿namespace RECOVER.Engine;
 
 public abstract class ColliderReaction : Component
 {

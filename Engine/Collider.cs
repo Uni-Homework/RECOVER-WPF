@@ -1,9 +1,8 @@
 ﻿using System.Windows;
-using RECOVER.Inner;
 
-namespace RECOVER.Scripts.Engine;
+namespace RECOVER.Engine;
 
-public abstract class Collider : Component, IDisposable
+public abstract class Collider : Component
 {
     private bool _isTrigger;
 

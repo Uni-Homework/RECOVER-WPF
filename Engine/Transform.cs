@@ -1,13 +1,13 @@
 ﻿using System.Windows;
 using RECOVER.Inner;
 
-namespace RECOVER.Scripts.Engine;
+namespace RECOVER.Engine;
 
 public class Transform : DeafNotificationObject
 {
     private Vector _position = new Vector(0, 0);
     private Vector _velocity = new Vector(0, 0);
-    private Vector _rotation = new Vector(0, 0);
+    private double _rotation = 0; 
 
     public Vector Position
     {
@@ -21,7 +21,7 @@ public class Transform : DeafNotificationObject
         set => Set(ref _velocity, value);
     }
 
-    public Vector Rotation
+    public double Rotation
     {
         get => _rotation;
         set => Set(ref _rotation, value);
