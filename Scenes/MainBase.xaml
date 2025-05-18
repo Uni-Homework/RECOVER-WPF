@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:recover="clr-namespace:RECOVER"
       xmlns:c="clr-namespace:RECOVER.Control"
       xmlns:conv="clr-namespace:RECOVER.Converter"
       xmlns:scenes="clr-namespace:RECOVER.Scenes"
@@ -13,34 +12,48 @@
 
     <Page.Resources>
         <conv:NegativeDoubleConvert x:Key="NegativeDoubleConvert" />
+        <conv:HalfValueConverter x:Key="HalfValueConverter" />
+        <conv:NegateValueConverter x:Key="NegateValueConverter" />
     </Page.Resources>
 
-    <Canvas Width="{Binding ElementName=ThisPage, Path=ActualWidth}" 
+    <Canvas Width="{Binding ElementName=ThisPage, Path=ActualWidth}"
             Height="{Binding ElementName=ThisPage, Path=ActualHeight}">
 
         <Canvas.RenderTransform>
-            <TranslateTransform>
-                <TranslateTransform.X>
-                    <MultiBinding Converter="{StaticResource NegativeDoubleConvert}">
-                        <Binding Path="Player.Transform.Position.X" />
-                        <Binding ElementName="ThisPage" Path="ActualWidth" />
-                    </MultiBinding>
-                </TranslateTransform.X>
-                <TranslateTransform.Y>
-                    <MultiBinding Converter="{StaticResource NegativeDoubleConvert}">
-                        <Binding Path="Player.Transform.Position.Y" />
-                        <Binding ElementName="ThisPage" Path="ActualHeight" />
-                    </MultiBinding>
-                </TranslateTransform.Y>
-            </TranslateTransform>
+            <TransformGroup>
+                <TranslateTransform>
+                    <TranslateTransform.X>
+                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}" ConverterParameter="15">
+                            <Binding Path="Player.Transform.Position.X" />
+                            <Binding ElementName="ThisPage" Path="ActualWidth" />
+                        </MultiBinding>
+                    </TranslateTransform.X>
+                    <TranslateTransform.Y>
+                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}" ConverterParameter="15">
+                            <Binding Path="Player.Transform.Position.Y" />
+                            <Binding ElementName="ThisPage" Path="ActualHeight" />
+                        </MultiBinding>
+                    </TranslateTransform.Y>
+                </TranslateTransform>
+                <RotateTransform
+                    CenterX="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={StaticResource HalfValueConverter}}"
+                    CenterY="{Binding ElementName=ThisPage, Path=ActualHeight, Converter={StaticResource HalfValueConverter}}"
+                    Angle="{Binding Player.Transform.Rotation.Y, Converter={StaticResource NegateValueConverter}}" />
+            </TransformGroup>
         </Canvas.RenderTransform>
 
         <Grid>
-            <c:TileMap ItemSource="{Binding Map.CellsOfMap}" WidthOfCell="64" HeightOfCell="64"  />
+            <c:TileMap ItemSource="{Binding Map.CellsOfMap}" WidthOfCell="64" HeightOfCell="64" />
         </Grid>
 
-        <Ellipse Width="20" Height="20" Fill="White"
-                 Canvas.Left="{Binding Player.Transform.Position.X}"
-                 Canvas.Top="{Binding Player.Transform.Position.Y}" />
+        <Image Width="30" Height="30"
+               Source="{StaticResource PlayerMen}"
+               Canvas.Left="{Binding Player.Transform.Position.X}"
+               Canvas.Top="{Binding Player.Transform.Position.Y}">
+            <Image.RenderTransform>
+                <RotateTransform CenterX="15" CenterY="15" Angle="{Binding Player.Transform.Rotation.Y}" />
+            </Image.RenderTransform>
+        </Image>
+
     </Canvas>
 </Page>

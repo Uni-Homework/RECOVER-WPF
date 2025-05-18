@@ -5,5 +5,8 @@
     <Application.Resources>
         <BitmapImage UriSource="Resource/Tile/floor.png" x:Key="FloorMainBaseTile"></BitmapImage>
         <BitmapImage UriSource="Resource/Tile/shipwall.png" x:Key="ShipwallMainBaseTile"></BitmapImage>
+        <BitmapImage UriSource="/RECOVER;component/Resource/Player/Spacesuit.png" DecodePixelHeight="30"
+                     x:Key="PlayerMen">
+        </BitmapImage>
     </Application.Resources>
 </Application>

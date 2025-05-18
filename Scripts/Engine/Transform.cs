@@ -7,6 +7,7 @@ public class Transform : DeafNotificationObject
 {
     private Vector _position = new Vector(0, 0);
     private Vector _velocity = new Vector(0, 0);
+    private Vector _rotation = new Vector(0, 0);
 
     public Vector Position
     {
@@ -18,5 +19,11 @@ public class Transform : DeafNotificationObject
     {
         get => _velocity;
         set => Set(ref _velocity, value);
+    }
+
+    public Vector Rotation
+    {
+        get => _rotation;
+        set => Set(ref _rotation, value);
     }
 }
