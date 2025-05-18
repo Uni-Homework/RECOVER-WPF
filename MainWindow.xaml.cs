@@ -1,5 +1,3 @@
-// TODO later make a MainBaseScene class, learn pipelines
-
 using System.Windows;
 
 namespace RECOVER

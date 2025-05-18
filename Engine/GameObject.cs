@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using RECOVER.Engine.Components;
 using RECOVER.Engine.WPFTools;
 
 namespace RECOVER.Engine;
@@ -12,7 +13,7 @@ public class GameObject : DeafNotificationObject
     {
         components = new List<Component>();
         transform = new Transform();
-        System.Diagnostics.Debug.WriteLine($"GameObject constructor called for {GetType().Name}");
+        Debug.WriteLine($"GameObject constructor called for {GetType().Name}");
     }
 
     public List<Component> Components
@@ -31,13 +32,13 @@ public class GameObject : DeafNotificationObject
     {
         if (component == null)
         {
-            System.Diagnostics.Debug.WriteLine($"Warning: Attempted to add null component to {GetType().Name}");
+            Debug.WriteLine($"Warning: Attempted to add null component to {GetType().Name}");
             return null;
         }
 
         component.GameObject = this;
         components.Add(component);
-        System.Diagnostics.Debug.WriteLine($"Added component {component.GetType().Name} to {GetType().Name}");
+        Debug.WriteLine($"Added component {component.GetType().Name} to {GetType().Name}");
         return component;
     }
 
@@ -45,30 +46,30 @@ public class GameObject : DeafNotificationObject
 
     public virtual void Update(double deltaTime)
     {
-        System.Diagnostics.Debug.WriteLine($"GameObject.Update() called for {GetType().Name}, deltaTime: {deltaTime}");
+        Debug.WriteLine($"GameObject.Update() called for {GetType().Name}, deltaTime: {deltaTime}");
         foreach (var component in components) 
         {
             if (component == null)
             {
-                System.Diagnostics.Debug.WriteLine($"Warning: Null component found in {GetType().Name}");
+                Debug.WriteLine($"Warning: Null component found in {GetType().Name}");
                 continue;
             }
-            System.Diagnostics.Debug.WriteLine($"Updating component {component.GetType().Name}");
+            Debug.WriteLine($"Updating component {component.GetType().Name}");
             component.Update(deltaTime);
         }
     }
 
     public virtual void Start()
     {
-        System.Diagnostics.Debug.WriteLine($"GameObject.Start() called for {GetType().Name}");
+        Debug.WriteLine($"GameObject.Start() called for {GetType().Name}");
         foreach (var component in components) 
         {
             if (component == null)
             {
-                System.Diagnostics.Debug.WriteLine($"Warning: Null component found in {GetType().Name}");
+                Debug.WriteLine($"Warning: Null component found in {GetType().Name}");
                 continue;
             }
-            System.Diagnostics.Debug.WriteLine($"Starting component {component.GetType().Name}");
+            Debug.WriteLine($"Starting component {component.GetType().Name}");
             component.Start();
         }
     }

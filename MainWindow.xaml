@@ -7,6 +7,4 @@
         Title="RECOVER"
         WindowStyle="None"
         WindowState="Maximized">
-
-    <Frame Background="Black" Content="{Binding Source={x:Static Application.Current}, Path=CurrentScene}"/>
 </Window>

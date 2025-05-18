@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace RECOVER.Engine;
+namespace RECOVER.Engine.Components;
 
 public class RigidBody : Component
 {

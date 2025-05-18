@@ -1,7 +1,6 @@
 ﻿using RECOVER.Engine.WPFTools;
-using RECOVER.Scripts;
 
-namespace RECOVER.Engine;
+namespace RECOVER.Engine.Components;
 
 public abstract class Component : DeafNotificationObject
 {

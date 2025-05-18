@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using RECOVER.Engine;
+using RECOVER.Engine.Components;
 
-namespace RECOVER.Scripts;
+namespace RECOVER.Assets.Prefabs.Player;
 
 public class PlayerColliderController : ColliderReaction
 {
@@ -13,21 +13,5 @@ public class PlayerColliderController : ColliderReaction
     public override void OnCollisionStay()
     {
         GameObject.Transform.Velocity = new Vector();
-    }
-
-    public override void OnCollisionExit()
-    {
-    }
-
-    public override void OnTriggerEnter()
-    {
-    }
-
-    public override void OnTriggerStay()
-    {
-    }
-
-    public override void OnTriggerExit()
-    {
     }
 }

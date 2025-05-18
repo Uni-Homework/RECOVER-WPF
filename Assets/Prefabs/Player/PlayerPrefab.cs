@@ -1,8 +1,7 @@
-﻿using System.Runtime.CompilerServices;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media.Imaging;
 using RECOVER.Engine;
-using RECOVER.Scripts;
+using RECOVER.Engine.Components;
 
 namespace RECOVER.Assets.Prefabs.Player;
 

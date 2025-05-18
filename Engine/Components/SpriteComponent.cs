@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace RECOVER.Engine;
+namespace RECOVER.Engine.Components;
 
 public class SpriteComponent : Component
 {

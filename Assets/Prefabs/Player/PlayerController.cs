@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using RECOVER.Engine;
+using RECOVER.Engine.Components;
 
-namespace RECOVER.Scripts;
+namespace RECOVER.Assets.Prefabs.Player;
 
 public class PlayerController : Component
 {

@@ -1,11 +1,28 @@
-﻿namespace RECOVER.Engine;
+﻿namespace RECOVER.Engine.Components;
 
 public abstract class ColliderReaction : Component
 {
-    public abstract void OnCollisionEnter();
-    public abstract void OnCollisionStay();
-    public abstract void OnCollisionExit();
-    public abstract void OnTriggerEnter();
-    public abstract void OnTriggerStay();
-    public abstract void OnTriggerExit();
+    public virtual void OnCollisionEnter()
+    {
+    }
+
+    public virtual void OnCollisionStay()
+    {
+    }
+
+    public virtual void OnCollisionExit()
+    {
+    }
+
+    public virtual void OnTriggerEnter()
+    {
+    }
+
+    public virtual void OnTriggerStay()
+    {
+    }
+
+    public virtual void OnTriggerExit()
+    {
+    }
 }
