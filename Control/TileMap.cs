@@ -1,106 +1,86 @@
 ﻿using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
-using RECOVER.Scripts.Model;
+using RECOVER.Inner;
+using RECOVER.Scripts;
 
 namespace RECOVER.Control;
 
-public class TileMap : Grid
+public class TileMap : Canvas
 {
-    #region ItemSourceDependencyProperty
+    public static readonly DependencyProperty ItemSourceProperty =
+        DependencyProperty.Register("ItemSource", typeof(IEnumerable), typeof(TileMap),
+            new PropertyMetadata(null, OnItemSourceChanged));
 
-    public static readonly DependencyProperty ItemSourceDependencyProperty = DependencyProperty.Register(
-        nameof(ItemSource),
-        typeof(IList<Cell>), typeof(TileMap),
-        new FrameworkPropertyMetadata(null, OnItemSourceChanged));
-
-    static void OnItemSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    public IEnumerable ItemSource
     {
-        TileMap tileMap = (TileMap)d;
-        IList<Cell> cells = (IList<Cell>)e.NewValue;
-
-        tileMap.Children.Clear();
-        GridLength gl = new GridLength(tileMap.WidthOfCell);
-
-        Add<ColumnDefinition>(cells.Max(c => c.X), tileMap.ColumnDefinitions, cs => cs.Width = gl);
-        Add<RowDefinition>(cells.Max(c => c.Y), tileMap.RowDefinitions, cs => cs.Height = gl);
-
-        foreach (var c in cells)
-        {
-            Image image = new Image();
-            image.Source = (ImageSource)App.Current.Resources[c.Type.ToString()];
-            image.SetBinding(ColumnProperty, new Binding
-            {
-                Source = c,
-                Path = new PropertyPath(nameof(c.X))
-            });
-            image.SetBinding(RowProperty, new Binding
-            {
-                Source = c,
-                Path = new PropertyPath(nameof(c.Y))
-            });
-            tileMap.Children.Add(image);
-        }
+        get { return (IEnumerable)GetValue(ItemSourceProperty); }
+        set { SetValue(ItemSourceProperty, value); }
     }
 
-    private static void Add<T>(int max, IList definitions, Action<T> action)
-    {
-        while (definitions.Count < max)
-        {
-            T inst = (T)Activator.CreateInstance(typeof(T));
-            definitions.Add(inst);
-            action.Invoke(inst);
-        }
-
-        while (definitions.Count > max)
-        {
-            definitions.RemoveAt(definitions.Count - 1);
-        }
-    }
-
-    public IList<Cell> ItemSource
-    {
-        get => (IList<Cell>)GetValue(ItemSourceDependencyProperty);
-        set => SetValue(ItemSourceDependencyProperty, value);
-    }
-
-    #endregion
-
-    #region WidthOfCellDependencyProperty
-
-    public static readonly DependencyProperty WidthOfCellDependencyProperty = DependencyProperty.Register(
-        nameof(WidthOfCell),
-        typeof(double), typeof(TileMap),
-        new FrameworkPropertyMetadata(64.0, OnWidthOfCellChanged));
-
-    static void OnWidthOfCellChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        TileMap tileMap = (TileMap)d;
-        GridLength gl = new GridLength(tileMap.WidthOfCell);
-
-        foreach (var column in tileMap.ColumnDefinitions)
-        {
-            column.Width = gl;
-        }
-
-        foreach (var column in tileMap.RowDefinitions)
-        {
-            column.Height = gl;
-        }
-    }
+    public static readonly DependencyProperty WidthOfCellProperty =
+        DependencyProperty.Register("WidthOfCell", typeof(double), typeof(TileMap),
+            new PropertyMetadata(64.0, OnWidthOfCellChanged));
 
     public double WidthOfCell
     {
-        get => (double)GetValue(WidthOfCellDependencyProperty);
-        set => SetValue(WidthOfCellDependencyProperty, value);
+        get { return (double)GetValue(WidthOfCellProperty); }
+        set { SetValue(WidthOfCellProperty, value); }
     }
 
-    #endregion
+    public static readonly DependencyProperty HeightOfCellProperty =
+        DependencyProperty.Register("HeightOfCell", typeof(double), typeof(TileMap),
+            new PropertyMetadata(64.0, OnHeightOfCellChanged));
 
-    public TileMap()
+    public double HeightOfCell
     {
-        ShowGridLines = false;
+        get { return (double)GetValue(HeightOfCellProperty); }
+        set { SetValue(HeightOfCellProperty, value); }
+    }
+
+    private static void OnItemSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var tileMap = (TileMap)d;
+        tileMap.Children.Clear();
+        tileMap.DrawTiles();
+    }
+
+    private static void OnWidthOfCellChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var tileMap = (TileMap)d;
+        tileMap.Children.Clear();
+        tileMap.DrawTiles();
+    }
+
+    private static void OnHeightOfCellChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var tileMap = (TileMap)d;
+        tileMap.Children.Clear();
+        tileMap.DrawTiles();
+    }
+
+    private void DrawTiles()
+    {
+        if (ItemSource == null) return;
+
+        var items = ItemSource as List<GameObject>;
+        if (items == null) return;
+
+        foreach (GameObject cell in items)
+        {
+            var image = new Image
+            {
+                Width = WidthOfCell,
+                Height = HeightOfCell,
+                Source = cell.GetComponent<SpriteComponent>().Source,
+                Stretch = Stretch.Fill
+            };
+
+            SetLeft(image, cell.Transform.Position.X);
+            SetTop(image, cell.Transform.Position.Y);
+
+            Children.Add(image);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using RECOVER.Inner;
 
 namespace RECOVER.Scripts.Engine;
 
@@ -14,7 +15,7 @@ public class RigidBody : Component
             if (UseGravity)
                 GameObject.Transform.Velocity += new Vector(0, 9.81) * deltaTime;
 
-            GameObject.Transform.Position += GameObject.Transform.Velocity * deltaTime;
+            GameObject.Transform.Position += ColliderMap.CheckGlobal(GameObject, deltaTime);
         }
     }
 }
