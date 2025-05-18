@@ -8,7 +8,7 @@ namespace RECOVER.Assets.Prefabs.Player;
 
 public class PlayerPrefab : GameObject
 {
-    public PlayerPrefab(Vector position)
+    public PlayerPrefab(Vector position) : base()
     {
         Transform.Position = position;
         Components.Add(new RigidBody { IsKinematic = false });

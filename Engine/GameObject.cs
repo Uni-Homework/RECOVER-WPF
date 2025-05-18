@@ -1,4 +1,5 @@
-﻿using RECOVER.Engine.WPFTools;
+﻿using System.Windows;
+using RECOVER.Engine.WPFTools;
 
 namespace RECOVER.Engine;
 
