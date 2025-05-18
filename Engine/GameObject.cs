@@ -1,8 +1,8 @@
-﻿using RECOVER.Inner;
+﻿using RECOVER.Engine.WPFTools;
 
 namespace RECOVER.Engine;
 
-public class GameObject : DeafNotificationObject
+public abstract class GameObject : DeafNotificationObject
 {
     private List<Component> components;
     private Transform transform;
@@ -34,9 +34,13 @@ public class GameObject : DeafNotificationObject
 
     public T GetComponent<T>() where T : Component => components.OfType<T>().FirstOrDefault();
 
-    public void Update(double deltaTime)
+    public virtual void Update(double deltaTime)
     {
-        foreach (var component in components)
-            component.Update(deltaTime);
+        foreach (var component in components) component.Update(deltaTime);
+    }
+
+    public virtual void Start()
+    {
+        foreach (var component in components) component.Start(); 
     }
 }

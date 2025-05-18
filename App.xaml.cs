@@ -2,19 +2,15 @@
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
-using RECOVER.Type;
-using SceneView = RECOVER.Assets.Scenes.SceneView;
 
 namespace RECOVER;
 
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
-public partial class App : Application, INotifyPropertyChanged
+public partial class App : INotifyPropertyChanged
 {
     private DateTime lastFrameTime;
-    private SceneView currentScene;
-    private Dictionary<SceneType, SceneView> cacheScenes;
 
     protected override void OnStartup(StartupEventArgs e)
     {
@@ -22,43 +18,22 @@ public partial class App : Application, INotifyPropertyChanged
         Start();
     }
 
-    public SceneView CurrentScene
-    {
-        get => currentScene;
-        private set => Set(ref currentScene, value);
-    }
 
     private void Start()
     {
         lastFrameTime = DateTime.Now;
-        cacheScenes = new Dictionary<SceneType, SceneView>();
 
-        SetScene(SceneType.MainBaseScene);
+        // SetScene(SceneType.MainBaseScene);
         CompositionTarget.Rendering += GameLoop;
     }
 
-    public void SetScene(SceneType type)
-    {
-        if (cacheScenes.TryGetValue(type, out var sceneView))
-        {
-            CurrentScene = sceneView;
-        }
-        else
-        {
-            CurrentScene = type switch
-            {
-                SceneType.MainBaseScene => new MainBase(new MainBaseScene())
-            };
-            CurrentScene.BaseScene.Start();
-        }
-    }
 
     private void GameLoop(object sender, EventArgs e)
     {
         DateTime currentFrameTime = DateTime.Now;
         double deltaTime = (currentFrameTime - lastFrameTime).TotalSeconds;
 
-        CurrentScene.BaseScene.Update(deltaTime);
+        // CurrentScene.BaseScene.Update(deltaTime);
 
         lastFrameTime = currentFrameTime;
     }
