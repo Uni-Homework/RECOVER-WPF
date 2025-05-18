@@ -44,7 +44,7 @@ public class ColliderMap
     public void ColliderIteration(GameObject gameObject, double deltaTime)
     {
         Collider goCollider = gameObject.GetComponent<Collider>();
-        ColliderReaction reaction = gameObject.GetComponent<ColliderReaction>();
+        IEnumerable<ColliderReaction> reactions = gameObject.GetComponents<ColliderReaction>();
 
         foreach (var collider in colliders)
         {
@@ -61,33 +61,51 @@ public class ColliderMap
             {
                 if (isTrigger)
                 {
-                    reaction.OnTriggerExit();
+                    foreach (var colliderReaction in reactions)
+                    {
+                        colliderReaction.OnTriggerExit(collider.GameObject);
+                    }
                 }
                 else
                 {
-                    reaction.OnCollisionExit();
+                    foreach (var colliderReaction in reactions)
+                    {
+                        colliderReaction.OnCollisionExit(collider.GameObject);
+                    }
                 }
             }
             else if (ncp && !nop)
             {
                 if (isTrigger)
                 {
-                    reaction.OnTriggerEnter();
+                    foreach (var colliderReaction in reactions)
+                    {
+                        colliderReaction.OnTriggerEnter(collider.GameObject);
+                    }
                 }
                 else
                 {
-                    reaction.OnCollisionEnter();
+                    foreach (var colliderReaction in reactions)
+                    {
+                        colliderReaction.OnCollisionEnter(collider.GameObject);
+                    }
                 }
             }
             else if (ncp && nop)
             {
                 if (isTrigger)
                 {
-                    reaction.OnTriggerStay();
+                    foreach (var colliderReaction in reactions)
+                    {
+                        colliderReaction.OnTriggerStay(collider.GameObject);
+                    }
                 }
                 else
                 {
-                    reaction.OnCollisionStay();
+                    foreach (var colliderReaction in reactions)
+                    {
+                        colliderReaction.OnCollisionStay(collider.GameObject);
+                    }
                 }
             }
         }

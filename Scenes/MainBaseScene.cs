@@ -13,6 +13,7 @@ public class MainBaseScene : DeafNotificationObject, IScene, ITangible
     private List<GameObject> gameObjects;
     private Map map;
     private ColliderMap colliderMap;
+    private ItemActivator _itemActivator;
 
     public MainBaseScene()
     {
@@ -32,16 +33,25 @@ public class MainBaseScene : DeafNotificationObject, IScene, ITangible
         private set => Set(ref map, value);
     }
 
+    public ItemActivator ItemActivator
+    {
+        get => _itemActivator;
+        private set => Set(ref _itemActivator, value);
+    }
+
     public void Start()
     {
+        Map = MapLayoutLoader.GetMapsBy(SceneType.MainBaseScene, player);
+        ItemActivator = new ItemActivator();
+
         Player = new GameObject();
         Player.Transform.Position = new Vector(200, 200);
         Player.AddComponent(new RigidBody { IsKinematic = false });
         Player.AddComponent(new PlayerController());
         Player.AddComponent(new BoxCollider(20, 20));
         Player.AddComponent(new PlayerColliderController());
-
-        Map = MapLayoutLoader.GetMapsBy(SceneType.MainBaseScene, player);
+        Player.AddComponent(new ItemObjectReaction());
+        Player.AddComponent(ItemActivator);
 
         gameObjects.Add(Player);
         gameObjects.Add(new GameObject

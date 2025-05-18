@@ -34,6 +34,8 @@ public class GameObject : DeafNotificationObject
     }
 
     public T GetComponent<T>() where T : Component => components.OfType<T>().FirstOrDefault();
+    
+    public IEnumerable<T> GetComponents<T>() where T : Component => components.OfType<T>();
 
     public void Update(double deltaTime)
     {

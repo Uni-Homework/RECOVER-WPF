@@ -1,8 +1,7 @@
 ﻿using System.Windows.Media;
-using RECOVER.Scripts.Engine;
 using RECOVER.Type;
 
-namespace RECOVER.Inner;
+namespace RECOVER.Scripts.Engine;
 
 public class SpriteComponent(TileType tileType) : Component
 {

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using RECOVER.Scripts;
 using RECOVER.Scripts.Engine;
 using RECOVER.Scripts.Model;
@@ -17,6 +18,17 @@ public class MapLayoutLoader
         { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
         { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
         { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+    };
+    
+    private static int[,] mainBaseMapItem =
+    {
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
     };
 
     public static Map GetMapsBy(SceneType mainBaseScene, GameObject player)
@@ -44,6 +56,14 @@ public class MapLayoutLoader
                     cell.AddComponent(new SpriteComponent((TileType)mainBaseMap[y, x]));
                     cell.AddComponent(new Cell(x, y, Convert.ToBoolean(mainBaseMap[y, x])));
                     cells.Add(cell);
+
+                    if (mainBaseMapItem[y, x] == 1)
+                    {
+                        ItemObject o = new ItemObject(x * map.WidthOfCell, y * map.HeightOfCell, 40, 64, Key.D,
+                            () => { }, "открыть терминал");
+                        o.AddComponent(new SpriteComponent(TileType.ItemTerminalTile));
+                        cells.Add(o);
+                    }
                 }
             }
         }

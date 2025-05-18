@@ -2,27 +2,27 @@
 
 public abstract class ColliderReaction : Component
 {
-    public virtual void OnCollisionEnter()
+    public virtual void OnCollisionEnter(GameObject gameObject)
     {
     }
 
-    public virtual void OnCollisionStay()
+    public virtual void OnCollisionStay(GameObject gameObject)
     {
     }
 
-    public virtual void OnCollisionExit()
+    public virtual void OnCollisionExit(GameObject gameObject)
     {
     }
 
-    public virtual void OnTriggerEnter()
+    public virtual void OnTriggerEnter(GameObject gameObject)
     {
     }
 
-    public virtual void OnTriggerStay()
+    public virtual void OnTriggerStay(GameObject gameObject)
     {
     }
 
-    public virtual void OnTriggerExit()
+    public virtual void OnTriggerExit(GameObject gameObject)
     {
     }
 }

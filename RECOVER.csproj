@@ -15,6 +15,10 @@
       <Resource Include="Resource\Tile\floor.png" />
       <None Remove="Resource\Player\Spacesuit.png" />
       <Resource Include="Resource\Player\Spacesuit.png" />
+      <None Remove="Resource\Item\termenal.png" />
+      <Resource Include="Resource\Item\terminal.png" />
+      <None Remove="Resource\Item\itemTarget.png" />
+      <Resource Include="Resource\Item\itemTarget.png" />
     </ItemGroup>
 
     <ItemGroup>

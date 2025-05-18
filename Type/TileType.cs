@@ -3,5 +3,7 @@
 public enum TileType
 {
     FloorMainBaseTile,
-    ShipwallMainBaseTile
+    ShipwallMainBaseTile,
+    
+    ItemTerminalTile,
 }

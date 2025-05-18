@@ -6,6 +6,7 @@ namespace RECOVER.Scripts.Engine;
 public abstract class Collider : Component, IDisposable
 {
     private bool _isTrigger;
+    private Vector _origin;
 
     protected Collider()
     {
@@ -18,6 +19,12 @@ public abstract class Collider : Component, IDisposable
     {
         get => _isTrigger;
         set => Set(ref _isTrigger, value);
+    }
+
+    public Vector Origin
+    {
+        get => _origin;
+        set => Set(ref _origin, value);
     }
 
     public abstract bool Intersects(Collider other);
@@ -46,8 +53,16 @@ public class BoxCollider(double wight, double height) : Collider
         set => Set(ref height, value);
     }
 
-    public override Rect Bounds => new Rect(GameObject.Transform.Position.X, GameObject.Transform.Position.Y,
-        wight, height);
+    public override Rect Bounds
+    {
+        get
+        {
+            Rect rect = new Rect(GameObject.Transform.Position.X, GameObject.Transform.Position.Y,
+                wight, height);
+            rect.Offset(wight * Origin.X, height * Origin.Y);
+            return rect;
+        }
+    }
 
     public override bool Intersects(Collider other)
     {

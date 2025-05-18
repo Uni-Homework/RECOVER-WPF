@@ -16,44 +16,66 @@
         <conv:NegateValueConverter x:Key="NegateValueConverter" />
     </Page.Resources>
 
-    <Canvas Width="{Binding ElementName=ThisPage, Path=ActualWidth}"
-            Height="{Binding ElementName=ThisPage, Path=ActualHeight}">
+    <Grid>
 
-        <Canvas.RenderTransform>
-            <TransformGroup>
-                <TranslateTransform>
-                    <TranslateTransform.X>
-                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}" ConverterParameter="15">
-                            <Binding Path="Player.Transform.Position.X" />
-                            <Binding ElementName="ThisPage" Path="ActualWidth" />
-                        </MultiBinding>
-                    </TranslateTransform.X>
-                    <TranslateTransform.Y>
-                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}" ConverterParameter="15">
-                            <Binding Path="Player.Transform.Position.Y" />
-                            <Binding ElementName="ThisPage" Path="ActualHeight" />
-                        </MultiBinding>
-                    </TranslateTransform.Y>
-                </TranslateTransform>
-                <RotateTransform
-                    CenterX="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={StaticResource HalfValueConverter}}"
-                    CenterY="{Binding ElementName=ThisPage, Path=ActualHeight, Converter={StaticResource HalfValueConverter}}"
-                    Angle="{Binding Player.Transform.Rotation.Y, Converter={StaticResource NegateValueConverter}}" />
-            </TransformGroup>
-        </Canvas.RenderTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.1*" />
+        </Grid.RowDefinitions>
 
-        <Grid>
-            <c:TileMap ItemSource="{Binding Map.CellsOfMap}" WidthOfCell="64" HeightOfCell="64" />
-        </Grid>
+        <Canvas Grid.Row="0" Width="{Binding ElementName=ThisPage, Path=ActualWidth}"
+                Height="{Binding ElementName=ThisPage, Path=ActualHeight}">
 
-        <Image Width="30" Height="30"
-               Source="{StaticResource PlayerMen}"
-               Canvas.Left="{Binding Player.Transform.Position.X}"
-               Canvas.Top="{Binding Player.Transform.Position.Y}">
-            <Image.RenderTransform>
-                <RotateTransform CenterX="15" CenterY="15" Angle="{Binding Player.Transform.Rotation.Y}" />
-            </Image.RenderTransform>
-        </Image>
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform>
+                        <TranslateTransform.X>
+                            <MultiBinding Converter="{StaticResource NegativeDoubleConvert}" ConverterParameter="15">
+                                <Binding Path="Player.Transform.Position.X" />
+                                <Binding ElementName="ThisPage" Path="ActualWidth" />
+                            </MultiBinding>
+                        </TranslateTransform.X>
+                        <TranslateTransform.Y>
+                            <MultiBinding Converter="{StaticResource NegativeDoubleConvert}" ConverterParameter="15">
+                                <Binding Path="Player.Transform.Position.Y" />
+                                <Binding ElementName="ThisPage" Path="ActualHeight" />
+                            </MultiBinding>
+                        </TranslateTransform.Y>
+                    </TranslateTransform>
+                    <RotateTransform
+                        CenterX="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={StaticResource HalfValueConverter}}"
+                        CenterY="{Binding ElementName=ThisPage, Path=ActualHeight, Converter={StaticResource HalfValueConverter}}"
+                        Angle="{Binding Player.Transform.Rotation.Y, Converter={StaticResource NegateValueConverter}}" />
+                </TransformGroup>
+            </Canvas.RenderTransform>
 
-    </Canvas>
+            <Grid>
+                <c:TileMap ItemSource="{Binding Map.CellsOfMap}" WidthOfCell="64" HeightOfCell="64" />
+            </Grid>
+
+            <Image Width="30" Height="30"
+                   Source="{StaticResource PlayerMen}"
+                   Canvas.Left="{Binding Player.Transform.Position.X}"
+                   Canvas.Top="{Binding Player.Transform.Position.Y}">
+                <Image.RenderTransform>
+                    <RotateTransform CenterX="15" CenterY="15" Angle="{Binding Player.Transform.Rotation.Y}" />
+                </Image.RenderTransform>
+            </Image>
+
+        </Canvas>
+
+        <ListView Background="Black" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                  Grid.Row="1" ItemsSource="{Binding ItemActivator.SurroundingItems}"
+                  BorderBrush="Black">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Canvas Height="32" Width="256">
+                        <Image Source="{StaticResource ItemTarget}" />
+                        <Label Canvas.Left="3" FontSize="18" Canvas.Top="0" Content="{Binding ActivationKey}" />
+                        <Label Canvas.Left="25" FontSize="18" Canvas.Top="0" Content="{Binding Description}" />
+                    </Canvas>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </Page>
