@@ -5,16 +5,23 @@ namespace RECOVER.Scripts.Engine;
 
 public abstract class Collider : Component, IDisposable
 {
-    public virtual Rect Bounds { get; }
-
-    public abstract bool Intersects(Collider other);
-    public abstract bool IntersectsDelta(Collider other, double deltaTime);
+    private bool _isTrigger;
 
     protected Collider()
     {
         ColliderMap.RegisterGlobal(this);
     }
 
+    public virtual Rect Bounds { get; }
+
+    public bool IsTrigger
+    {
+        get => _isTrigger;
+        set => Set(ref _isTrigger, value);
+    }
+
+    public abstract bool Intersects(Collider other);
+    public abstract bool IntersectsDelta(Collider other, double deltaTime);
 
     public void Dispose()
     {

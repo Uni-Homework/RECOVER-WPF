@@ -7,7 +7,6 @@ namespace RECOVER.Inner;
 public class ColliderMap
 {
     private HashSet<Collider> colliders = new HashSet<Collider>();
-    private Dictionary<Collider, HashSet<Collider>> intersections = new Dictionary<Collider, HashSet<Collider>>();
 
     public void Register(Collider collider)
     {
@@ -35,82 +34,63 @@ public class ColliderMap
         }
     }
 
-    public static Vector CheckGlobal(GameObject gameObject, double deltaTime)
+    public static void NextPositionGlobal(GameObject gameObject, double deltaTime)
     {
         if ((App.Current as App).CurrentScene.BaseScene is ITangible scene)
         {
-            return scene.ColliderMap.Check(gameObject, deltaTime);
-        }
-        else
-        {
-            return gameObject.Transform.Velocity * deltaTime;
+            scene.ColliderMap.ColliderIteration(gameObject, deltaTime);
         }
     }
 
-    public Vector Check(GameObject gameObject, double deltaTime)
+    public void ColliderIteration(GameObject gameObject, double deltaTime)
     {
         Collider goCollider = gameObject.GetComponent<Collider>();
+        ColliderReaction reaction = gameObject.GetComponent<ColliderReaction>();
 
-        if (goCollider == null)
+        foreach (var collider in colliders)
         {
-            return gameObject.Transform.Velocity * deltaTime;
-        }
+            bool ncp = goCollider.IntersectsDelta(collider, deltaTime);
+            bool nop = goCollider.Intersects(collider);
+            bool isTrigger = collider.IsTrigger;
 
-        if (intersections.TryGetValue(goCollider, out var set))
-        {
-            HashSet<Collider> colliders = new HashSet<Collider>(this.colliders);
-            colliders.ExceptWith(set);
-
-            foreach (Collider other in colliders)
+            if (collider == goCollider)
             {
-                if (other == goCollider)
-                {
-                    continue;
-                }
-
-                if (goCollider.IntersectsDelta(other, deltaTime))
-                {
-                    set.Add(other);
-                    return new Vector();
-                }
+                continue;
             }
 
-            set.RemoveWhere(b =>
+            if (!ncp && nop)
             {
-                bool result = !goCollider.IntersectsDelta(b, deltaTime);
-                return result;
-            });
-
-            if (set.Count != 0)
-            {
-                return new Vector();
-            }
-        }
-        else
-        {
-            set = new HashSet<Collider>();
-            foreach (Collider other in colliders)
-            {
-                if (other == goCollider)
+                if (isTrigger)
                 {
-                    continue;
+                    reaction.OnTriggerExit();
                 }
-
-                if (goCollider.IntersectsDelta(other, deltaTime))
+                else
                 {
-                    set.Add(other);
-                    return new Vector();
+                    reaction.OnCollisionExit();
                 }
             }
-
-            intersections.Add(goCollider, set);
-            
-            if (set.Count != 0)
+            else if (ncp && !nop)
             {
-                return new Vector();
+                if (isTrigger)
+                {
+                    reaction.OnTriggerEnter();
+                }
+                else
+                {
+                    reaction.OnCollisionEnter();
+                }
+            }
+            else if (ncp && nop)
+            {
+                if (isTrigger)
+                {
+                    reaction.OnTriggerStay();
+                }
+                else
+                {
+                    reaction.OnCollisionStay();
+                }
             }
         }
-
-        return gameObject.Transform.Velocity * deltaTime;
     }
 }
