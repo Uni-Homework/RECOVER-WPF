@@ -9,20 +9,20 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Remove="Resource\Tile\shipwall.png" />
-      <Resource Include="Resource\Tile\shipwall.png" />
-      <None Remove="Resource\Tile\floor.png" />
-      <Resource Include="Resource\Tile\floor.png" />
-      <None Remove="Resource\Player\Spacesuit.png" />
-      <Resource Include="Resource\Player\Spacesuit.png" />
+      <None Remove="Assets\Resources\Tile\shipwall.png" />
+      <Resource Include="Assets\Resources\Tile\shipwall.png" />
+      <None Remove="Assets\Resources\Tile\floor.png" />
+      <Resource Include="Assets\Resources\Tile\floor.png" />
+      <None Remove="Assets\Resources\Player\Spacesuit.png" />
+      <Resource Include="Assets\Resources\Player\Spacesuit.png" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Resource\Player\" />
+      <Folder Include="Assets\Resources\Player\" />
     </ItemGroup>
 
     <ItemGroup>
-      <Page Update="MyAssets\Scenes\MainBase.xaml">
+      <Page Update="Assets\Scenes\MainBase.xaml">
         <Generator>MSBuild:Compile</Generator>
       </Page>
     </ItemGroup>

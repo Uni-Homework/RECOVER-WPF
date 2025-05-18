@@ -5,9 +5,7 @@ using RECOVER.Scripts.Engine;
 using RECOVER.Scripts.Model;
 using RECOVER.Type;
 
-namespace RECOVER.Scenes;
-
-public class MainBaseScene : 
+public class MainBaseScene : DeafNotificationObject, IScene, ITangible
 {
     private GameObject player;
     private List<GameObject> gameObjects;

@@ -1,4 +1,4 @@
-﻿namespace RECOVER.Scenes;
+﻿namespace RECOVER.Assets.Scenes;
 
 public partial class MainBase : SceneView
 {

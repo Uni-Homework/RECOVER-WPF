@@ -2,8 +2,8 @@
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
-using RECOVER.Scenes;
 using RECOVER.Type;
+using SceneView = RECOVER.Assets.Scenes.SceneView;
 
 namespace RECOVER;
 

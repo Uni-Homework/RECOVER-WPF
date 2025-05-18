@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <BitmapImage UriSource="Resource/Tile/floor.png" x:Key="FloorMainBaseTile"></BitmapImage>
-        <BitmapImage UriSource="Resource/Tile/shipwall.png" x:Key="ShipwallMainBaseTile"></BitmapImage>
-        <BitmapImage UriSource="/RECOVER;component/Resource/Player/Spacesuit.png" DecodePixelHeight="30"
+        <BitmapImage UriSource="Assets/Resources/Tile/floor.png" x:Key="FloorMainBaseTile"></BitmapImage>
+        <BitmapImage UriSource="Assets/Resources/Tile/shipwall.png" x:Key="ShipwallMainBaseTile"></BitmapImage>
+        <BitmapImage UriSource="Assets/Resources/Player/Spacesuit.png" DecodePixelHeight="30"
                      x:Key="PlayerMen">
         </BitmapImage>
     </Application.Resources>
