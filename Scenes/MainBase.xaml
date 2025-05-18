@@ -24,13 +24,13 @@
             <TransformGroup>
                 <TranslateTransform>
                     <TranslateTransform.X>
-                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}">
+                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}" ConverterParameter="15">
                             <Binding Path="Player.Transform.Position.X" />
                             <Binding ElementName="ThisPage" Path="ActualWidth" />
                         </MultiBinding>
                     </TranslateTransform.X>
                     <TranslateTransform.Y>
-                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}">
+                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}" ConverterParameter="15">
                             <Binding Path="Player.Transform.Position.Y" />
                             <Binding ElementName="ThisPage" Path="ActualHeight" />
                         </MultiBinding>

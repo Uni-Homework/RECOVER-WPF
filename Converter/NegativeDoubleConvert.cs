@@ -7,7 +7,8 @@ public class NegativeDoubleConvert : IMultiValueConverter
 {
     public object Convert(object[] values, System.Type targetType, object parameter, CultureInfo culture)
     {
-        return -(double)values[0] + (double)values[1]/2;
+        double offset = parameter != null ? double.Parse(parameter.ToString()) : 0;
+        return -(double)values[0] + (double)values[1]/2 - offset;
     }
 
     public object[] ConvertBack(object value, System.Type[] targetTypes, object parameter, CultureInfo culture)
