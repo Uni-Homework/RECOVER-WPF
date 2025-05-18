@@ -20,4 +20,10 @@ public class SpriteComponent : Component
         Width = width;
         Height = height;
     }
+    public SpriteComponent(double width, double height, ImageSource image)
+    {
+        Width = width;
+        Height = height;
+        Image = image;
+    }
 }

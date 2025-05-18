@@ -6,13 +6,19 @@ namespace RECOVER.Assets.Scenes;
 
 public class MainBaseScene : Scene
 {
-    public GameObject Player { get; private set; }
+    // Necessary for that stupid thing called WPF
+    private PlayerPrefab player;
+    
+    public PlayerPrefab Player
+    {
+        get => player;
+        private set => Set(ref player, value);
+    }
 
-    public override void Start()
+    public MainBaseScene()
     {
         base.Start();
-        
-        Player = new PlayerPrefab(new Vector(200, 200));
-        Objects.Add(Player);
+        player = new PlayerPrefab(new Vector(200, 200));
+        objects.Add(player);
     }
 }

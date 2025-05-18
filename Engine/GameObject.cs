@@ -3,15 +3,16 @@ using RECOVER.Engine.WPFTools;
 
 namespace RECOVER.Engine;
 
-public abstract class GameObject : DeafNotificationObject
+public class GameObject : DeafNotificationObject
 {
     private List<Component> components;
     private Transform transform;
 
     public GameObject()
     {
-        Components = new List<Component>();
-        Transform = new Transform();
+        components = new List<Component>();
+        transform = new Transform();
+        System.Diagnostics.Debug.WriteLine($"GameObject constructor called for {GetType().Name}");
     }
 
     public List<Component> Components
@@ -28,8 +29,15 @@ public abstract class GameObject : DeafNotificationObject
 
     public T AddComponent<T>(T component) where T : Component
     {
+        if (component == null)
+        {
+            System.Diagnostics.Debug.WriteLine($"Warning: Attempted to add null component to {GetType().Name}");
+            return null;
+        }
+
         component.GameObject = this;
         components.Add(component);
+        System.Diagnostics.Debug.WriteLine($"Added component {component.GetType().Name} to {GetType().Name}");
         return component;
     }
 
@@ -37,11 +45,31 @@ public abstract class GameObject : DeafNotificationObject
 
     public virtual void Update(double deltaTime)
     {
-        foreach (var component in components) component.Update(deltaTime);
+        System.Diagnostics.Debug.WriteLine($"GameObject.Update() called for {GetType().Name}, deltaTime: {deltaTime}");
+        foreach (var component in components) 
+        {
+            if (component == null)
+            {
+                System.Diagnostics.Debug.WriteLine($"Warning: Null component found in {GetType().Name}");
+                continue;
+            }
+            System.Diagnostics.Debug.WriteLine($"Updating component {component.GetType().Name}");
+            component.Update(deltaTime);
+        }
     }
 
     public virtual void Start()
     {
-        foreach (var component in components) component.Start(); 
+        System.Diagnostics.Debug.WriteLine($"GameObject.Start() called for {GetType().Name}");
+        foreach (var component in components) 
+        {
+            if (component == null)
+            {
+                System.Diagnostics.Debug.WriteLine($"Warning: Null component found in {GetType().Name}");
+                continue;
+            }
+            System.Diagnostics.Debug.WriteLine($"Starting component {component.GetType().Name}");
+            component.Start();
+        }
     }
 }

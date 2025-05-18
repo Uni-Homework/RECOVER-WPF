@@ -1,10 +1,22 @@
-﻿namespace RECOVER.Assets.Scenes;
+﻿using System.Windows.Controls;
+using RECOVER.Engine;
 
-public partial class MainBase : SceneView
+namespace RECOVER.Assets.Scenes;
+
+public partial class MainBase : Page
 {
-    public MainBase(MainBaseScene baseScene) 
+    private MainBaseScene _baseScene;
+    
+    public MainBaseScene BaseScene
     {
-        DataContext = baseScene;
+        get => _baseScene;
+        private set => _baseScene = value;
+    }
+
+    public MainBase()
+    {
         InitializeComponent();
+        _baseScene = new MainBaseScene();
+        DataContext = this;
     }
 }

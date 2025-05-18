@@ -1,9 +1,10 @@
-﻿<Page x:Class="RECOVER.Assets.Scenes.MainBase"
+<Page x:Class="RECOVER.Assets.Scenes.SceneView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:conv="clr-namespace:RECOVER.Engine.WPFTools"
+      xmlns:scenes="clr-namespace:RECOVER.Assets.Scenes"
       mc:Ignorable="d"
       x:Name="ThisPage"
       Background="Black">
@@ -12,7 +13,6 @@
         <conv:NegativeDoubleConvert x:Key="NegativeDoubleConvert" />
         <conv:HalfValueConverter x:Key="HalfValueConverter" />
         <conv:NegateValueConverter x:Key="NegateValueConverter" />
-        <conv:OffsetValueConverter x:Key="OffsetValueConverter" />
     </Page.Resources>
 
     <Canvas Width="{Binding ElementName=ThisPage, Path=ActualWidth}"
@@ -36,20 +36,19 @@
                     </TranslateTransform.Y>
                 </TranslateTransform>
                 <RotateTransform
-                    CenterX="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={StaticResource OffsetValueConverter}}"
-                    CenterY="{Binding ElementName=ThisPage, Path=ActualHeight, Converter={StaticResource OffsetValueConverter}}"
+                    CenterX="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={StaticResource HalfValueConverter}}"
+                    CenterY="{Binding ElementName=ThisPage, Path=ActualHeight, Converter={StaticResource HalfValueConverter}}"
                     Angle="{Binding BaseScene.Player.Transform.Rotation, Converter={StaticResource NegateValueConverter}}" />
             </TransformGroup>
         </Canvas.RenderTransform>
 
-        <Ellipse Width="30" Height="30" Fill="White"></Ellipse>
-        <Image Width="30" Height="30"
-               Source="{StaticResource PlayerMen}"
-               Canvas.Left="{Binding BaseScene.Player.Transform.Position.X}"
-               Canvas.Top="{Binding BaseScene.Player.Transform.Position.Y}">
-            <Image.RenderTransform>
+        <Ellipse Width="30" Height="30" 
+                 Fill="White"
+                 Canvas.Left="{Binding BaseScene.Player.Transform.Position.X}"
+                 Canvas.Top="{Binding BaseScene.Player.Transform.Position.Y}">
+            <Ellipse.RenderTransform>
                 <RotateTransform CenterX="15" CenterY="15" Angle="{Binding BaseScene.Player.Transform.Rotation}" />
-            </Image.RenderTransform>
-        </Image>
+            </Ellipse.RenderTransform>
+        </Ellipse>
     </Canvas>
-</Page>
+</Page> 

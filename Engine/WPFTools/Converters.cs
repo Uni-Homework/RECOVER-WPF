@@ -61,3 +61,15 @@ public class NegativeDoubleConvert : IMultiValueConverter
         throw new System.NotImplementedException();
     }
 }
+public class OffsetValueConverter : IValueConverter
+{
+    public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
+    {
+        return (double)value / 2 + 30;
+    }
+
+    public object ConvertBack(object value, System.Type targetType, object parameter, CultureInfo culture)
+    {
+        return ((double)value - 30) * 2;
+    }
+}
