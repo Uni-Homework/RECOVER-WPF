@@ -1,13 +1,18 @@
-﻿using RECOVER.Inner;
-using RECOVER.Type;
+﻿using RECOVER.Scripts.Engine;
 
 namespace RECOVER.Scripts.Model;
 
-public class Cell : DeafNotificationObject
+public class Cell : Component
 {
     private int x;
     private int y;
-    private TileType type;
+    private bool hasCollider;
+
+    public bool HasCollider
+    {
+        get => hasCollider;
+        set => Set(ref hasCollider, value);
+    }
 
     public int X
     {
@@ -21,16 +26,10 @@ public class Cell : DeafNotificationObject
         private set => Set(ref y, value);
     }
 
-    public TileType Type
+    public Cell(int x, int y, bool hasCollider)
     {
-        get => type;
-        private set => Set(ref type, value);
-    }
-
-    public Cell(int x, int y, TileType type)
-    {
-        X = x;
-        Y = y;
-        Type = type;
+        this.x = x;
+        this.y = y;
+        this.hasCollider = hasCollider;
     }
 }

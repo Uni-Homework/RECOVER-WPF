@@ -6,9 +6,10 @@
       xmlns:recover="clr-namespace:RECOVER"
       xmlns:c="clr-namespace:RECOVER.Control"
       xmlns:conv="clr-namespace:RECOVER.Converter"
+      xmlns:scenes="clr-namespace:RECOVER.Scenes"
       mc:Ignorable="d"
       x:Name="ThisPage"
-      d:DataContext="{d:DesignInstance recover:MainBaseScene, IsDesignTimeCreatable=True}">
+      d:DataContext="{d:DesignInstance scenes:MainBaseScene, IsDesignTimeCreatable=True}">
 
     <Page.Resources>
         <conv:NegativeDoubleConvert x:Key="NegativeDoubleConvert" />
@@ -34,7 +35,9 @@
             </TranslateTransform>
         </Canvas.RenderTransform>
 
-        <c:TileMap ItemSource="{Binding BaseMap}" WidthOfCell="64"></c:TileMap>
+        <Grid>
+            <c:TileMap ItemSource="{Binding Map.CellsOfMap}" WidthOfCell="64" HeightOfCell="64"  />
+        </Grid>
 
         <Ellipse Width="20" Height="20" Fill="White"
                  Canvas.Left="{Binding Player.Transform.Position.X}"

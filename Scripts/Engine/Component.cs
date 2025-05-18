@@ -1,6 +1,8 @@
-﻿namespace RECOVER.Scripts.Engine;
+﻿using RECOVER.Inner;
 
-public abstract class Component
+namespace RECOVER.Scripts.Engine;
+
+public abstract class Component : DeafNotificationObject
 {
     public GameObject GameObject { get; internal set; }
     public virtual void Update(double deltaTime) { }
