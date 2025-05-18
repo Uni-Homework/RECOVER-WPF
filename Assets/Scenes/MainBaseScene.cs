@@ -7,7 +7,7 @@ using RECOVER.Type;
 
 namespace RECOVER.Scenes;
 
-public class MainBaseScene : DeafNotificationObject, IScene, ITangible
+public class MainBaseScene : 
 {
     private GameObject player;
     private List<GameObject> gameObjects;

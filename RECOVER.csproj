@@ -21,4 +21,10 @@
       <Folder Include="Resource\Player\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Page Update="MyAssets\Scenes\MainBase.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
+
 </Project>
