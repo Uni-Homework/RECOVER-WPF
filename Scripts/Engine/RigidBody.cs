@@ -15,7 +15,7 @@ public class RigidBody : Component
             if (UseGravity)
                 GameObject.Transform.Velocity += new Vector(0, 9.81) * deltaTime;
 
-            ColliderMap.NextPositionGlobal(GameObject, deltaTime);
+            ColliderMap.ColliderIterationGlobal(GameObject, deltaTime);
             GameObject.Transform.Position += GameObject.Transform.Velocity * deltaTime;
         }
     }

@@ -14,20 +14,4 @@ public class PlayerColliderController : ColliderReaction
     {
         GameObject.Transform.Velocity = new Vector();
     }
-
-    public override void OnCollisionExit()
-    {
-    }
-
-    public override void OnTriggerEnter()
-    {
-    }
-
-    public override void OnTriggerStay()
-    {
-    }
-
-    public override void OnTriggerExit()
-    {
-    }
 }

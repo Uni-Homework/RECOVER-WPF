@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using RECOVER.Scripts;
+﻿using RECOVER.Scripts;
 using RECOVER.Scripts.Engine;
 
 namespace RECOVER.Inner;
@@ -34,7 +33,7 @@ public class ColliderMap
         }
     }
 
-    public static void NextPositionGlobal(GameObject gameObject, double deltaTime)
+    public static void ColliderIterationGlobal(GameObject gameObject, double deltaTime)
     {
         if ((App.Current as App).CurrentScene.BaseScene is ITangible scene)
         {
