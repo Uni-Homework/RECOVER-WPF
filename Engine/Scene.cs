@@ -27,6 +27,7 @@ public abstract class Scene : DeafNotificationObject
     /// <summary>
     /// Runs once
     /// </summary>
+
     public virtual void Start()
     {
         foreach (var obj in objects) obj.Start();
@@ -58,7 +59,6 @@ public abstract class Scene : DeafNotificationObject
     {
         if(!_isInitialized) PreUpdate();
         UpdatePhysics(deltaTime);
-        
         foreach (var obj in objects) obj.Update(deltaTime);
     }
 

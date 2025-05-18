@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -7,21 +8,25 @@ using RECOVER.Assets.Prefabs.Player;
 using RECOVER.Engine;
 using RECOVER.Engine.Components;
 
+
 namespace RECOVER.Assets.Scenes;
 
 public class MainBaseScene : Scene
 {
+
     private PlayerPrefab player;
     
     // for debug
     private List<Rectangle> _debugBoxes = new List<Rectangle>();
     
     // Necessary for that stupid thing called WPF
+
     public PlayerPrefab Player
     {
         get => player;
         private set => Set(ref player, value);
     }
+
 
     public MainBaseScene(Canvas canvas) : base(canvas)
     {
@@ -91,4 +96,5 @@ public class MainBaseScene : Scene
     }
     
     
+
 }

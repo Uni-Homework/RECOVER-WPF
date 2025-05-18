@@ -4,6 +4,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Rectangle = System.Windows.Shapes.Rectangle;
 
+
 namespace RECOVER.Engine.Components;
 
 public class SpriteComponent : Component

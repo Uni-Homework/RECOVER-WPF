@@ -8,7 +8,6 @@ public class GameObject : DeafNotificationObject
 {
     private List<Component> components;
     private Transform transform;
-    
     public string Name { get; set; }
 
     public GameObject(string name = "GameObject")
@@ -17,6 +16,7 @@ public class GameObject : DeafNotificationObject
         transform = new Transform();
         Debug.WriteLine($"GameObject constructor called for {GetType().Name}");
         Name = name;
+
     }
 
     public List<Component> Components

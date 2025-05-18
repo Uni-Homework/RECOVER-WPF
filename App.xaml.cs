@@ -1,5 +1,7 @@
 ﻿using System.Windows;
+
 using System.Windows.Controls;
+
 using System.Windows.Media;
 using RECOVER.Assets.Scenes;
 
@@ -28,12 +30,14 @@ public partial class App : Application
         CompositionTarget.Rendering += GameLoop;
     }
 
+
     // lmao wha
     // why we do it twice???
     // check MainBase.xaml.cs
     private void SetScene()
     {
         var scene = new MainBaseScene(new Canvas());
+
         mainWindow.Content = new MainBase();
         scene.Start();
     }
@@ -46,6 +50,7 @@ public partial class App : Application
         if (mainWindow.Content is MainBase mainBase && mainBase.BaseScene != null)
         {
             mainBase.BaseScene.Update(deltaTime);
+
         }
 
         lastFrameTime = currentFrameTime;
