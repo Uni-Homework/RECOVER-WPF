@@ -43,7 +43,6 @@
             </TransformGroup>
         </Canvas.RenderTransform>
 
-        <Ellipse Width="30" Height="30" Fill="White"></Ellipse>
         <Image Width="30" Height="30"
                Source="{StaticResource PlayerMen}"
                Canvas.Left="{Binding BaseScene.Player.Transform.Position.X}"
