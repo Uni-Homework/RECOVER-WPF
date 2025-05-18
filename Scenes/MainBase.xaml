@@ -13,26 +13,34 @@
 
     <Page.Resources>
         <conv:NegativeDoubleConvert x:Key="NegativeDoubleConvert" />
+        <conv:HalfValueConverter x:Key="HalfValueConverter" />
+        <conv:NegateValueConverter x:Key="NegateValueConverter" />
     </Page.Resources>
 
     <Canvas Width="{Binding ElementName=ThisPage, Path=ActualWidth}" 
             Height="{Binding ElementName=ThisPage, Path=ActualHeight}">
 
         <Canvas.RenderTransform>
-            <TranslateTransform>
-                <TranslateTransform.X>
-                    <MultiBinding Converter="{StaticResource NegativeDoubleConvert}">
-                        <Binding Path="Player.Transform.Position.X" />
-                        <Binding ElementName="ThisPage" Path="ActualWidth" />
-                    </MultiBinding>
-                </TranslateTransform.X>
-                <TranslateTransform.Y>
-                    <MultiBinding Converter="{StaticResource NegativeDoubleConvert}">
-                        <Binding Path="Player.Transform.Position.Y" />
-                        <Binding ElementName="ThisPage" Path="ActualHeight" />
-                    </MultiBinding>
-                </TranslateTransform.Y>
-            </TranslateTransform>
+            <TransformGroup>
+                <TranslateTransform>
+                    <TranslateTransform.X>
+                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}">
+                            <Binding Path="Player.Transform.Position.X" />
+                            <Binding ElementName="ThisPage" Path="ActualWidth" />
+                        </MultiBinding>
+                    </TranslateTransform.X>
+                    <TranslateTransform.Y>
+                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}">
+                            <Binding Path="Player.Transform.Position.Y" />
+                            <Binding ElementName="ThisPage" Path="ActualHeight" />
+                        </MultiBinding>
+                    </TranslateTransform.Y>
+                </TranslateTransform>
+                <RotateTransform 
+                    CenterX="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={StaticResource HalfValueConverter}}"
+                    CenterY="{Binding ElementName=ThisPage, Path=ActualHeight, Converter={StaticResource HalfValueConverter}}"
+                    Angle="{Binding Player.Transform.Rotation.Y, Converter={StaticResource NegateValueConverter}}" />
+            </TransformGroup>
         </Canvas.RenderTransform>
 
         <Grid>
@@ -42,6 +50,9 @@
         <Image Width="30" Height="30" Name="PlayerImage"
            Canvas.Left="{Binding Player.Transform.Position.X}"
            Canvas.Top="{Binding Player.Transform.Position.Y}">
+            <Image.RenderTransform>
+                <RotateTransform CenterX="15" CenterY="15" Angle="{Binding Player.Transform.Rotation.Y}" />
+            </Image.RenderTransform>
             <Image.Source>
                 <BitmapImage DecodePixelHeight="30"
                              UriSource="/RECOVER;component/Resource/Player/Spacesuit.png"></BitmapImage>

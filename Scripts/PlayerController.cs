@@ -20,9 +20,9 @@ public class PlayerController : Component
         if (Keyboard.IsKeyDown(Key.D)) input.X += 1;
         
         if (Keyboard.IsKeyDown(Key.E)) rotateRight = true;
-        if (Keyboard.IsKeyDown(Key.R)) rotateLeft = true;
-        if(Keyboard.IsKeyUp(Key.E)) rotateRight = false;
-        if (Keyboard.IsKeyDown(Key.R)) rotateLeft = false;
+        if (Keyboard.IsKeyDown(Key.Q)) rotateLeft = true;
+        if (Keyboard.IsKeyUp(Key.E)) rotateRight = false;
+        if (Keyboard.IsKeyUp(Key.Q)) rotateLeft = false;
         
         // Apply rotation
         if (rotateLeft)

@@ -15,3 +15,29 @@ public class NegativeDoubleConvert : IMultiValueConverter
         return [-(double)value];
     }
 }
+
+public class HalfValueConverter : IValueConverter
+{
+    public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
+    {
+        return (double)value / 2;
+    }
+
+    public object ConvertBack(object value, System.Type targetType, object parameter, CultureInfo culture)
+    {
+        return (double)value * 2;
+    }
+}
+
+public class NegateValueConverter : IValueConverter
+{
+    public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
+    {
+        return -(double)value;
+    }
+
+    public object ConvertBack(object value, System.Type targetType, object parameter, CultureInfo culture)
+    {
+        return -(double)value;
+    }
+}
