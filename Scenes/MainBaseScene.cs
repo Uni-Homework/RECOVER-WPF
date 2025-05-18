@@ -50,7 +50,6 @@ public class MainBaseScene : DeafNotificationObject, IScene, ITangible
         Player.AddComponent(new PlayerController());
         Player.AddComponent(new BoxCollider(20, 20));
         Player.AddComponent(new PlayerColliderController());
-        Player.AddComponent(new ItemObjectReaction());
         Player.AddComponent(ItemActivator);
 
         gameObjects.Add(Player);

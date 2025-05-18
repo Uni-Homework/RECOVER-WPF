@@ -1,9 +1,10 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using RECOVER.Scripts.Engine;
 
 namespace RECOVER.Scripts.Model;
 
-public class ItemActivator : Component
+public class ItemActivator : ColliderReaction
 {
     private ObservableCollection<ItemObject> _surroundingItems;
 
@@ -12,6 +13,28 @@ public class ItemActivator : Component
         _surroundingItems = new ObservableCollection<ItemObject>();
     }
 
+    public ObservableCollection<ItemObject> SurroundingItems
+    {
+        get => _surroundingItems;
+        set => Set(ref _surroundingItems, value);
+    }
+
+    public override void OnTriggerEnter(GameObject gameObject)
+    {
+        if (gameObject is ItemObject itemObject)
+        {
+            this.GameObject.GetComponent<ItemActivator>().Add(itemObject);
+        }
+    }
+
+    public override void OnTriggerExit(GameObject gameObject)
+    {
+        if (gameObject is ItemObject itemObject)
+        {
+            this.GameObject.GetComponent<ItemActivator>().Remove(itemObject);
+        }
+    }
+    
     public void Add(ItemObject itemObject)
     {
         _surroundingItems.Add(itemObject);
@@ -22,9 +45,14 @@ public class ItemActivator : Component
         _surroundingItems.Remove(itemObject);
     }
 
-    public ObservableCollection<ItemObject> SurroundingItems
+    public override void Update(double deltaTime)
     {
-        get => _surroundingItems;
-        set => Set(ref _surroundingItems, value);
+        foreach (var surroundingItem in _surroundingItems)
+        {
+            if (Keyboard.GetKeyStates(surroundingItem.ActivationKey) == KeyStates.Down)
+            {
+                surroundingItem.Action.Invoke();
+            }
+        }
     }
 }
