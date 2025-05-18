@@ -39,8 +39,14 @@
             <c:TileMap ItemSource="{Binding Map.CellsOfMap}" WidthOfCell="64" HeightOfCell="64"  />
         </Grid>
 
-        <Ellipse Width="20" Height="20" Fill="White"
-                 Canvas.Left="{Binding Player.Transform.Position.X}"
-                 Canvas.Top="{Binding Player.Transform.Position.Y}" />
+        <Image Width="30" Height="30" Name="PlayerImage"
+           Canvas.Left="{Binding Player.Transform.Position.X}"
+           Canvas.Top="{Binding Player.Transform.Position.Y}">
+            <Image.Source>
+                <BitmapImage DecodePixelHeight="30"
+                             UriSource="/RECOVER;component/Resource/Player/Spacesuit.png"></BitmapImage>
+            </Image.Source>
+        </Image>
+        
     </Canvas>
 </Page>
