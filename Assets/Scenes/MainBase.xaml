@@ -17,7 +17,8 @@
 
     <Canvas Width="{Binding ElementName=ThisPage, Path=ActualWidth}"
             Height="{Binding ElementName=ThisPage, Path=ActualHeight}"
-            Background="Black">
+            Background="Black"
+            x:Name="ThisCanvas">
 
         <Canvas.RenderTransform>
             <TransformGroup>

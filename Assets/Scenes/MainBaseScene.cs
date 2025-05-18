@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using RECOVER.Assets.Prefabs.Player;
 using RECOVER.Engine;
 
@@ -15,7 +16,7 @@ public class MainBaseScene : Scene
         private set => Set(ref player, value);
     }
 
-    public MainBaseScene()
+    public MainBaseScene(Canvas canvas) : base(canvas)
     {
         base.Start();
         player = new PlayerPrefab(new Vector(200, 200));
