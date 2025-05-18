@@ -43,7 +43,10 @@ public abstract class Scene : DeafNotificationObject
         foreach (var obj in Objects)
         {
             var sprite = obj.GetComponent<SpriteComponent>();
-            if (sprite != null) SceneCanvas.Children.Add(sprite.GetRectangle());
+            if (sprite != null)
+            {
+                SceneCanvas.Children.Add(sprite.GetRectangle());
+            }
         }
     }
     

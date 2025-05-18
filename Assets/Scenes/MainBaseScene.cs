@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using RECOVER.Assets.Prefabs;
 using RECOVER.Assets.Prefabs.Player;
 using RECOVER.Engine;
 
@@ -21,5 +22,10 @@ public class MainBaseScene : Scene
         base.Start();
         player = new PlayerPrefab(new Vector(200, 200));
         objects.Add(player);
+        
+        
+        objects.Add(new DebugBoxPrefab(new Vector(100, 100)));
+        objects.Add(new DebugBoxPrefab(new Vector(200, 100)));
+        objects.Add(new DebugBoxPrefab(new Vector(300, 100)));
     }
 }

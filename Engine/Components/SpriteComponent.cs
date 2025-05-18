@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -22,6 +23,13 @@ public class SpriteComponent : Component
         _rectangle.Height = _image.Height;
         _rectangle.Fill = _imageBrush;
         _rectangle.Tag = "SpriteComponent";
+    }
+
+    public override void Update(double deltaTime)
+    {
+        Canvas.SetLeft(_rectangle, GameObject.Transform.Position.X);
+        Canvas.SetTop(_rectangle, GameObject.Transform.Position.Y);
+        _rectangle.RenderTransform = new RotateTransform(GameObject.Transform.Rotation);
     }
     
     public Rectangle GetRectangle() => _rectangle;
