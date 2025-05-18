@@ -4,8 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:c="clr-namespace:RECOVER.Control"
-      xmlns:conv="clr-namespace:RECOVER.Converter"
-      xmlns:scenes="clr-namespace:RECOVER.Scenes"
+      xmlns:conv="clr-namespace:RECOVER.Engine.WPFTools"
+      xmlns:scenes="clr-namespace:RECOVER.Assets.Scenes"
       mc:Ignorable="d"
       x:Name="ThisPage"
       d:DataContext="{d:DesignInstance scenes:MainBaseScene, IsDesignTimeCreatable=True}">

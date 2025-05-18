@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace RECOVER.Inner;
+namespace RECOVER.Engine.WPFTools;
 
 public abstract class DeafNotificationObject : INotifyPropertyChanged
 {

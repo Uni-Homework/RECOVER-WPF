@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using RECOVER.Scripts.Engine;
+using RECOVER.Engine;
 
 namespace RECOVER.Scripts;
 
@@ -26,18 +26,12 @@ public class PlayerController : Component
         
         // Apply rotation
         if (rotateLeft)
-            GameObject.Transform.Rotation = new Vector(
-                GameObject.Transform.Rotation.X,
-                GameObject.Transform.Rotation.Y - (float)(rotationSpeed * deltaTime)
-            );
+            GameObject.Transform.Rotation -= (float)(rotationSpeed * deltaTime);
         if (rotateRight)
-            GameObject.Transform.Rotation = new Vector(
-                GameObject.Transform.Rotation.X,
-                GameObject.Transform.Rotation.Y + (float)(rotationSpeed * deltaTime)
-            );
+            GameObject.Transform.Rotation += (float)(rotationSpeed * deltaTime);
 
         // Apply movement relative to rotation
-        double angle = GameObject.Transform.Rotation.Y * (float)Math.PI / 180f;
+        double angle = GameObject.Transform.Rotation * (float)Math.PI / 180f;
         Vector rotatedInput = new Vector(
             input.X * (float)Math.Cos(angle) - input.Y * (float)Math.Sin(angle),
             input.X * (float)Math.Sin(angle) + input.Y * (float)Math.Cos(angle)

@@ -6,12 +6,6 @@ public abstract class Collider : Component
 {
     private bool _isTrigger;
 
-    // TODO
-    // protected Collider()
-    // {
-    //     ColliderMap.RegisterGlobal(this);
-    // }
-
     public virtual Rect Bounds { get; }
 
     public bool IsTrigger
@@ -22,23 +16,17 @@ public abstract class Collider : Component
 
     public abstract bool Intersects(Collider other);
     public abstract bool IntersectsDelta(Collider other, double deltaTime);
-
-    // TODO
-    // public void Dispose()
-    // {
-    //     ColliderMap.RemoveGlobal(this);
-    // }
 }
 
-public class BoxCollider(double wight, double height) : Collider
+public class BoxCollider(double width, double height) : Collider
 {
-    private double wight = wight;
+    private double width = width;
     private double height = height;
 
-    public double Wight
+    public double Width
     {
-        get => wight;
-        set => Set(ref wight, value);
+        get => width;
+        set => Set(ref width, value);
     }
 
     public double Height
@@ -48,7 +36,7 @@ public class BoxCollider(double wight, double height) : Collider
     }
 
     public override Rect Bounds => new Rect(GameObject.Transform.Position.X, GameObject.Transform.Position.Y,
-        wight, height);
+        width, height);
 
     public override bool Intersects(Collider other)
     {
