@@ -25,5 +25,6 @@ public class PlayerPrefab : GameObject
         AddComponent(new DetectedItemsComponent());
         AddComponent(new EnergyResourcePlayer());
         AddComponent(new PlayerResourceViewer());
+        AddComponent(new WaterResourcePlayer());
     }
 }

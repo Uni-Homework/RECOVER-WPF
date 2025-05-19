@@ -5,42 +5,37 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
         Name="ThisWindow"
-        Title="ResourceViewer" Height="450" Width="800">
-    <Grid>
-        <ListBox ItemsSource="{Binding ElementName=ThisWindow, Path=ResourcePlayers}">
-            <ListBox.ItemTemplate>
+        Title="Ресурсы" Height="200" Width="200"
+        ResizeMode="NoResize">
+    <Grid Background="Black">
+        <ItemsControl Background="Black" ItemsSource="{Binding ElementName=ThisWindow, Path=ResourcePlayers}">
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                    <Grid Background="Black">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <Image Source="{Binding ImageSource}" Width="50" Height="50" Margin="5" Grid.RowSpan="2" />
+                        <TextBlock Foreground="Cornsilk" Text="{Binding Name}" FontWeight="Bold" Grid.Row="0" TextAlignment="Center" FontSize="18" />
 
-                        <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="5" Grid.Row="0" Grid.Column="1" />
-
-                        <Grid Grid.Row="1" Grid.Column="1" Margin="5">
+                        <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="20" />
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="{Binding Min}" VerticalAlignment="Center" />
-
-                            <ProgressBar Grid.Column="1" Minimum="{Binding Min}" Maximum="{Binding Max}"
-                                         Value="{Binding Current}" Margin="5,0" />
-
-                            <TextBlock Text="{Binding Max}" VerticalAlignment="Center" Grid.Column="2" />
+                            <Image Grid.Column="0" Source="{Binding ImageSource}" Width="30" Height="30" />
+                            <TextBlock Foreground="Cornsilk" Grid.Column="1" Text="{Binding Min}" VerticalAlignment="Center" />
+                            <ProgressBar Foreground="Cornsilk" Grid.Column="2" Minimum="{Binding Min}" Maximum="{Binding Max}"
+                                         Value="{Binding Current}" />
+                            <TextBlock Foreground="Cornsilk" Text="{Binding Max}" VerticalAlignment="Center" Grid.Column="3" />
                         </Grid>
                     </Grid>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Window>

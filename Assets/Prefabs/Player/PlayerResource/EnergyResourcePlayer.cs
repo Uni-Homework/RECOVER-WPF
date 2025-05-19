@@ -1,37 +1,15 @@
 ﻿using System.Windows.Media;
-using RECOVER.Engine.Components;
 
 namespace RECOVER.Assets.Prefabs.Player.PlayerResource;
 
-public class EnergyResourcePlayer : Component, IResourcePlayer
+public class EnergyResourcePlayer : CommonResourcePlayer
 {
-    private double _current = 50;
-    private const double MAX_STEP = 20;
-    private const double MIN_STEP = 0;
-    private const double DELTA_STEP = 10;
-
-    private double step = 0;
-
-    public double Max { get; } = 100;
-    public double Min { get; } = 0;
-    public string Name { get; } = "Энергия";
-
-    public double Current
+    public EnergyResourcePlayer() : base(50, 20, 0, 10)
     {
-        get => _current;
-        set => Set(ref _current, value);
     }
 
-    public ImageSource ImageSource { get; } = null;
-
-    public override void Update(double deltaTime)
-    {
-        step += deltaTime;
-
-        if (MAX_STEP < step)
-        {
-            step = MIN_STEP;
-            Current -= DELTA_STEP;
-        }
-    }
+    public override double Max { get; } = 100;
+    public override double Min { get; } = 0;
+    public override string Name { get; } = "Энергия";
+    public override ImageSource ImageSource { get; } = null;
 }

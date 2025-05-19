@@ -15,10 +15,12 @@ public class MainBaseScene : Scene
         PlayerPrefab player = new PlayerPrefab(new Vector(200, 0));
         TerminalPrefab item = new TerminalPrefab(100, 100);
         EnergyPlayerResourceFiller enetgyenricher = new EnergyPlayerResourceFiller(100, 200);
+        WaterPlayerResourceFiller waterPlayerResourceFiller = new WaterPlayerResourceFiller(200, 200);
         DetectorItems = player.GetComponent<DetectedItemsComponent>();
         objects.Add(player);
         objects.Add(item);
         objects.Add(enetgyenricher);
+        objects.Add(waterPlayerResourceFiller);
     }
 
     public DetectedItemsComponent DetectorItems
