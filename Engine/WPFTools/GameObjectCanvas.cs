@@ -49,7 +49,7 @@ public class GameObjectCanvas : Canvas
 
     private void SetCollider(GameObject go)
     {
-        foreach (var collider in go.Components.OfType<BoxCollider>())
+        foreach (var collider in go.GetComponents<BoxCollider>())
         {
             Rectangle rect = new Rectangle();
             rect.Stroke = Brushes.Red;
