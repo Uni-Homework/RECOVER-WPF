@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 using RECOVER.Engine;
 using RECOVER.Engine.Components;
 
@@ -13,8 +14,9 @@ public class DebugBoxPrefab : GameObject
     public DebugBoxPrefab(Vector position)
     {
         Transform.Position = position;
+        Transform.Origin = new Point(0.5, 0.5);
 
-        SpriteComponent sprite = new SpriteComponent(new Uri("pack://application:,,,/Assets/Resources/Tile/floor.png"));
+        SpriteComponent sprite = new SpriteComponent((ImageSource)App.Current.Resources["FloorMainBaseTile"]);
         AddComponent(sprite);
         AddComponent(new BoxCollider(sprite.GetRectangle().Width, sprite.GetRectangle().Height));
     }

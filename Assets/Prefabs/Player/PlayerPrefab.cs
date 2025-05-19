@@ -17,7 +17,5 @@ public class PlayerPrefab : GameObject
         AddComponent(new PlayerController());
         AddComponent(new BoxCollider(20, 20));
         AddComponent(new PlayerColliderController());
-        // SpriteComponent sprite = new SpriteComponent(new Uri("pack://application:,,,/Assets/Resources/Player/Spacesuit.png", UriKind.Absolute));
-        // AddComponent(sprite);
     }
 }

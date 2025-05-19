@@ -28,7 +28,7 @@ public class MainBaseScene : Scene
     }
 
 
-    public MainBaseScene(Canvas canvas) : base(canvas)
+    public MainBaseScene() : base()
     {
         base.Start();
         
@@ -58,11 +58,6 @@ public class MainBaseScene : Scene
     public override void Update(double deltaTime)
     {
         base.Update(deltaTime);
-
-        #region DebugSection
-            foreach (var box in _debugBoxes) SceneCanvas.Children.Remove(box);
-            _debugBoxes.Clear();
-        #endregion
         
         foreach (var obj in Objects)
         {
@@ -70,28 +65,6 @@ public class MainBaseScene : Scene
             if (obj.Name == "Cube1") obj.Transform.Position += new Vector(0, 0.5);
             if (obj.Name == "Cube2") obj.Transform.Position += new Vector(-0.2, 0);
             if (obj.Name == "Cube3") obj.Transform.Rotation += 2;
-
-            #region DebugSection
-                var collider = obj.GetComponent<BoxCollider>();
-                if (collider != null)
-                {
-                    // Rectangle is a main drawable structure for WPF
-                    Rectangle rect = new Rectangle();
-                    rect.Width = (double)collider.Bounds.Width;
-                    rect.Height = (double)collider.Bounds.Height;
-                    rect.Stroke = Brushes.Red;
-                    rect.Fill = Brushes.Transparent;
-
-                    // These methods are to update the positions of the debug rects
-                    Canvas.SetLeft(rect, (double)collider?.Bounds.Left);
-                    Canvas.SetTop(rect, (double)collider?.Bounds.Top);
-
-                    // This one draws a rect on the Canvas
-                    SceneCanvas.Children.Add(rect);
-                    
-                    _debugBoxes.Add(rect);
-                }
-            #endregion
         }
     }
     
