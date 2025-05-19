@@ -16,9 +16,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <conv:GameObjectCanvas Grid.Row="0" Width="{Binding ElementName=ThisPage, Path=ActualWidth}"
+        <conv:GameObjectCanvas x:Name="GameObjectCanvas" Grid.Row="0" Width="{Binding ElementName=ThisPage, Path=ActualWidth}"
                                Height="{Binding ElementName=ThisPage, Path=ActualHeight}"
-                               Background="Black" ItemsSource="{Binding Objects}" />
+                               Background="Black" ItemsSource="{Binding Objects}"/>
 
         <ItemsControl HorizontalAlignment="Right" VerticalAlignment="Bottom"
                       Grid.Row="1" ItemsSource="{Binding DetectorItems.SurroundingItems}">

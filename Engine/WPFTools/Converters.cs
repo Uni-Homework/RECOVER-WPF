@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace RECOVER.Engine.WPFTools;
 
@@ -99,6 +100,31 @@ public class HalfConverter : IValueConverter
         if (value is double doub)
         {
             return doub * 2;
+        }
+
+        return null;
+    }
+}
+
+public class ColorColliderConverter : IValueConverter
+{
+    public static readonly ColorColliderConverter Instance = new ColorColliderConverter();
+
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is bool b)
+        {
+            return b ? Brushes.Green : Brushes.Red;
+        }
+
+        return null;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is Brush b)
+        {
+            return b == Brushes.Green;
         }
 
         return null;

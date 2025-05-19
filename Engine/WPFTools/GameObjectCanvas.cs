@@ -18,12 +18,13 @@ public class GameObjectCanvas : Canvas
 
     private static void OnItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        GameObjectCanvas battleMapControl = (GameObjectCanvas)d;
-        battleMapControl.ShowItems();
+        GameObjectCanvas canvas = (GameObjectCanvas)d;
+        canvas.ShowItems();
     }
 
     private void ShowItems()
     {
+        _colliderRectangles.Clear();
         foreach (var go in ItemsSource)
         {
             SetGameObject(go);
@@ -38,13 +39,46 @@ public class GameObjectCanvas : Canvas
 
     #endregion
 
+    #region IsDebugSourceProperty
+
+    public static readonly DependencyProperty IsDebugSourceProperty = DependencyProperty.Register(
+        nameof(IsDebug),
+        typeof(bool), typeof(GameObjectCanvas),
+        new FrameworkPropertyMetadata(false, OnIsDebugChanged));
+
+    private static void OnIsDebugChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        GameObjectCanvas canvas = (GameObjectCanvas)d;
+        if ((bool)e.NewValue)
+        {
+            canvas._colliderRectangles.ForEach(r => canvas.Children.Add(r));
+        }
+        else
+        {
+            canvas._colliderRectangles.ForEach(r => canvas.Children.Remove(r));
+        }
+    }
+
+    public bool IsDebug
+    {
+        get => (bool)GetValue(IsDebugSourceProperty);
+        set => SetValue(IsDebugSourceProperty, value);
+    }
+
+    #endregion
+
+    private List<Rectangle> _colliderRectangles;
+
+    public GameObjectCanvas()
+    {
+        _colliderRectangles = new List<Rectangle>();
+    }
+
     private void SetGameObject(GameObject go)
     {
         SetCamera(go);
         SetSprite(go);
-#if DEBUG
         SetCollider(go);
-#endif
     }
 
     private void SetCollider(GameObject go)
@@ -52,8 +86,14 @@ public class GameObjectCanvas : Canvas
         foreach (var collider in go.GetComponents<BoxCollider>())
         {
             Rectangle rect = new Rectangle();
-            rect.Stroke = Brushes.Red;
             rect.Fill = Brushes.Transparent;
+            
+            rect.SetBinding(Rectangle.StrokeProperty, new Binding()
+            {
+                Source = collider,
+                Path = new PropertyPath("IsTrigger"),
+                Converter = ColorColliderConverter.Instance
+            });
 
             rect.SetBinding(WidthProperty, new Binding()
             {
@@ -65,7 +105,7 @@ public class GameObjectCanvas : Canvas
                 Source = collider,
                 Path = new PropertyPath("Height")
             });
-            
+
             rect.RenderTransform = new RotateTransform(0);
 
             rect.SetBinding(RenderTransformOriginProperty, new Binding()
@@ -73,7 +113,7 @@ public class GameObjectCanvas : Canvas
                 Source = go,
                 Path = new PropertyPath("Transform.Origin")
             });
-            
+
             MultiBinding leftBinding = new MultiBinding()
             {
                 Converter = OriginCorrectingConverter.Instance
@@ -94,7 +134,11 @@ public class GameObjectCanvas : Canvas
             topBinding.Bindings.Add(new Binding("Height") { Source = collider });
             rect.SetBinding(TopProperty, topBinding);
 
-            Children.Add(rect);
+            if (IsDebug)
+            {
+                Children.Add(rect);
+            }
+            _colliderRectangles.Add(rect);
         }
     }
 
@@ -104,13 +148,13 @@ public class GameObjectCanvas : Canvas
         if (sprite != null)
         {
             Rectangle rectangle = sprite.GetRectangle();
-            
+
             rectangle.SetBinding(RenderTransformOriginProperty, new Binding()
             {
                 Source = go,
                 Path = new PropertyPath("Transform.Origin")
             });
-            
+
             MultiBinding leftBinding = new MultiBinding()
             {
                 Converter = OriginCorrectingConverter.Instance
@@ -130,7 +174,7 @@ public class GameObjectCanvas : Canvas
             topBinding.Bindings.Add(new Binding("Transform.Origin.Y") { Source = go });
             topBinding.Bindings.Add(new Binding("Height") { Source = rectangle });
             rectangle.SetBinding(TopProperty, topBinding);
-            
+
             rectangle.RenderTransform = new RotateTransform(0);
 
             BindingOperations.SetBinding(rectangle.RenderTransform, RotateTransform.AngleProperty, new Binding()
