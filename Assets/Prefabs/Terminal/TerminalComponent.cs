@@ -26,13 +26,13 @@ public class TerminalComponent : Component
     public ObservableCollection<string> History
     {
         get => history;
-        set { Set(ref history, value); }
+        set => Set(ref history, value);
     }
 
     public string Command
     {
         get => command;
-        set { Set(ref command, value); }
+        set => Set(ref command, value);
     }
 
     public void OpenTerminal()

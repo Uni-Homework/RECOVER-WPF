@@ -17,6 +17,8 @@ public partial class MainBase : Page
         InitializeComponent();
 
         _baseScene = new MainBaseScene();
+        _baseScene.Start();
+        
         DataContext = BaseScene;
     }
 }

@@ -11,7 +11,6 @@ public class MainBaseScene : Scene
 
     public MainBaseScene() : base()
     {
-        base.Start();
         PlayerPrefab player = new PlayerPrefab(new Vector(200, 0));
         TerminalPrefab item = new TerminalPrefab(100, 100);
         DetectorItems = player.GetComponent<DetectedItemsComponent>();

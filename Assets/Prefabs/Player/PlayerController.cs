@@ -9,9 +9,23 @@ public class PlayerController : Component
     private float rotationSpeed = 180f; // degrees per second
     private float moveSpeed = 1f;
     private bool rotateLeft, rotateRight;
-    
+    private DetectedItemsComponent _detectedItemsComponent;
+
+    public override void Start()
+    {
+        _detectedItemsComponent = GameObject.GetComponent<DetectedItemsComponent>();
+    }
+
     public override void Update(double deltaTime)
     {
+        
+        foreach (var surroundingItem in _detectedItemsComponent.SurroundingItems)
+        {
+            if (Keyboard.GetKeyStates(surroundingItem.ActivationKey) != KeyStates.Down) continue;
+            surroundingItem.Action.Invoke();
+            return;
+        }
+        
         // Get input
         Vector input = new Vector();
         if (Keyboard.IsKeyDown(Key.W)) input.Y -= 1;

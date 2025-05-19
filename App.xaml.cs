@@ -33,10 +33,7 @@ public partial class App : Application
     // check MainBase.xaml.cs
     private void SetScene()
     {
-        var scene = new MainBaseScene();
-
         mainWindow.Content = new MainBase();
-        scene.Start();
     }
 
     private void GameLoop(object sender, EventArgs e)

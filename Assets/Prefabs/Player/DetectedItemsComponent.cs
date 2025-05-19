@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
 using RECOVER.Assets.Prefabs.Item;
 using RECOVER.Engine;
 using RECOVER.Engine.Components;
@@ -34,17 +33,6 @@ public class DetectedItemsComponent : ColliderReaction
         if (gameObject is ItemPrefab itemObject)
         {
             _surroundingItems.Remove(itemObject);
-        }
-    }
-
-    public override void Update(double deltaTime)
-    {
-        foreach (var surroundingItem in _surroundingItems)
-        {
-            if (Keyboard.GetKeyStates(surroundingItem.ActivationKey) == KeyStates.Down)
-            {
-                surroundingItem.Action.Invoke();
-            }
         }
     }
 }
