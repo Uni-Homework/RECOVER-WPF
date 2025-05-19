@@ -1,0 +1,1 @@
+﻿Folder for all the sprites, animations, sounds - all not-code related game assets.
