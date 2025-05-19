@@ -21,5 +21,6 @@ public class PlayerPrefab : GameObject
         AddComponent(new SpriteComponent((ImageSource)App.Current.Resources["PlayerMen"]));
         AddComponent(new PlayerColliderController());
         AddComponent(new Camera());
+        AddComponent(new DetectedItemsComponent());
     }
 }

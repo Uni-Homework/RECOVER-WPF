@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace RECOVER.Assets.Scenes;
+namespace RECOVER.Assets.Scenes.MainBase;
 
 public partial class MainBase : Page
 {
@@ -17,6 +17,8 @@ public partial class MainBase : Page
         InitializeComponent();
 
         _baseScene = new MainBaseScene();
+        _baseScene.Start();
+        
         DataContext = BaseScene;
     }
 }

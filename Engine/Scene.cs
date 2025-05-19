@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using RECOVER.Engine.Components;
+﻿using RECOVER.Engine.Components;
 using RECOVER.Engine.WPFTools;
 
 namespace RECOVER.Engine;
@@ -7,16 +6,17 @@ namespace RECOVER.Engine;
 public abstract class Scene : DeafNotificationObject
 {
     protected List<GameObject> objects;
-    
+
+    private Dictionary<(Collider, Collider), bool> _previousCollisions;
     private bool _isInitialized = false;
 
     /// <summary>
     /// Default constructor for a scene.
     /// </summary>
-    /// <param name="canvas">A canvas of a window - required for GameObjects rendering.</param>
     public Scene()
     {
         objects = new List<GameObject>();
+        _previousCollisions = new Dictionary<(Collider, Collider), bool>();
     }
 
     public IReadOnlyList<GameObject> Objects => objects;
@@ -24,12 +24,11 @@ public abstract class Scene : DeafNotificationObject
     /// <summary>
     /// Runs once
     /// </summary>
-
     public virtual void Start()
     {
         foreach (var obj in objects) obj.Start();
     }
-    
+
     /// <summary>
     /// Runs indefinitely
     /// </summary>
@@ -42,32 +41,123 @@ public abstract class Scene : DeafNotificationObject
 
     public virtual void UpdatePhysics(double deltaTime)
     {
-        // Check for collisions between all objects
-        for (int i = 0; i < objects.Count; i++)
+        Dictionary<(Collider, Collider), bool> previousCollisionsCopy =
+            new Dictionary<(Collider, Collider), bool>(_previousCollisions);
+        _previousCollisions.Clear();
+        
+        List<Collider> allColliders = objects.SelectMany(go => go.Components.OfType<Collider>()).ToList();
+        
+        for (int i = 0; i < allColliders.Count; i++)
         {
-            var obj1 = objects[i];
-            var collider1 = obj1.GetComponent<Collider>();
-            if (collider1 == null) continue;
-
-            for (int j = i + 1; j < objects.Count; j++)
+            for (int j = i + 1; j < allColliders.Count; j++)
             {
-                var obj2 = objects[j];
-                var collider2 = obj2.GetComponent<Collider>();
-                if (collider2 == null) continue;
-
-                // If objects are colliding
-                if (collider1.Intersects(collider2))
+                Collider colliderA = allColliders[i];
+                Collider colliderB = allColliders[j];
+                
+                bool intersects = colliderA.IntersectsDelta(colliderB, deltaTime);
+                var collisionKey = (colliderA, colliderB);
+                
+                if (intersects)
                 {
-                    // Stop both objects
-                    obj1.Transform.Velocity = new Vector(0, 0);
-                    obj2.Transform.Velocity = new Vector(0, 0);
+                    _previousCollisions[collisionKey] = true;
+                    
+                    GameObject gameObjectA = colliderA.GameObject;
+                    GameObject gameObjectB = colliderB.GameObject;
+                    List<ColliderReaction> reactionsA = gameObjectA.GetComponents<ColliderReaction>().ToList();
+                    List<ColliderReaction> reactionsB = gameObjectB.GetComponents<ColliderReaction>().ToList();
+                    
+                    if (colliderA.IsTrigger || colliderB.IsTrigger)
+                    {
+                        foreach (ColliderReaction reaction in reactionsA)
+                        {
+                            if (!previousCollisionsCopy.ContainsKey(collisionKey))
+                            {
+                                reaction.OnTriggerEnter(gameObjectB);
+                            }
+                            else
+                            {
+                                reaction.OnTriggerStay(gameObjectB);
+                            }
+                        }
 
-                    // Notify collision reactions if they exist
-                    var reaction1 = obj1.GetComponent<ColliderReaction>();
-                    var reaction2 = obj2.GetComponent<ColliderReaction>();
+                        foreach (ColliderReaction reaction in reactionsB)
+                        {
+                            if (!previousCollisionsCopy.ContainsKey(collisionKey))
+                            {
+                                reaction.OnTriggerEnter(gameObjectA);
+                            }
+                            else
+                            {
+                                reaction.OnTriggerStay(gameObjectA);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (ColliderReaction reaction in reactionsA)
+                        {
+                            if (!previousCollisionsCopy.ContainsKey(collisionKey))
+                            {
+                                reaction.OnCollisionEnter(gameObjectB);
+                            }
+                            else
+                            {
+                                reaction.OnCollisionStay(gameObjectB);
+                            }
+                        }
 
-                    if (reaction1 != null) reaction1.OnCollisionEnter();
-                    if (reaction2 != null) reaction2.OnCollisionEnter();
+                        foreach (ColliderReaction reaction in reactionsB)
+                        {
+                            if (!previousCollisionsCopy.ContainsKey(collisionKey))
+                            {
+                                reaction.OnCollisionEnter(gameObjectA);
+                            }
+                            else
+                            {
+                                reaction.OnCollisionStay(gameObjectA);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        foreach (var collision in previousCollisionsCopy)
+        {
+            var colliderA = collision.Key.Item1;
+            var colliderB = collision.Key.Item2;
+            
+            if (!_previousCollisions.ContainsKey(collision.Key))
+            {
+                GameObject gameObjectA = colliderA.GameObject;
+                GameObject gameObjectB = colliderB.GameObject;
+                
+                List<ColliderReaction> reactionsA = gameObjectA.GetComponents<ColliderReaction>().ToList();
+                List<ColliderReaction> reactionsB = gameObjectB.GetComponents<ColliderReaction>().ToList();
+                
+                if (colliderA.IsTrigger || colliderB.IsTrigger)
+                {
+                    foreach (ColliderReaction reaction in reactionsA)
+                    {
+                        reaction.OnTriggerExit(gameObjectB);
+                    }
+
+                    foreach (ColliderReaction reaction in reactionsB)
+                    {
+                        reaction.OnTriggerExit(gameObjectA);
+                    }
+                }
+                else
+                {
+                    foreach (ColliderReaction reaction in reactionsA)
+                    {
+                        reaction.OnCollisionExit(gameObjectB);
+                    }
+
+                    foreach (ColliderReaction reaction in reactionsB)
+                    {
+                        reaction.OnCollisionExit(gameObjectA);
+                    }
                 }
             }
         }

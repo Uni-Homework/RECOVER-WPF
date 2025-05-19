@@ -3,7 +3,7 @@ using System.Windows.Media;
 using RECOVER.Engine;
 using RECOVER.Engine.Components;
 
-namespace RECOVER.Assets.Prefabs;
+namespace RECOVER.Assets.Prefabs.Test;
 
 public class DebugBoxPrefab : GameObject
 {
