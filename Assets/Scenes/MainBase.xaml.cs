@@ -16,8 +16,7 @@ public partial class MainBase : Page
     {
         InitializeComponent();
 
-        _baseScene = new MainBaseScene(ThisCanvas);
-
-        DataContext = this;
+        _baseScene = new MainBaseScene();
+        DataContext = BaseScene;
     }
 }

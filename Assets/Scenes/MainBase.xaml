@@ -4,53 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:conv="clr-namespace:RECOVER.Engine.WPFTools"
+      xmlns:s="clr-namespace:RECOVER.Assets.Scenes"
       mc:Ignorable="d"
       x:Name="ThisPage"
-      Background="Black">
+      Background="Black"
+      d:DataContext="{d:DesignInstance s:MainBaseScene, IsDesignTimeCreatable=True}">
 
-    <Page.Resources>
-        <conv:NegativeDoubleConvert x:Key="NegativeDoubleConvert" />
-        <conv:HalfValueConverter x:Key="HalfValueConverter" />
-        <conv:NegateValueConverter x:Key="NegateValueConverter" />
-        <conv:OffsetValueConverter x:Key="OffsetValueConverter" />
-    </Page.Resources>
-
-    <Canvas Width="{Binding ElementName=ThisPage, Path=ActualWidth}"
-            Height="{Binding ElementName=ThisPage, Path=ActualHeight}"
-            Background="Black"
-            x:Name="ThisCanvas">
-
-
-        <Canvas.RenderTransform>
-            <TransformGroup>
-                <TranslateTransform>
-                    <TranslateTransform.X>
-                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}" ConverterParameter="15">
-                            <Binding Path="BaseScene.Player.Transform.Position.X" />
-                            <Binding ElementName="ThisPage" Path="ActualWidth" />
-                        </MultiBinding>
-                    </TranslateTransform.X>
-                    <TranslateTransform.Y>
-                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}" ConverterParameter="15">
-                            <Binding Path="BaseScene.Player.Transform.Position.Y" />
-                            <Binding ElementName="ThisPage" Path="ActualHeight" />
-                        </MultiBinding>
-                    </TranslateTransform.Y>
-                </TranslateTransform>
-                <RotateTransform
-                    CenterX="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={StaticResource OffsetValueConverter}}"
-                    CenterY="{Binding ElementName=ThisPage, Path=ActualHeight, Converter={StaticResource OffsetValueConverter}}"
-                    Angle="{Binding BaseScene.Player.Transform.Rotation, Converter={StaticResource NegateValueConverter}}" />
-            </TransformGroup>
-        </Canvas.RenderTransform>
-
-        <Image Width="30" Height="30"
-               Source="{StaticResource PlayerMen}"
-               Canvas.Left="{Binding BaseScene.Player.Transform.Position.X}"
-               Canvas.Top="{Binding BaseScene.Player.Transform.Position.Y}">
-            <Image.RenderTransform>
-                <RotateTransform CenterX="15" CenterY="15" Angle="{Binding BaseScene.Player.Transform.Rotation}" />
-            </Image.RenderTransform>
-        </Image>
-    </Canvas>
+    <conv:GameObjectCanvas Width="{Binding ElementName=ThisPage, Path=ActualWidth}"
+                           Height="{Binding ElementName=ThisPage, Path=ActualHeight}"
+                           Background="Black" ItemsSource="{Binding Objects}">
+    </conv:GameObjectCanvas>
 </Page>

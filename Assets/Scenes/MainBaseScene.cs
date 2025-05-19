@@ -1,43 +1,21 @@
 ﻿using System.Windows;
-
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using RECOVER.Assets.Prefabs;
 using RECOVER.Assets.Prefabs.Player;
 using RECOVER.Engine;
-using RECOVER.Engine.Components;
-
 
 namespace RECOVER.Assets.Scenes;
 
 public class MainBaseScene : Scene
 {
-
-    private PlayerPrefab player;
-    
-    // for debug
-    private List<Rectangle> _debugBoxes = new List<Rectangle>();
-    
-    // Necessary for that stupid thing called WPF
-
-    public PlayerPrefab Player
-    {
-        get => player;
-        private set => Set(ref player, value);
-    }
-
-
-    public MainBaseScene(Canvas canvas) : base(canvas)
+    public MainBaseScene() : base()
     {
         base.Start();
         
         // Creating player
-        player = new PlayerPrefab(new Vector(200, 0));
+        PlayerPrefab player = new PlayerPrefab(new Vector(200, 0));
         
         // You can rotate Player as well!
         player.Transform.Rotation = 180.0;
-        objects.Add(player);
         
         // Creating game objects
         GameObject cube1 = new DebugBoxPrefab(new Vector(100, 200));
@@ -53,16 +31,12 @@ public class MainBaseScene : Scene
         objects.Add(cube1);
         objects.Add(cube2);
         objects.Add(cube3);
+        objects.Add(player);
     }
 
     public override void Update(double deltaTime)
     {
         base.Update(deltaTime);
-
-        #region DebugSection
-            foreach (var box in _debugBoxes) SceneCanvas.Children.Remove(box);
-            _debugBoxes.Clear();
-        #endregion
         
         foreach (var obj in Objects)
         {
@@ -70,28 +44,6 @@ public class MainBaseScene : Scene
             if (obj.Name == "Cube1") obj.Transform.Position += new Vector(0, 0.5);
             if (obj.Name == "Cube2") obj.Transform.Position += new Vector(-0.2, 0);
             if (obj.Name == "Cube3") obj.Transform.Rotation += 2;
-
-            #region DebugSection
-                var collider = obj.GetComponent<BoxCollider>();
-                if (collider != null)
-                {
-                    // Rectangle is a main drawable structure for WPF
-                    Rectangle rect = new Rectangle();
-                    rect.Width = (double)collider.Bounds.Width;
-                    rect.Height = (double)collider.Bounds.Height;
-                    rect.Stroke = Brushes.Red;
-                    rect.Fill = Brushes.Transparent;
-
-                    // These methods are to update the positions of the debug rects
-                    Canvas.SetLeft(rect, (double)collider?.Bounds.Left);
-                    Canvas.SetTop(rect, (double)collider?.Bounds.Top);
-
-                    // This one draws a rect on the Canvas
-                    SceneCanvas.Children.Add(rect);
-                    
-                    _debugBoxes.Add(rect);
-                }
-            #endregion
         }
     }
     
