@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace RECOVER.Assets.Scenes;
+namespace RECOVER.Assets.Scenes.MainBase;
 
 public partial class MainBase : Page
 {

@@ -1,9 +1,6 @@
 ﻿using System.Windows;
-
-using System.Windows.Controls;
-
 using System.Windows.Media;
-using RECOVER.Assets.Scenes;
+using RECOVER.Assets.Scenes.MainBase;
 
 namespace RECOVER;
 

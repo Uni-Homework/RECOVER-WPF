@@ -7,7 +7,7 @@
         <BitmapImage UriSource="Assets/Resources/Player/spacesuit.png" DecodePixelHeight="30"
                      x:Key="PlayerMen">
         </BitmapImage>
-        <BitmapImage UriSource="/Resource/Item/terminal.png" x:Key="ItemTerminalTile"></BitmapImage>
-        <BitmapImage UriSource="/Resource/Item/itemTarget.png" x:Key="ItemTarget"></BitmapImage>
+        <BitmapImage UriSource="/Assets/Resources/Item/terminal.png" x:Key="ItemTerminalTile"></BitmapImage>
+        <BitmapImage UriSource="/Assets/Resources/Item/itemtarget.png" x:Key="ItemTarget"></BitmapImage>
     </Application.Resources>
 </Application>

@@ -15,11 +15,17 @@
       <None Remove="Assets\Resources\Tile\floor.png" />
       <Resource Include="Assets\Resources\Tile\floor.png" />
       <None Remove="Assets\Resources\Player\Spacesuit.png" />
+      <None Remove="Assets\Resources\Item\itemtarget.png" />
+      <Resource Include="Assets\Resources\Item\itemtarget.png" />
+      <None Remove="Assets\Resources\Item\terminal.png" />
+      <Resource Include="Assets\Resources\Item\terminal.png" />
     </ItemGroup>
 
     <ItemGroup>
-      <Page Update="Assets\Scenes\MainBase.xaml">
+      <Page Update="Assets\Scenes\MainBase\MainBase.xaml">
         <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
       </Page>
     </ItemGroup>
 

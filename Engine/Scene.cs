@@ -72,11 +72,11 @@ public abstract class Scene : DeafNotificationObject
                         {
                             if (!previousCollisionsCopy.ContainsKey(collisionKey))
                             {
-                                reaction.OnTriggerEnter();
+                                reaction.OnTriggerEnter(gameObjectB);
                             }
                             else
                             {
-                                reaction.OnTriggerStay();
+                                reaction.OnTriggerStay(gameObjectB);
                             }
                         }
 
@@ -84,11 +84,11 @@ public abstract class Scene : DeafNotificationObject
                         {
                             if (!previousCollisionsCopy.ContainsKey(collisionKey))
                             {
-                                reaction.OnTriggerEnter();
+                                reaction.OnTriggerEnter(gameObjectA);
                             }
                             else
                             {
-                                reaction.OnTriggerStay();
+                                reaction.OnTriggerStay(gameObjectA);
                             }
                         }
                     }
@@ -98,11 +98,11 @@ public abstract class Scene : DeafNotificationObject
                         {
                             if (!previousCollisionsCopy.ContainsKey(collisionKey))
                             {
-                                reaction.OnCollisionEnter();
+                                reaction.OnCollisionEnter(gameObjectB);
                             }
                             else
                             {
-                                reaction.OnCollisionStay();
+                                reaction.OnCollisionStay(gameObjectB);
                             }
                         }
 
@@ -110,11 +110,11 @@ public abstract class Scene : DeafNotificationObject
                         {
                             if (!previousCollisionsCopy.ContainsKey(collisionKey))
                             {
-                                reaction.OnCollisionEnter();
+                                reaction.OnCollisionEnter(gameObjectA);
                             }
                             else
                             {
-                                reaction.OnCollisionStay();
+                                reaction.OnCollisionStay(gameObjectA);
                             }
                         }
                     }
@@ -139,24 +139,24 @@ public abstract class Scene : DeafNotificationObject
                 {
                     foreach (ColliderReaction reaction in reactionsA)
                     {
-                        reaction.OnTriggerExit();
+                        reaction.OnTriggerExit(gameObjectB);
                     }
 
                     foreach (ColliderReaction reaction in reactionsB)
                     {
-                        reaction.OnTriggerExit();
+                        reaction.OnTriggerExit(gameObjectA);
                     }
                 }
                 else
                 {
                     foreach (ColliderReaction reaction in reactionsA)
                     {
-                        reaction.OnCollisionExit();
+                        reaction.OnCollisionExit(gameObjectB);
                     }
 
                     foreach (ColliderReaction reaction in reactionsB)
                     {
-                        reaction.OnCollisionExit();
+                        reaction.OnCollisionExit(gameObjectA);
                     }
                 }
             }
