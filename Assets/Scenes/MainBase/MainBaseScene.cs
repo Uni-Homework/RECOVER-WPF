@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using RECOVER.Assets.Prefabs.Item.PlayerResourceEnricher;
 using RECOVER.Assets.Prefabs.Player;
+using RECOVER.Assets.Prefabs.SpaceStation;
 using RECOVER.Assets.Prefabs.Terminal;
 using RECOVER.Engine;
 
@@ -12,10 +13,33 @@ public class MainBaseScene : Scene
 
     public MainBaseScene() : base()
     {
-        PlayerPrefab player = new PlayerPrefab(new Vector(200, 0));
-        TerminalPrefab item = new TerminalPrefab(100, 100);
-        EnergyPlayerResourceFiller enetgyenricher = new EnergyPlayerResourceFiller(100, 200);
-        WaterPlayerResourceFiller waterPlayerResourceFiller = new WaterPlayerResourceFiller(200, 200);
+        // Create a simple space station layout
+        string spaceStationLayout = 
+            "####################\n" +
+            "#..................#\n" +
+            "#..................#\n" +
+            "#..................#\n" +
+            "#..................#\n" +
+            "#..................#\n" +
+            "#..................#\n" +
+            "#..................#\n" +
+            "#..................#\n" +
+            "####################";
+
+        // Create and add the space station
+        var spaceStation = new SpaceStationPrefab(spaceStationLayout, new Vector(0, 0));
+        objects.Add(spaceStation);
+
+        // Add wall tiles to the scene
+        foreach (var wallTile in spaceStation.WallTiles)
+        {
+            objects.Add(wallTile);
+        }
+
+        var player = new PlayerPrefab(new Vector(400, 200));
+        var item = new TerminalPrefab(100, 100);
+        var enetgyenricher = new EnergyPlayerResourceFiller(100, 200);
+        var waterPlayerResourceFiller = new WaterPlayerResourceFiller(200, 200);
         DetectorItems = player.GetComponent<DetectedItemsComponent>();
         objects.Add(player);
         objects.Add(item);
