@@ -8,7 +8,7 @@ namespace RECOVER.Assets.Prefabs.SpaceStation;
 public class SpaceStationPrefab : GameObject
 {
     private const int TILE_SIZE = 64; // Size of each tile in pixels
-    private string[,] _tileMap;
+    private char[,] _tileMap;
     private List<GameObject> _wallTiles;
 
     public SpaceStationPrefab(string matrix, Vector position)
@@ -20,7 +20,7 @@ public class SpaceStationPrefab : GameObject
         string[] rows = matrix.Split('\n');
         int height = rows.Length;
         int width = rows[0].Length;
-        _tileMap = new string[width, height];
+        _tileMap = new char[width, height];
         _wallTiles = new List<GameObject>();
 
         // Store the tile map and create wall tiles
@@ -28,26 +28,29 @@ public class SpaceStationPrefab : GameObject
         {
             for (int x = 0; x < width; x++)
             {
-                _tileMap[x, y] = rows[y][x].ToString();
-                
-                if (_tileMap[x, y] == "#")
-                {
-                    CreateWallTile(x, y);
-                }
+                _tileMap[x, y] = rows[y][x];
+                CreateWallTile(x, y, _tileMap[x, y]);
             }
         }
 
     }
 
-    private void CreateWallTile(int x, int y)
+    private void CreateWallTile(int x, int y, char tile)
     {
         var wallTile = new GameObject();
         wallTile.Transform.Position = new Vector(x * TILE_SIZE, y * TILE_SIZE);
         wallTile.Transform.Origin = new Point(0.5, 0.5);
 
-        // Add sprite and collider components
-        var sprite = new SpriteComponent((ImageSource)App.Current.Resources["ShipwallMainBaseTile"]);
+        string[] wallIds = ["WallTl", "WallT", "WallTr", "WallL", "WallR", "WallBl", "WallB", "WallBr"];
+        string[] floorIds = ["FloorTl", "FloorT", "FloorTr", "FloorL", "Floor", "FloorR", "FloorBl", "FloorB", "FloorBr"];
+        
+        string resId = char.IsLower(tile) ? floorIds[tile-'a'] : wallIds[tile-'A'];
+        
+        // Add sprite component
+        var sprite = new SpriteComponent((ImageSource)App.Current.Resources[resId]);
         wallTile.AddComponent(sprite);
+
+        // Add physical collider
         wallTile.AddComponent(new BoxCollider(TILE_SIZE, TILE_SIZE));
 
         _wallTiles.Add(wallTile);
