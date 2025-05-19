@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+using RECOVER.Assets.Prefabs.Player.PlayerResource;
 using RECOVER.Engine;
 using RECOVER.Engine.Components;
 
@@ -22,5 +23,8 @@ public class PlayerPrefab : GameObject
         AddComponent(new PlayerColliderController());
         AddComponent(new Camera());
         AddComponent(new DetectedItemsComponent());
+        AddComponent(new EnergyResourcePlayer());
+        AddComponent(new PlayerResourceViewer());
+        AddComponent(new WaterResourcePlayer());
     }
 }

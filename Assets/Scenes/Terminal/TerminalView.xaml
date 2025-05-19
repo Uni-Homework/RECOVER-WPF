@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:t="clr-namespace:RECOVER.Assets.Prefabs.Terminal"
         mc:Ignorable="d"
-        Title="TerminalView" Height="450" Width="800"
+        Title="Терминал" Height="450" Width="800"
         d:DataContext="{d:DesignInstance t:TerminalComponent, IsDesignTimeCreatable=True}">
 
     <Grid Background="Black">

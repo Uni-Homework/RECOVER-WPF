@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using RECOVER.Assets.Prefabs.Player.PlayerResource;
 using RECOVER.Engine.Components;
 
 namespace RECOVER.Assets.Prefabs.Player;
@@ -10,10 +11,12 @@ public class PlayerController : Component
     private float moveSpeed = 1f;
     private bool rotateLeft, rotateRight;
     private DetectedItemsComponent _detectedItemsComponent;
+    private PlayerResourceViewer _resourceViewer;
 
     public override void Start()
     {
         _detectedItemsComponent = GameObject.GetComponent<DetectedItemsComponent>();
+        _resourceViewer = GameObject.GetComponent<PlayerResourceViewer>();
     }
 
     public override void Update(double deltaTime)
@@ -36,6 +39,8 @@ public class PlayerController : Component
         if (Keyboard.IsKeyDown(Key.Q)) rotateLeft = true;
         if (Keyboard.IsKeyUp(Key.E)) rotateRight = false;
         if (Keyboard.IsKeyUp(Key.Q)) rotateLeft = false;
+        
+        if (Keyboard.IsKeyDown(Key.Tab)) _resourceViewer.OpenResourceViewer();
         
         // Apply rotation
         if (rotateLeft)

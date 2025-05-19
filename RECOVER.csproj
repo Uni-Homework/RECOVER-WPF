@@ -19,6 +19,10 @@
       <Resource Include="Assets\Resources\Item\itemtarget.png" />
       <None Remove="Assets\Resources\Item\terminal.png" />
       <Resource Include="Assets\Resources\Item\terminal.png" />
+      <None Remove="Assets\Resources\Item\energytile.png" />
+      <Resource Include="Assets\Resources\Item\energytile.png" />
+      <None Remove="Assets\Resources\Item\coolerTile.png" />
+      <Resource Include="Assets\Resources\Item\coolerTile.png" />
     </ItemGroup>
 
     <ItemGroup>
