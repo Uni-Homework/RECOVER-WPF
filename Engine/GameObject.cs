@@ -8,12 +8,15 @@ public class GameObject : DeafNotificationObject
 {
     private List<Component> components;
     private Transform transform;
+    public string Name { get; set; }
 
-    public GameObject()
+    public GameObject(string name = "GameObject")
     {
         components = new List<Component>();
         transform = new Transform();
         Debug.WriteLine($"GameObject constructor called for {GetType().Name}");
+        Name = name;
+
     }
 
     public List<Component> Components

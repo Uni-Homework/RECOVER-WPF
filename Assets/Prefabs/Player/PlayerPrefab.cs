@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Media.Imaging;
 using RECOVER.Engine;
 using RECOVER.Engine.Components;
 
@@ -18,9 +17,7 @@ public class PlayerPrefab : GameObject
         AddComponent(new PlayerController());
         AddComponent(new BoxCollider(20, 20));
         AddComponent(new PlayerColliderController());
-
-        SpriteComponent sprite = new SpriteComponent(30, 30);
-        sprite.Image = new BitmapImage(new Uri("Assets/Resources/Player/Spacesuit.png", UriKind.Relative));
-        AddComponent(sprite);
+        // SpriteComponent sprite = new SpriteComponent(new Uri("pack://application:,,,/Assets/Resources/Player/Spacesuit.png", UriKind.Absolute));
+        // AddComponent(sprite);
     }
 }

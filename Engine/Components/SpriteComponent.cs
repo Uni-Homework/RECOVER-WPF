@@ -1,29 +1,40 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Rectangle = System.Windows.Shapes.Rectangle;
+
 
 namespace RECOVER.Engine.Components;
 
 public class SpriteComponent : Component
 {
-    public ImageSource Image { get; set; }
-    public Rect Bounds => new Rect(
-        GameObject.Transform.Position.X,
-        GameObject.Transform.Position.Y,
-        Width,
-        Height
-    );
-    public double Width { get; set; } = 50;
-    public double Height { get; set; } = 50;
+    private ImageBrush _imageBrush;
+    private BitmapImage _image;
+    private Rectangle _rectangle;
 
-    public SpriteComponent(double width, double height)
+    public SpriteComponent(Uri uri)
     {
-        Width = width;
-        Height = height;
+        _image = new BitmapImage(uri);
+        
+        _imageBrush = new ImageBrush();
+        _imageBrush.ImageSource = _image;
+        
+        _rectangle = new Rectangle();
+        _rectangle.Width = _image.Width;
+        _rectangle.Height = _image.Height;
+        _rectangle.Fill = _imageBrush;
+        _rectangle.Tag = "SpriteComponent";
+        _rectangle.RenderTransformOrigin = new Point(0.5, 0.5); 
     }
-    public SpriteComponent(double width, double height, ImageSource image)
+
+    public override void Update(double deltaTime)
     {
-        Width = width;
-        Height = height;
-        Image = image;
+        Canvas.SetLeft(_rectangle, GameObject.Transform.Position.X);
+        Canvas.SetTop(_rectangle, GameObject.Transform.Position.Y);
+        
+        _rectangle.RenderTransform = new RotateTransform(GameObject.Transform.Rotation);
     }
+    
+    public Rectangle GetRectangle() => _rectangle;
 }
