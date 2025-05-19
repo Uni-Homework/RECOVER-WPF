@@ -1,43 +1,21 @@
 ﻿using System.Windows;
-
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using RECOVER.Assets.Prefabs;
 using RECOVER.Assets.Prefabs.Player;
 using RECOVER.Engine;
-using RECOVER.Engine.Components;
-
 
 namespace RECOVER.Assets.Scenes;
 
 public class MainBaseScene : Scene
 {
-
-    private PlayerPrefab player;
-    
-    // for debug
-    private List<Rectangle> _debugBoxes = new List<Rectangle>();
-    
-    // Necessary for that stupid thing called WPF
-
-    public PlayerPrefab Player
-    {
-        get => player;
-        private set => Set(ref player, value);
-    }
-
-
     public MainBaseScene() : base()
     {
         base.Start();
         
         // Creating player
-        player = new PlayerPrefab(new Vector(200, 0));
+        PlayerPrefab player = new PlayerPrefab(new Vector(200, 0));
         
         // You can rotate Player as well!
         player.Transform.Rotation = 180.0;
-        objects.Add(player);
         
         // Creating game objects
         GameObject cube1 = new DebugBoxPrefab(new Vector(100, 200));
@@ -53,6 +31,7 @@ public class MainBaseScene : Scene
         objects.Add(cube1);
         objects.Add(cube2);
         objects.Add(cube3);
+        objects.Add(player);
     }
 
     public override void Update(double deltaTime)

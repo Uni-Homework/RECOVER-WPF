@@ -10,47 +10,8 @@
       Background="Black"
       d:DataContext="{d:DesignInstance s:MainBaseScene, IsDesignTimeCreatable=True}">
 
-    <Page.Resources>
-        <conv:NegativeDoubleConvert x:Key="NegativeDoubleConvert" />
-        <conv:HalfValueConverter x:Key="HalfValueConverter" />
-        <conv:NegateValueConverter x:Key="NegateValueConverter" />
-        <conv:OffsetValueConverter x:Key="OffsetValueConverter" />
-    </Page.Resources>
-
     <conv:GameObjectCanvas Width="{Binding ElementName=ThisPage, Path=ActualWidth}"
                            Height="{Binding ElementName=ThisPage, Path=ActualHeight}"
                            Background="Black" ItemsSource="{Binding Objects}">
-
-        <conv:GameObjectCanvas.RenderTransform>
-            <TransformGroup>
-                <TranslateTransform>
-                    <TranslateTransform.X>
-                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}" ConverterParameter="15">
-                            <Binding Path="Player.Transform.Position.X" />
-                            <Binding ElementName="ThisPage" Path="ActualWidth" />
-                        </MultiBinding>
-                    </TranslateTransform.X>
-                    <TranslateTransform.Y>
-                        <MultiBinding Converter="{StaticResource NegativeDoubleConvert}" ConverterParameter="15">
-                            <Binding Path="Player.Transform.Position.Y" />
-                            <Binding ElementName="ThisPage" Path="ActualHeight" />
-                        </MultiBinding>
-                    </TranslateTransform.Y>
-                </TranslateTransform>
-                <RotateTransform
-                    CenterX="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={StaticResource OffsetValueConverter}}"
-                    CenterY="{Binding ElementName=ThisPage, Path=ActualHeight, Converter={StaticResource OffsetValueConverter}}"
-                    Angle="{Binding Player.Transform.Rotation, Converter={StaticResource NegateValueConverter}}" />
-            </TransformGroup>
-        </conv:GameObjectCanvas.RenderTransform>
-
-        <Image Width="30" Height="30"
-               Source="{StaticResource PlayerMen}"
-               Canvas.Left="{Binding Player.Transform.Position.X}"
-               Canvas.Top="{Binding Player.Transform.Position.Y}">
-            <Image.RenderTransform>
-                <RotateTransform CenterX="15" CenterY="15" Angle="{Binding Player.Transform.Rotation}" />
-            </Image.RenderTransform>
-        </Image>
     </conv:GameObjectCanvas>
 </Page>

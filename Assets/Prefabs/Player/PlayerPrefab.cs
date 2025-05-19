@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 using RECOVER.Engine;
 using RECOVER.Engine.Components;
 
@@ -9,13 +10,15 @@ public class PlayerPrefab : GameObject
     public PlayerPrefab(Vector position) : base()
     {
         Transform.Position = position;
-        
+
         // Initialize components properly using AddComponent
         var rigidBody = new RigidBody { IsKinematic = false };
         AddComponent(rigidBody);
-        
+
         AddComponent(new PlayerController());
-        AddComponent(new BoxCollider(20, 20));
+        AddComponent(new BoxCollider(40, 40));
+        AddComponent(new SpriteComponent((ImageSource)App.Current.Resources["PlayerMen"]));
         AddComponent(new PlayerColliderController());
+        AddComponent(new Camera());
     }
 }
