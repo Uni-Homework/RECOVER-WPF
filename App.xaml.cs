@@ -27,7 +27,6 @@ public partial class App : Application
         CompositionTarget.Rendering += GameLoop;
     }
 
-
     // lmao wha
     // why we do it twice???
     // check MainBase.xaml.cs
@@ -44,7 +43,6 @@ public partial class App : Application
         if (mainWindow.Content is MainBase mainBase && mainBase.BaseScene != null)
         {
             mainBase.BaseScene.Update(deltaTime);
-
         }
 
         lastFrameTime = currentFrameTime;

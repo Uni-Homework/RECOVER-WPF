@@ -18,7 +18,6 @@ public class PlayerController : Component
 
     public override void Update(double deltaTime)
     {
-        
         foreach (var surroundingItem in _detectedItemsComponent.SurroundingItems)
         {
             if (Keyboard.GetKeyStates(surroundingItem.ActivationKey) != KeyStates.Down) continue;
