@@ -49,8 +49,7 @@ public class GameObjectCanvas : Canvas
 
     private void SetCollider(GameObject go)
     {
-        var collider = go.GetComponent<BoxCollider>();
-        if (collider != null)
+        foreach (var collider in go.Components.OfType<BoxCollider>())
         {
             Rectangle rect = new Rectangle();
             rect.Stroke = Brushes.Red;
@@ -66,16 +65,7 @@ public class GameObjectCanvas : Canvas
                 Source = collider,
                 Path = new PropertyPath("Height")
             });
-            rect.SetBinding(LeftProperty, new Binding()
-            {
-                Source = go,
-                Path = new PropertyPath("Transform.Position.X")
-            });
-            rect.SetBinding(TopProperty, new Binding()
-            {
-                Source = go,
-                Path = new PropertyPath("Transform.Position.Y")
-            });
+            
             rect.RenderTransform = new RotateTransform(0);
 
             rect.SetBinding(RenderTransformOriginProperty, new Binding()
@@ -83,7 +73,26 @@ public class GameObjectCanvas : Canvas
                 Source = go,
                 Path = new PropertyPath("Transform.Origin")
             });
+            
+            MultiBinding leftBinding = new MultiBinding()
+            {
+                Converter = OriginCorrectingConverter.Instance
+            };
 
+            leftBinding.Bindings.Add(new Binding("Transform.Position.X") { Source = go });
+            leftBinding.Bindings.Add(new Binding("Transform.Origin.X") { Source = go });
+            leftBinding.Bindings.Add(new Binding("Width") { Source = collider });
+
+            rect.SetBinding(LeftProperty, leftBinding);
+
+            MultiBinding topBinding = new MultiBinding()
+            {
+                Converter = OriginCorrectingConverter.Instance
+            };
+            topBinding.Bindings.Add(new Binding("Transform.Position.Y") { Source = go });
+            topBinding.Bindings.Add(new Binding("Transform.Origin.Y") { Source = go });
+            topBinding.Bindings.Add(new Binding("Height") { Source = collider });
+            rect.SetBinding(TopProperty, topBinding);
 
             Children.Add(rect);
         }
@@ -95,21 +104,33 @@ public class GameObjectCanvas : Canvas
         if (sprite != null)
         {
             Rectangle rectangle = sprite.GetRectangle();
-            rectangle.SetBinding(LeftProperty, new Binding()
-            {
-                Source = go,
-                Path = new PropertyPath("Transform.Position.X")
-            });
-            rectangle.SetBinding(TopProperty, new Binding()
-            {
-                Source = go,
-                Path = new PropertyPath("Transform.Position.Y")
-            });
+            
             rectangle.SetBinding(RenderTransformOriginProperty, new Binding()
             {
                 Source = go,
                 Path = new PropertyPath("Transform.Origin")
             });
+            
+            MultiBinding leftBinding = new MultiBinding()
+            {
+                Converter = OriginCorrectingConverter.Instance
+            };
+
+            leftBinding.Bindings.Add(new Binding("Transform.Position.X") { Source = go });
+            leftBinding.Bindings.Add(new Binding("Transform.Origin.X") { Source = go });
+            leftBinding.Bindings.Add(new Binding("Width") { Source = rectangle });
+
+            rectangle.SetBinding(LeftProperty, leftBinding);
+
+            MultiBinding topBinding = new MultiBinding()
+            {
+                Converter = OriginCorrectingConverter.Instance
+            };
+            topBinding.Bindings.Add(new Binding("Transform.Position.Y") { Source = go });
+            topBinding.Bindings.Add(new Binding("Transform.Origin.Y") { Source = go });
+            topBinding.Bindings.Add(new Binding("Height") { Source = rectangle });
+            rectangle.SetBinding(TopProperty, topBinding);
+            
             rectangle.RenderTransform = new RotateTransform(0);
 
             BindingOperations.SetBinding(rectangle.RenderTransform, RotateTransform.AngleProperty, new Binding()
@@ -167,50 +188,17 @@ public class GameObjectCanvas : Canvas
             });
 
             RotateTransform rotateTransform = new RotateTransform(0);
-            BindingOperations.SetBinding(rotateTransform, RotateTransform.CenterXProperty, new MultiBinding()
+            BindingOperations.SetBinding(rotateTransform, RotateTransform.CenterXProperty, new Binding()
             {
-                Converter = HalfAndOriginValueConverter.Instance,
-                Bindings =
-                {
-                    new Binding
-                    {
-                        Path = new PropertyPath("ActualWidth"),
-                        Source = Parent
-                    },
-                    new Binding()
-                    {
-                        Path = new PropertyPath("Transform.Origin.X"),
-                        Source = go
-                    },
-                    new Binding
-                    {
-                        Path = new PropertyPath("Bounds.Width"),
-                        Source = collider
-                    }
-                }
+                Converter = HalfConverter.Instance,
+                Path = new PropertyPath("ActualWidth"),
+                Source = Parent
             });
-            BindingOperations.SetBinding(rotateTransform, RotateTransform.CenterYProperty, new MultiBinding()
+            BindingOperations.SetBinding(rotateTransform, RotateTransform.CenterYProperty, new Binding()
             {
-                Converter = HalfAndOriginValueConverter.Instance,
-
-                Bindings =
-                {
-                    new Binding
-                    {
-                        Path = new PropertyPath("ActualHeight"),
-                        Source = Parent
-                    },
-                    new Binding()
-                    {
-                        Path = new PropertyPath("Transform.Origin.Y"),
-                        Source = go
-                    },
-                    new Binding
-                    {
-                        Path = new PropertyPath("Bounds.Height"),
-                        Source = collider
-                    }
-                }
+                Converter = HalfConverter.Instance,
+                Path = new PropertyPath("ActualHeight"),
+                Source = Parent
             });
 
             BindingOperations.SetBinding(rotateTransform, RotateTransform.AngleProperty, new Binding()

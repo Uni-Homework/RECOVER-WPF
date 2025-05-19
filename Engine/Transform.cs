@@ -33,4 +33,9 @@ public class Transform : DeafNotificationObject
         get => _origin;
         set { Set(ref _origin, value); }
     }
+
+    public Rect GetRectWithOrigin(double wight, double height)
+    {
+        return new Rect(_position.X - wight * Origin.X, _position.Y - height * Origin.Y, wight, height);
+    }
 }

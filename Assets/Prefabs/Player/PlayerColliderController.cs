@@ -5,12 +5,12 @@ namespace RECOVER.Assets.Prefabs.Player;
 
 public class PlayerColliderController : ColliderReaction
 {
-    public override void OnCollisionEnter(GameObject gameObject)
+    public override void OnCollisionEnter()
     {
         GameObject.Transform.Velocity = new Vector();
     }
 
-    public override void OnCollisionStay(GameObject collider)
+    public override void OnCollisionStay()
     {
         GameObject.Transform.Velocity = new Vector();
     }

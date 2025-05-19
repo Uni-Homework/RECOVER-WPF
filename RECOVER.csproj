@@ -10,15 +10,11 @@
 
     <ItemGroup>
       <None Remove="Assets\Resources\Tile\shipwall.png" />
+      <Resource Include="Assets\Resources\Player\spacesuit.png" />
       <Resource Include="Assets\Resources\Tile\shipwall.png" />
       <None Remove="Assets\Resources\Tile\floor.png" />
       <Resource Include="Assets\Resources\Tile\floor.png" />
       <None Remove="Assets\Resources\Player\Spacesuit.png" />
-      <Resource Include="Assets\Resources\Player\Spacesuit.png" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Assets\Resources\Player\" />
     </ItemGroup>
 
     <ItemGroup>
