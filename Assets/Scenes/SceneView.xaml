@@ -10,7 +10,6 @@
 
     <Page.Resources>
         <conv:NegativeDoubleConvert x:Key="NegativeDoubleConvert" />
-        <conv:HalfValueConverter x:Key="HalfValueConverter" />
         <conv:NegateValueConverter x:Key="NegateValueConverter" />
     </Page.Resources>
 

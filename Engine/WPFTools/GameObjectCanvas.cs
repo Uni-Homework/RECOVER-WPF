@@ -78,11 +78,6 @@ public class GameObjectCanvas : Canvas
             });
             rect.RenderTransform = new RotateTransform(0);
 
-            BindingOperations.SetBinding(rect.RenderTransform, RotateTransform.AngleProperty, new Binding()
-            {
-                Source = go,
-                Path = new PropertyPath("Transform.Rotation")
-            });
             rect.SetBinding(RenderTransformOriginProperty, new Binding()
             {
                 Source = go,
@@ -130,14 +125,15 @@ public class GameObjectCanvas : Canvas
     private void SetCamera(GameObject go)
     {
         Camera camera = go.GetComponent<Camera>();
-        if (camera != null)
+        Collider collider = go.GetComponent<Collider>();
+        if (camera != null && collider != null)
         {
             TransformGroup tgroup = new TransformGroup();
 
             TranslateTransform translateTransform = new TranslateTransform();
             BindingOperations.SetBinding(translateTransform, TranslateTransform.XProperty, new MultiBinding()
             {
-                Converter = new NegativeDoubleConvert(),
+                Converter = NegativeDoubleConvert.Instance,
                 Bindings =
                 {
                     new Binding()
@@ -154,7 +150,7 @@ public class GameObjectCanvas : Canvas
             });
             BindingOperations.SetBinding(translateTransform, TranslateTransform.YProperty, new MultiBinding()
             {
-                Converter = new NegativeDoubleConvert(),
+                Converter = NegativeDoubleConvert.Instance,
                 Bindings =
                 {
                     new Binding
@@ -171,21 +167,55 @@ public class GameObjectCanvas : Canvas
             });
 
             RotateTransform rotateTransform = new RotateTransform(0);
-            BindingOperations.SetBinding(rotateTransform, RotateTransform.CenterXProperty, new Binding()
+            BindingOperations.SetBinding(rotateTransform, RotateTransform.CenterXProperty, new MultiBinding()
             {
-                Converter = new HalfValueConverter(),
-                Path = new PropertyPath("ActualWidth"),
-                Source = Parent
+                Converter = HalfAndOriginValueConverter.Instance,
+                Bindings =
+                {
+                    new Binding
+                    {
+                        Path = new PropertyPath("ActualWidth"),
+                        Source = Parent
+                    },
+                    new Binding()
+                    {
+                        Path = new PropertyPath("Transform.Origin.X"),
+                        Source = go
+                    },
+                    new Binding
+                    {
+                        Path = new PropertyPath("Bounds.Width"),
+                        Source = collider
+                    }
+                }
             });
-            BindingOperations.SetBinding(rotateTransform, RotateTransform.CenterYProperty, new Binding()
+            BindingOperations.SetBinding(rotateTransform, RotateTransform.CenterYProperty, new MultiBinding()
             {
-                Converter = new HalfValueConverter(),
-                Path = new PropertyPath("ActualHeight"),
-                Source = Parent
+                Converter = HalfAndOriginValueConverter.Instance,
+
+                Bindings =
+                {
+                    new Binding
+                    {
+                        Path = new PropertyPath("ActualHeight"),
+                        Source = Parent
+                    },
+                    new Binding()
+                    {
+                        Path = new PropertyPath("Transform.Origin.Y"),
+                        Source = go
+                    },
+                    new Binding
+                    {
+                        Path = new PropertyPath("Bounds.Height"),
+                        Source = collider
+                    }
+                }
             });
+
             BindingOperations.SetBinding(rotateTransform, RotateTransform.AngleProperty, new Binding()
             {
-                Converter = new NegateValueConverter(),
+                Converter = NegateValueConverter.Instance,
                 Path = new PropertyPath("Transform.Rotation"),
                 Source = go
             });

@@ -3,21 +3,30 @@ using System.Windows.Data;
 
 namespace RECOVER.Engine.WPFTools;
 
-public class HalfValueConverter : IValueConverter
+public class HalfAndOriginValueConverter : IMultiValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public static readonly HalfAndOriginValueConverter Instance = new HalfAndOriginValueConverter();
+    
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
-        return (double)value / 2;
+        if (values.Length == 0 || values.Any(d => d is not double))
+        {
+            return null;
+        }
+
+        return (double)values[0] / 2 + (double)values[1] * (double)values[2];
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
-        return (double)value * 2;
+        throw new NotImplementedException();
     }
 }
 
 public class NegateValueConverter : IValueConverter
 {
+    public static readonly NegateValueConverter Instance = new NegateValueConverter();
+    
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         return -(double)value;
@@ -31,6 +40,8 @@ public class NegateValueConverter : IValueConverter
 
 public class NegativeDoubleConvert : IMultiValueConverter
 {
+    public static readonly NegativeDoubleConvert Instance = new NegativeDoubleConvert();
+    
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
         if (values.Length != 2 || !(values[0] is double) || !(values[1] is double))
@@ -46,18 +57,5 @@ public class NegativeDoubleConvert : IMultiValueConverter
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
-    }
-}
-
-public class OffsetValueConverter : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return (double)value / 2 + 30;
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return ((double)value - 30) * 2;
     }
 }

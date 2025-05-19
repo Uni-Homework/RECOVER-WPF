@@ -10,6 +10,7 @@ public class PlayerPrefab : GameObject
     public PlayerPrefab(Vector position) : base()
     {
         Transform.Position = position;
+        Transform.Origin = new Point(0.5, 0.5);
 
         // Initialize components properly using AddComponent
         var rigidBody = new RigidBody { IsKinematic = false };
