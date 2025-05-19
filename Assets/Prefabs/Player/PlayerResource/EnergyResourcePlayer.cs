@@ -3,10 +3,10 @@ using RECOVER.Engine.Components;
 
 namespace RECOVER.Assets.Prefabs.Player.PlayerResource;
 
-public class Energy : Component, IResourcePlayer
+public class EnergyResourcePlayer : Component, IResourcePlayer
 {
     private double _current = 50;
-    private const double MAX_STEP = 10;
+    private const double MAX_STEP = 20;
     private const double MIN_STEP = 0;
     private const double DELTA_STEP = 10;
 
@@ -31,7 +31,7 @@ public class Energy : Component, IResourcePlayer
         if (MAX_STEP < step)
         {
             step = MIN_STEP;
-            _current -= DELTA_STEP;
+            Current -= DELTA_STEP;
         }
     }
 }

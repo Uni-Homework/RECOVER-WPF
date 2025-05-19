@@ -7,6 +7,6 @@ public interface IResourcePlayer
     public double Max { get; }
     public double Min { get; }
     public string Name { get; }
-    public double Current { get; }
+    public double Current { get; set; }
     public ImageSource ImageSource { get; }
 }

@@ -9,5 +9,6 @@
         </BitmapImage>
         <BitmapImage UriSource="/Assets/Resources/Item/terminal.png" x:Key="ItemTerminalTile"></BitmapImage>
         <BitmapImage UriSource="/Assets/Resources/Item/itemtarget.png" x:Key="ItemTarget"></BitmapImage>
+        <BitmapImage UriSource="/Assets/Resources/Item/energytile.png" x:Key="EnetgyPlayerResourceEnricherTile"></BitmapImage>
     </Application.Resources>
 </Application>

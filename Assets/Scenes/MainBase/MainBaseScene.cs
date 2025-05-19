@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using RECOVER.Assets.Prefabs.Item.PlayerResourceEnricher;
 using RECOVER.Assets.Prefabs.Player;
 using RECOVER.Assets.Prefabs.Terminal;
 using RECOVER.Engine;
@@ -13,9 +14,11 @@ public class MainBaseScene : Scene
     {
         PlayerPrefab player = new PlayerPrefab(new Vector(200, 0));
         TerminalPrefab item = new TerminalPrefab(100, 100);
+        EnergyPlayerResourceFiller enetgyenricher = new EnergyPlayerResourceFiller(100, 200);
         DetectorItems = player.GetComponent<DetectedItemsComponent>();
         objects.Add(player);
         objects.Add(item);
+        objects.Add(enetgyenricher);
     }
 
     public DetectedItemsComponent DetectorItems
