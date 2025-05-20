@@ -93,7 +93,7 @@ public class TerminalComponent : Component
                 break;
             
             default:
-                History.Add($"Unknown command: {Command}");
+                History.Add($"Unknown command: {Command}.\nType \"help\" for a list of available commands.");
                 break;
         }
 
