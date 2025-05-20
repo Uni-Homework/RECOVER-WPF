@@ -23,6 +23,44 @@
       <Resource Include="Assets\Resources\Item\energytile.png" />
       <None Remove="Assets\Resources\Item\coolerTile.png" />
       <Resource Include="Assets\Resources\Item\coolerTile.png" />
+      
+      <!-- Tileset1 Resources -->
+      <None Remove="Assets\Resources\Tile\Tileset1\_01.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_02.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_03.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_04.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_05.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_06.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_11.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_12.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_13.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_14.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_15.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_16.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_21.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_22.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_23.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_24.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_25.png" />
+      <None Remove="Assets\Resources\Tile\Tileset1\_26.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_01.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_02.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_03.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_04.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_05.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_06.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_11.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_12.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_13.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_14.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_15.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_16.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_21.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_22.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_23.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_24.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_25.png" />
+      <Resource Include="Assets\Resources\Tile\Tileset1\_26.png" />
     </ItemGroup>
 
     <ItemGroup>

@@ -15,16 +15,16 @@ public class MainBaseScene : Scene
     {
         // Create a simple space station layout
         string spaceStationLayout = 
-            "AAAAAAAAAAAAAAAAAAAA\n" +
-            "A..................A\n" +
-            "A..................A\n" +
-            "A..................A\n" +
-            "A..................A\n" +
-            "A..................A\n" +
-            "A..................A\n" +
-            "A..................A\n" +
-            "A..................A\n" +
-            "AAAAAAAAAAAAAAAAAAAA";
+            "ABBBBBBBBBBBBBBBBBBC\n" +
+            "DabbbbbbbbbbbbbbbbcE\n" +
+            "DdeeeeeeeeeeeeeeeefE\n" +
+            "DdeeeeeeeeeeeeeeeefE\n" +
+            "DdeeeeeeeeeeeeeeeefE\n" +
+            "DdeeeeeeeeeeeeeeeefE\n" +
+            "DdeeeeeeeeeeeeeeeefE\n" +
+            "DdeeeeeeeeeeeeeeeefE\n" +
+            "DghhhhhhhhhhhhhhhhiE\n" +
+            "FGGGGGGGGGGGGGGGGGGH";
 
         // Create and add the space station
         var spaceStation = new SpaceStationPrefab(spaceStationLayout, new Vector(0, 0));
