@@ -83,8 +83,12 @@ public class TerminalComponent : Component
             case "clear":
                 History.Clear();
                 break;
+            
+            default:
+                History.Add($"Unknown command: {Command}");
+                break;
         }
 
-        Command = String.Empty;
+        ClearCommand();
     }
 }
