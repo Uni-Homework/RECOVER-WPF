@@ -2,6 +2,7 @@
 using RECOVER.Assets.Prefabs.Item.PlayerResourceEnricher;
 using RECOVER.Assets.Prefabs.Player;
 using RECOVER.Assets.Prefabs.SpaceStation;
+using RECOVER.Assets.Prefabs.SpaceTrash;
 using RECOVER.Assets.Prefabs.Terminal;
 using RECOVER.Engine;
 
@@ -18,10 +19,10 @@ public class MainBaseScene : Scene
             "ABBBBBBBBBBBBBBBBBBC\n" +
             "DabbbbbbbbbbbbbbbbcE\n" +
             "DdeeeeeeeeeeeeeeeefE\n" +
-            "DdeeeeeeeeeeeeeeeefE\n" +
-            "DdeeeeeeeeeeeeeeeefE\n" +
-            "DdeeeeeeeeeeeeeeeefE\n" +
-            "DdeeeeeeeeeeeeeeeefE\n" +
+            "Ddeeeeeeeeeeeeeeeeee\n" +
+            "Ddeeeeeeeeeeeeeeeeee\n" +
+            "Ddeeeeeeeeeeeeeeeeee\n" +
+            "Ddeeeeeeeeeeeeeeeeee\n" +
             "DdeeeeeeeeeeeeeeeefE\n" +
             "DghhhhhhhhhhhhhhhhiE\n" +
             "FGGGGGGGGGGGGGGGGGGH";
@@ -45,6 +46,22 @@ public class MainBaseScene : Scene
         objects.Add(item);
         objects.Add(enetgyenricher);
         objects.Add(waterPlayerResourceFiller);
+
+        for (int i = 0; i < 50; i++)
+        {
+            Random r = new Random();
+            int x = r.Next(-1000, 1900); 
+            int y = r.Next(-1000, 1900);
+            if ((x > -300 && x < 900) && (y > -300 && y < 900))
+            {
+            }
+            else
+            {
+                var prefab = new SpaceTrashPrefab(x, y);
+                prefab.Transform.Rotation = r.Next(0, 360);
+                objects.Add(prefab);
+            }
+        }
     }
 
     public DetectedItemsComponent DetectorItems

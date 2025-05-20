@@ -61,6 +61,10 @@
       <Resource Include="Assets\Resources\Tile\Tileset1\_24.png" />
       <Resource Include="Assets\Resources\Tile\Tileset1\_25.png" />
       <Resource Include="Assets\Resources\Tile\Tileset1\_26.png" />
+      <None Remove="Assets\Resources\Item\debris.png" />
+      <Resource Include="Assets\Resources\Item\debris.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
     <ItemGroup>

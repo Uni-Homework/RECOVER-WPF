@@ -23,4 +23,9 @@ public class SpriteComponent : Component
     }
     
     public Rectangle GetRectangle() => _rectangle;
+
+    public void MakeInvisible()
+    {
+        _rectangle.Fill = Brushes.Transparent;
+    }
 }

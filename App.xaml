@@ -37,5 +37,6 @@
         <BitmapImage UriSource="/Assets/Resources/Item/itemtarget.png" x:Key="ItemTarget"></BitmapImage>
         <BitmapImage UriSource="/Assets/Resources/Item/energytile.png" x:Key="EnetgyPlayerResourceEnricherTile"></BitmapImage>
         <BitmapImage UriSource="/Assets/Resources/Item/coolerTile.png" x:Key="CoolerTile"></BitmapImage>
+        <BitmapImage UriSource="/Assets/Resources/Item/debris.png" x:Key="Debris"></BitmapImage>
     </Application.Resources>
 </Application>
