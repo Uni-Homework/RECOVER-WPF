@@ -7,12 +7,16 @@ namespace RECOVER.Assets.Prefabs.Player;
 
 public class PlayerController : Component
 {
+    private bool isLocked = false;
     private float rotationSpeed = 180f; // degrees per second
     private float moveSpeed = 1f;
     private bool rotateLeft, rotateRight;
     private DetectedItemsComponent _detectedItemsComponent;
     private PlayerResourceViewer _resourceViewer;
 
+    public void Lock(){ isLocked = true; }
+    public void Unlock(){ isLocked = false; }
+    
     public override void Start()
     {
         _detectedItemsComponent = GameObject.GetComponent<DetectedItemsComponent>();
@@ -21,6 +25,7 @@ public class PlayerController : Component
 
     public override void Update(double deltaTime)
     {
+        if(isLocked) return;
         foreach (var surroundingItem in _detectedItemsComponent.SurroundingItems)
         {
             if (Keyboard.GetKeyStates(surroundingItem.ActivationKey) != KeyStates.Down) continue;

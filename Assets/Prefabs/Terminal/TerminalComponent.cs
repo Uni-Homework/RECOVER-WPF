@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
+using RECOVER.Assets.Prefabs.Player;
 using RECOVER.Assets.Scenes.Terminal;
 using RECOVER.Engine.Components;
 
@@ -37,6 +38,10 @@ public class TerminalComponent : Component
 
     public void OpenTerminal()
     {
+        var instance = (TerminalPrefab)GameObject;
+        var controller = instance.Player.GetComponent<PlayerController>();
+        controller.Lock();
+        
         if (IsShow)
         {
             return;
@@ -50,6 +55,9 @@ public class TerminalComponent : Component
 
     private void OnClosedTerminal(object sender, EventArgs e)
     {
+        var instance = (TerminalPrefab)GameObject;
+        var controller = instance.Player.GetComponent<PlayerController>();
+        controller.Unlock();
         (sender as Window).Closed -= OnClosedTerminal;
         ClearCommand();
         IsShow = false;
@@ -83,8 +91,12 @@ public class TerminalComponent : Component
             case "clear":
                 History.Clear();
                 break;
+            
+            default:
+                History.Add($"Unknown command: {Command}");
+                break;
         }
 
-        Command = String.Empty;
+        ClearCommand();
     }
 }

@@ -37,7 +37,7 @@ public class MainBaseScene : Scene
         }
 
         var player = new PlayerPrefab(new Vector(400, 200));
-        var item = new TerminalPrefab(100, 100);
+        var item = new TerminalPrefab(100, 100, player);
         var enetgyenricher = new EnergyPlayerResourceFiller(100, 200);
         var waterPlayerResourceFiller = new WaterPlayerResourceFiller(200, 200);
         DetectorItems = player.GetComponent<DetectedItemsComponent>();
