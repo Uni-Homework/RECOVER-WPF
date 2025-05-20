@@ -45,7 +45,7 @@ public class TerminalComponent : Component
         IsShow = true;
         TerminalView view = new TerminalView(this);
         view.Closed += OnClosedTerminal;
-        view.Show();
+        view.ShowDialog();
     }
 
     private void OnClosedTerminal(object sender, EventArgs e)
@@ -63,5 +63,28 @@ public class TerminalComponent : Component
     public void DoCommand()
     {
         History.Add(Command);
+
+        switch (Command)
+        {
+            case "help":
+                History.Add("Рассказ об управлении - get control\n" +
+                            "Выйти из игры - exit\n" +
+                            "Отчистка истории терминала - clear");
+                break;
+            case "get control":
+                History.Add("Ходьба - W, A, S, D\n" +
+                            "Проверить показатели ресурсов - Tab\n" +
+                            "Обработка уведенных предметов - зависит от предметов в правом нижнем углу\n");
+                break;
+            case "exit":
+                App.Current.Shutdown(0);
+                break;
+
+            case "clear":
+                History.Clear();
+                break;
+        }
+
+        Command = String.Empty;
     }
 }

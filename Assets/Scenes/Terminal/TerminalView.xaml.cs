@@ -21,4 +21,15 @@ public partial class TerminalView : Window
             dataContext.DoCommand();
         }
     }
+
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter)
+        {
+            HistoryScroll.ScrollToEnd();
+            e.Handled = true;
+        }
+
+        base.OnKeyDown(e);
+    }
 }
