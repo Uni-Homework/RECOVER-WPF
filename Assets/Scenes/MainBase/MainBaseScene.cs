@@ -59,6 +59,7 @@ public class MainBaseScene : Scene
             {
                 var prefab = new SpaceTrashPrefab(x, y);
                 prefab.Transform.Rotation = r.Next(0, 360);
+                prefab.Transform.Velocity = new Vector(0.08, 0);
                 objects.Add(prefab);
             }
         }

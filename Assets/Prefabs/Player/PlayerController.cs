@@ -9,7 +9,7 @@ public class PlayerController : Component
 {
     private bool isLocked = false;
     private float rotationSpeed = 180f; // degrees per second
-    private float moveSpeed = 1f;
+    private float moveSpeed = 0.01f;
     private bool rotateLeft, rotateRight;
     private DetectedItemsComponent _detectedItemsComponent;
     private PlayerResourceViewer _resourceViewer;

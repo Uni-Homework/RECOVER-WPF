@@ -62,6 +62,7 @@ public class GameObject : DeafNotificationObject
             Debug.WriteLine($"Updating component {component.GetType().Name}");
             component.Update(deltaTime);
         }
+        Transform.Position += Transform.Velocity;
     }
 
     public virtual void Start()
