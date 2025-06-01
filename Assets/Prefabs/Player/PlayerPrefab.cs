@@ -15,16 +15,17 @@ public class PlayerPrefab : GameObject
 
         // Initialize components properly using AddComponent
         var rigidBody = new RigidBody { IsKinematic = false };
+        
         AddComponent(rigidBody);
-
         AddComponent(new PlayerController());
         AddComponent(new BoxCollider(40, 40));
         AddComponent(new SpriteComponent((ImageSource)App.Current.Resources["PlayerMen"]));
         AddComponent(new PlayerColliderController());
         AddComponent(new Camera());
         AddComponent(new DetectedItemsComponent());
-        AddComponent(new EnergyResourcePlayer());
         AddComponent(new PlayerResourceViewer());
+        AddComponent(new EnergyResourcePlayer());
         AddComponent(new WaterResourcePlayer());
+        AddComponent(new TrashResourcePlayer());
     }
 }

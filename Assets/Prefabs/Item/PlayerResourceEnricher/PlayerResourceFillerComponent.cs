@@ -13,6 +13,8 @@ public class PlayerResourceFillerComponent<T> : ColliderReaction where T : IReso
         _resourceRecipients = new List<T>();
     }
 
+    public List<T> ResourceRecipients => _resourceRecipients;
+
     public override void OnTriggerEnter(GameObject other)
     {
         _resourceRecipients.AddRange(other.Components.OfType<T>());
@@ -26,8 +28,8 @@ public class PlayerResourceFillerComponent<T> : ColliderReaction where T : IReso
         }
     }
 
-    public void Replenish()
+    public virtual void Replenish()
     {
-        _resourceRecipients.ForEach(rr => rr.Current = rr.Max);
+        ResourceRecipients.ForEach(rr => rr.Current = rr.Max);
     }
 }
