@@ -12,6 +12,7 @@ public partial class TerminalView : Window
     {
         DataContext = this.dataContext = dataContext;
         InitializeComponent();
+        CommandLine.Focus();
     }
 
     private void ClickEnter(object sender, KeyEventArgs e)
@@ -24,10 +25,15 @@ public partial class TerminalView : Window
 
     protected override void OnKeyDown(KeyEventArgs e)
     {
-        if (e.Key == Key.Enter)
+        switch (e.Key)
         {
-            HistoryScroll.ScrollToEnd();
-            e.Handled = true;
+            case Key.Enter:
+                HistoryScroll.ScrollToEnd();
+                e.Handled = true;
+                break;
+            case Key.Tab:
+                Close();
+                break;
         }
 
         base.OnKeyDown(e);

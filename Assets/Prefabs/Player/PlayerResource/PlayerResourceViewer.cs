@@ -25,7 +25,7 @@ public class PlayerResourceViewer : Component
         _isShow = true;
         ResourceViewer viewer = new ResourceViewer(_resourcePlayers);
         viewer.Closed += ViewerOnClosed;
-        viewer.Show();
+        viewer.ShowDialog();
     }
 
     private void ViewerOnClosed(object sender, EventArgs e)
