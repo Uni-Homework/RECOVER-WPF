@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using RECOVER.Assets.Prefabs.Item.PlayerResourceEnricher;
 using RECOVER.Assets.Prefabs.Player;
+using RECOVER.Assets.Prefabs.Player.PlayerResource;
 using RECOVER.Assets.Prefabs.SpaceStation;
 using RECOVER.Assets.Prefabs.SpaceTrash;
 using RECOVER.Assets.Prefabs.Terminal;
@@ -11,11 +12,13 @@ namespace RECOVER.Assets.Scenes.MainBase;
 public class MainBaseScene : Scene
 {
     private DetectedItemsComponent _detectorItems;
+    private PlayerController _playerController;
+    private PlayerResourceViewer _resourceViewer;
 
     public MainBaseScene() : base()
     {
         // Create a simple space station layout
-        string spaceStationLayout = 
+        string spaceStationLayout =
             "ABBBBBBBBBBBBBBBBBBC\n" +
             "DabbbbbbbbbbbbbbbbcE\n" +
             "DdeeeeeeeeeeeeeeeefE\n" +
@@ -42,6 +45,8 @@ public class MainBaseScene : Scene
         var enetgyenricher = new EnergyPlayerResourceFiller(100, 200);
         var waterPlayerResourceFiller = new WaterPlayerResourceFiller(200, 200);
         DetectorItems = player.GetComponent<DetectedItemsComponent>();
+        PlayerController = player.GetComponent<PlayerController>();
+        ResourceViewer = player.GetComponent<PlayerResourceViewer>();
         objects.Add(player);
         objects.Add(item);
         objects.Add(enetgyenricher);
@@ -50,7 +55,7 @@ public class MainBaseScene : Scene
         for (int i = 0; i < 50; i++)
         {
             Random r = new Random();
-            int x = r.Next(-1000, 1900); 
+            int x = r.Next(-1000, 1900);
             int y = r.Next(-1000, 1900);
             if ((x > -300 && x < 900) && (y > -300 && y < 900))
             {
@@ -69,5 +74,17 @@ public class MainBaseScene : Scene
     {
         get => _detectorItems;
         private set { Set(ref _detectorItems, value); }
+    }
+
+    public PlayerController PlayerController
+    {
+        get => _playerController;
+        private set => Set(ref _playerController, value);
+    }
+
+    public PlayerResourceViewer ResourceViewer
+    {
+        get => _resourceViewer;
+        private set => Set(ref _resourceViewer, value);
     }
 }
