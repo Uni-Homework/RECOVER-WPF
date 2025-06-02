@@ -4,7 +4,7 @@ using System.Windows.Media;
 using RECOVER.Assets.Scenes;
 using RECOVER.Assets.Scenes.CommonScene;
 using RECOVER.Assets.Scenes.CosmicStation;
-using RECOVER.Assets.Scenes.MainBase;
+using RECOVER.Assets.Scenes.MainMenu;
 
 namespace RECOVER;
 
@@ -28,7 +28,7 @@ public partial class App : Application, INotifyPropertyChanged
     private void Start()
     {
         lastFrameTime = DateTime.Now;
-        SetScene(SceneType.CosmicStation);
+        SetScene(SceneType.MainMenu);
         CompositionTarget.Rendering += GameLoop;
     }
 
@@ -45,6 +45,7 @@ public partial class App : Application, INotifyPropertyChanged
         {
             CurrentScene = type switch
             {
+                SceneType.MainMenu => new MainMenu(),
                 SceneType.CosmicStation => new CosmicStation()
             };
             CurrentScene.Scene.Start();

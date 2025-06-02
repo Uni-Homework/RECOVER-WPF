@@ -65,6 +65,8 @@
       <Resource Include="Assets\Resources\Item\debris.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
+      <None Remove="Assets\Resources\Background\MainMenu\mainmenu.png" />
+      <Resource Include="Assets\Resources\Background\MainMenu\mainmenu.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -73,10 +75,6 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Assets\Scenes\MainMenu\" />
     </ItemGroup>
 
 </Project>
