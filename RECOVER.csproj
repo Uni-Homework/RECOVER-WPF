@@ -65,6 +65,8 @@
       <Resource Include="Assets\Resources\Item\debris.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
+      <None Remove="Assets\Resources\Background\MainMenu\mainmenu.png" />
+      <Resource Include="Assets\Resources\Background\MainMenu\mainmenu.png" />
     </ItemGroup>
 
     <ItemGroup>

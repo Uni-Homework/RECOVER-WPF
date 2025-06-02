@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
         Name="ThisWindow"
-        Title="Ресурсы" Height="200" Width="200"
+        Title="Ресурсы" Height="230" Width="240"
         ResizeMode="NoResize">
     <Grid Background="Black">
         <ItemsControl Background="Black" ItemsSource="{Binding ElementName=ThisWindow, Path=ResourcePlayers}">
@@ -25,13 +25,15 @@
                                 <ColumnDefinition Width="20" />
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="30" />
                             </Grid.ColumnDefinitions>
 
                             <Image Grid.Column="0" Source="{Binding ImageSource}" Width="30" Height="30" />
                             <TextBlock Foreground="Cornsilk" Grid.Column="1" Text="{Binding Min}" VerticalAlignment="Center" />
-                            <ProgressBar Foreground="Cornsilk" Grid.Column="2" Minimum="{Binding Min}" Maximum="{Binding Max}"
+                            <ProgressBar Foreground="DarkCyan" Grid.Column="2" Minimum="{Binding Min}" Maximum="{Binding Max}"
                                          Value="{Binding Current}" />
                             <TextBlock Foreground="Cornsilk" Text="{Binding Max}" VerticalAlignment="Center" Grid.Column="3" />
+                            <TextBlock Foreground="DarkCyan" Text="{Binding Current}" VerticalAlignment="Center" Grid.Column="4"  HorizontalAlignment="Right" FontWeight="ExtraBlack"/>
                         </Grid>
                     </Grid>
                 </DataTemplate>

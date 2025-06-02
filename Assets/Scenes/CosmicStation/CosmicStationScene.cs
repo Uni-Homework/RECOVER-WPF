@@ -7,16 +7,16 @@ using RECOVER.Assets.Prefabs.SpaceTrash;
 using RECOVER.Assets.Prefabs.Terminal;
 using RECOVER.Engine;
 
-namespace RECOVER.Assets.Scenes.MainBase;
+namespace RECOVER.Assets.Scenes.CosmicStation;
 
-public class MainBaseScene : Scene
+public class CosmicStationScene : Scene
 {
     private DetectedItemsComponent _detectorItems;
     private PlayerController _playerController;
     private PlayerResourceViewer _resourceViewer;
     private const uint MaxTrashCount = 50;
 
-    public MainBaseScene() : base()
+    public CosmicStationScene() : base()
     {
         // Create a simple space station layout
         string spaceStationLayout =
