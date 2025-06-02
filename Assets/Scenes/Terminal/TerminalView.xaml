@@ -14,9 +14,9 @@
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
-        
+
         <ScrollViewer Name="HistoryScroll" Grid.Row="0" VerticalScrollBarVisibility="Auto">
-            <ItemsControl  ItemsSource="{Binding History}">
+            <ItemsControl ItemsSource="{Binding History}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Label FontSize="20" Foreground="White" Content="{Binding .}" />
@@ -32,10 +32,10 @@
             </Grid.ColumnDefinitions>
 
             <TextBox Text=">" Foreground="Green" VerticalAlignment="Center" Grid.Column="0" FontSize="20"
-                     BorderThickness="0" Background="Black" IsReadOnly="True"/>
-            <TextBox FontSize="20" Text="{Binding Command, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     BorderThickness="0" Background="Black" IsReadOnly="True" />
+            <TextBox Name="CommandLine" FontSize="20" Text="{Binding Command, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      TextAlignment="Left" Foreground="Green" Background="Black"
-                     Grid.Column="1" VerticalAlignment="Center" BorderThickness="0" KeyDown="ClickEnter" AcceptsTab="True"/>
+                     Grid.Column="1" VerticalAlignment="Center" BorderThickness="0" KeyDown="ClickEnter" />
         </Grid>
     </Grid>
 
