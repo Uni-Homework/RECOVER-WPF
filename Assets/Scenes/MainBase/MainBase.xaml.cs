@@ -1,9 +1,9 @@
-﻿using System.Windows.Controls;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using RECOVER.Assets.Scenes.CommonScene;
 
 namespace RECOVER.Assets.Scenes.MainBase;
 
-public partial class MainBase : Page
+public partial class MainBase : SceneView
 {
     private MainBaseScene _baseScene;
     
@@ -13,9 +13,7 @@ public partial class MainBase : Page
         Focusable = true;
         Focus();
 
-        _baseScene = new MainBaseScene();
-        _baseScene.Start();
-        
+        this._baseScene = new MainBaseScene();
         DataContext = BaseScene;
     }
 
@@ -34,4 +32,6 @@ public partial class MainBase : Page
 
         base.OnKeyDown(e);
     }
+
+    public override MainBaseScene Scene => _baseScene;
 }
