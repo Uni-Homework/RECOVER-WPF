@@ -4,6 +4,7 @@ using System.Windows.Media;
 using RECOVER.Assets.Scenes;
 using RECOVER.Assets.Scenes.CommonScene;
 using RECOVER.Assets.Scenes.CosmicStation;
+using RECOVER.Assets.Scenes.GameOver;
 using RECOVER.Assets.Scenes.MainMenu;
 
 namespace RECOVER;
@@ -32,10 +33,7 @@ public partial class App : Application, INotifyPropertyChanged
         CompositionTarget.Rendering += GameLoop;
     }
 
-    // lmao wha
-    // why we do it twice???
-    // check CosmicStation.xaml.cs
-    public void SetScene(SceneType type)
+    public void SetScene(SceneType type, bool isWin = false)
     {
         if (cacheScenes.TryGetValue(type, out var sceneView))
         {
@@ -46,7 +44,8 @@ public partial class App : Application, INotifyPropertyChanged
             CurrentScene = type switch
             {
                 SceneType.MainMenu => new MainMenu(),
-                SceneType.CosmicStation => new CosmicStation()
+                SceneType.CosmicStation => new CosmicStation(),
+                SceneType.GameOver => new GameOver(isWin)
             };
             CurrentScene.Scene.Start();
         }

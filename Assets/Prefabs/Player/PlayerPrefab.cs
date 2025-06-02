@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 using RECOVER.Assets.Prefabs.Player.PlayerResource;
+using RECOVER.Assets.Scenes;
 using RECOVER.Engine;
 using RECOVER.Engine.Components;
 
@@ -34,7 +35,7 @@ public class PlayerPrefab : GameObject
     /// </summary>
     public void Die()
     {
-        throw new NotImplementedException();
+        ((App)App.Current).SetScene(SceneType.GameOver, false);
     }
 
     /// <summary>
@@ -42,6 +43,6 @@ public class PlayerPrefab : GameObject
     /// </summary>
     public void Win()
     {
-        throw new NotImplementedException();
+        ((App)App.Current).SetScene(SceneType.GameOver, true);
     }
 }
