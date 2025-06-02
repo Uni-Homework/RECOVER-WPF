@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using RECOVER.Assets.Scenes;
 using RECOVER.Assets.Scenes.CommonScene;
+using RECOVER.Assets.Scenes.CosmicStation;
 using RECOVER.Assets.Scenes.MainBase;
 
 namespace RECOVER;
@@ -33,7 +34,7 @@ public partial class App : Application, INotifyPropertyChanged
 
     // lmao wha
     // why we do it twice???
-    // check MainBase.xaml.cs
+    // check CosmicStation.xaml.cs
     public void SetScene(SceneType type)
     {
         if (cacheScenes.TryGetValue(type, out var sceneView))
@@ -44,7 +45,7 @@ public partial class App : Application, INotifyPropertyChanged
         {
             CurrentScene = type switch
             {
-                SceneType.CosmicStation => new MainBase()
+                SceneType.CosmicStation => new CosmicStation()
             };
             CurrentScene.Scene.Start();
         }

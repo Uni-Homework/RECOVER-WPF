@@ -8,11 +8,11 @@ using RECOVER.Engine;
 
 namespace RECOVER.Assets.Scenes.MainBase;
 
-public class MainBaseScene : Scene
+public class CosmicStationScene : Scene
 {
     private DetectedItemsComponent _detectorItems;
 
-    public MainBaseScene() : base()
+    public CosmicStationScene() : base()
     {
         // Create a simple space station layout
         string spaceStationLayout = 

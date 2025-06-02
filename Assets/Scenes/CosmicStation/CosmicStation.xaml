@@ -1,4 +1,4 @@
-﻿<comonScene:SceneView x:Class="RECOVER.Assets.Scenes.MainBase.MainBase"
+﻿<comonScene:SceneView x:Class="RECOVER.Assets.Scenes.CosmicStation.CosmicStation"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -9,7 +9,7 @@
       mc:Ignorable="d"
       x:Name="ThisPage"
       Background="Black"
-      d:DataContext="{d:DesignInstance mainBase:MainBaseScene, IsDesignTimeCreatable=True}">
+      d:DataContext="{d:DesignInstance mainBase:CosmicStationScene, IsDesignTimeCreatable=True}">
 
     <Grid>
         <Grid.RowDefinitions>

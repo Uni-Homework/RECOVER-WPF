@@ -1,23 +1,24 @@
 ﻿using System.Windows.Input;
 using RECOVER.Assets.Scenes.CommonScene;
+using RECOVER.Assets.Scenes.MainBase;
 
-namespace RECOVER.Assets.Scenes.MainBase;
+namespace RECOVER.Assets.Scenes.CosmicStation;
 
-public partial class MainBase : SceneView
+public partial class CosmicStation : SceneView
 {
-    private MainBaseScene _baseScene;
+    private CosmicStationScene _baseScene;
     
-    public MainBase()
+    public CosmicStation()
     {
         InitializeComponent();
         Focusable = true;
         Focus();
 
-        this._baseScene = new MainBaseScene();
+        this._baseScene = new CosmicStationScene();
         DataContext = BaseScene;
     }
 
-    public MainBaseScene BaseScene
+    public CosmicStationScene BaseScene
     {
         get => _baseScene;
         private set => _baseScene = value;
@@ -33,5 +34,5 @@ public partial class MainBase : SceneView
         base.OnKeyDown(e);
     }
 
-    public override MainBaseScene Scene => _baseScene;
+    public override CosmicStationScene Scene => _baseScene;
 }
