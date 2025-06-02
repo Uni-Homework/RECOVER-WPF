@@ -13,15 +13,18 @@ public class EnergyResourcePlayer : CommonResourcePlayer
     public override double Min { get; } = 0;
     public override string Name { get; } = "Энергия";
     public override ImageSource ImageSource { get; } = null;
-    
 
-    public override void Update(double deltaTime)
+    public override double Current
     {
-        base.Update(deltaTime);
-        if (Current <= 0)
+        get => base.Current;
+        set
         {
-            var player = (PlayerPrefab)GameObject;
-            player.Die();
+            if (Current <= Min)
+            {
+                var player = (PlayerPrefab)GameObject;
+                player.Die();
+            }
+            base.Current = value;
         }
     }
 }
