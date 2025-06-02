@@ -1,25 +1,23 @@
-﻿using System.Windows.Controls;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using RECOVER.Assets.Scenes.CommonScene;
 
-namespace RECOVER.Assets.Scenes.MainBase;
+namespace RECOVER.Assets.Scenes.CosmicStation;
 
-public partial class MainBase : Page
+public partial class CosmicStation : SceneView
 {
-    private MainBaseScene _baseScene;
+    private CosmicStationScene _baseScene;
 
-    public MainBase()
+    public CosmicStation()
     {
         InitializeComponent();
         Focusable = true;
         Focus();
 
-        _baseScene = new MainBaseScene();
-        _baseScene.Start();
-
+        this._baseScene = new CosmicStationScene();
         DataContext = BaseScene;
     }
 
-    public MainBaseScene BaseScene
+    public CosmicStationScene BaseScene
     {
         get => _baseScene;
         private set => _baseScene = value;
@@ -108,4 +106,6 @@ public partial class MainBase : Page
 
         base.OnKeyDown(e);
     }
+
+    public override CosmicStationScene Scene => _baseScene;
 }

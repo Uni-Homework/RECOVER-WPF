@@ -1,50 +1,72 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Media;
-using RECOVER.Assets.Scenes.MainBase;
+using RECOVER.Assets.Scenes;
+using RECOVER.Assets.Scenes.CommonScene;
+using RECOVER.Assets.Scenes.CosmicStation;
+using RECOVER.Assets.Scenes.MainMenu;
 
 namespace RECOVER;
 
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
-public partial class App : Application
+public partial class App : Application, INotifyPropertyChanged
 {
     private DateTime lastFrameTime;
-    private MainWindow mainWindow;
+    private Dictionary<SceneType, SceneView> cacheScenes = new Dictionary<SceneType, SceneView>();
+    private SceneView _currentScene;
+    
+    public event PropertyChangedEventHandler PropertyChanged;
 
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
-        mainWindow = new MainWindow();
-        mainWindow.Show();
         Start();
     }
 
     private void Start()
     {
         lastFrameTime = DateTime.Now;
-        SetScene();
+        SetScene(SceneType.MainMenu);
         CompositionTarget.Rendering += GameLoop;
     }
 
     // lmao wha
     // why we do it twice???
-    // check MainBase.xaml.cs
-    private void SetScene()
+    // check CosmicStation.xaml.cs
+    public void SetScene(SceneType type)
     {
-        mainWindow.Content = new MainBase();
+        if (cacheScenes.TryGetValue(type, out var sceneView))
+        {
+            CurrentScene = sceneView;
+        }
+        else
+        {
+            CurrentScene = type switch
+            {
+                SceneType.MainMenu => new MainMenu(),
+                SceneType.CosmicStation => new CosmicStation()
+            };
+            CurrentScene.Scene.Start();
+        }
+    }
+
+    public SceneView CurrentScene
+    {
+        get => _currentScene;
+        set
+        {
+            _currentScene = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentScene)));
+        }
     }
 
     private void GameLoop(object sender, EventArgs e)
     {
         DateTime currentFrameTime = DateTime.Now;
         double deltaTime = (currentFrameTime - lastFrameTime).TotalSeconds;
-
-        if (mainWindow.Content is MainBase mainBase && mainBase.BaseScene != null)
-        {
-            mainBase.BaseScene.Update(deltaTime);
-        }
-
+        CurrentScene.Scene.Update(deltaTime);
         lastFrameTime = currentFrameTime;
     }
 }

@@ -6,9 +6,7 @@ namespace RECOVER.Engine;
 public abstract class Scene : DeafNotificationObject
 {
     protected List<GameObject> objects;
-
     private Dictionary<(Collider, Collider), bool> _previousCollisions;
-    private bool _isInitialized = false;
 
     /// <summary>
     /// Default constructor for a scene.
