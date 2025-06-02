@@ -14,6 +14,7 @@ public class MainBaseScene : Scene
     private DetectedItemsComponent _detectorItems;
     private PlayerController _playerController;
     private PlayerResourceViewer _resourceViewer;
+    private const uint MaxTrashCount = 50;
 
     public MainBaseScene() : base()
     {
@@ -52,22 +53,31 @@ public class MainBaseScene : Scene
         objects.Add(enetgyenricher);
         objects.Add(waterPlayerResourceFiller);
 
-        for (int i = 0; i < 50; i++)
+        int cn = 0;
+        for (int i = 0; i < MaxTrashCount; i++)
         {
             Random r = new Random();
-            int x = r.Next(-1000, 1900);
-            int y = r.Next(-1000, 1900);
-            if ((x > -300 && x < 900) && (y > -300 && y < 900))
+
+            int x;
+            int y;
+            x = y = 0;
+            
+            // Is trash in "bad" zone (where it shouldn't spawn)?
+            bool c = true;
+            while (c)
             {
+                x = r.Next(-1000, 1900);
+                y = r.Next(-1000, 1900);
+                c = (x > -300 && x < 900) && (y > -300 && y < 900);
             }
-            else
-            {
-                var prefab = new SpaceTrashPrefab(x, y);
-                prefab.Transform.Rotation = r.Next(0, 360);
-                prefab.Transform.Velocity = new Vector(0.08, 0);
-                objects.Add(prefab);
-            }
+            
+            var prefab = new SpaceTrashPrefab(x, y);
+            prefab.Transform.Rotation = r.Next(0, 360);
+            prefab.Transform.Velocity = new Vector(0.08, 0);
+            objects.Add(prefab);
+            cn++;
         }
+        Console.WriteLine(cn);
     }
 
     public DetectedItemsComponent DetectorItems
