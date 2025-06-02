@@ -53,7 +53,6 @@ public class MainBaseScene : Scene
         objects.Add(enetgyenricher);
         objects.Add(waterPlayerResourceFiller);
 
-        int cn = 0;
         for (int i = 0; i < MaxTrashCount; i++)
         {
             Random r = new Random();
@@ -75,9 +74,7 @@ public class MainBaseScene : Scene
             prefab.Transform.Rotation = r.Next(0, 360);
             prefab.Transform.Velocity = new Vector(0.08, 0);
             objects.Add(prefab);
-            cn++;
         }
-        Console.WriteLine(cn);
     }
 
     public DetectedItemsComponent DetectorItems
