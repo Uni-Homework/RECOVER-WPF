@@ -1,6 +1,5 @@
 ﻿using System.Windows.Input;
 using RECOVER.Assets.Scenes.CommonScene;
-using RECOVER.Assets.Scenes.MainBase;
 
 namespace RECOVER.Assets.Scenes.CosmicStation;
 

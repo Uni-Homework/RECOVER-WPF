@@ -6,7 +6,7 @@ using RECOVER.Assets.Prefabs.SpaceTrash;
 using RECOVER.Assets.Prefabs.Terminal;
 using RECOVER.Engine;
 
-namespace RECOVER.Assets.Scenes.MainBase;
+namespace RECOVER.Assets.Scenes.CosmicStation;
 
 public class CosmicStationScene : Scene
 {

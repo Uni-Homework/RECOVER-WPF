@@ -4,12 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:conv="clr-namespace:RECOVER.Engine.WPFTools"
-      xmlns:mainBase="clr-namespace:RECOVER.Assets.Scenes.MainBase"
       xmlns:comonScene="clr-namespace:RECOVER.Assets.Scenes.CommonScene"
+      xmlns:cs="clr-namespace:RECOVER.Assets.Scenes.CosmicStation"
       mc:Ignorable="d"
       x:Name="ThisPage"
       Background="Black"
-      d:DataContext="{d:DesignInstance mainBase:CosmicStationScene, IsDesignTimeCreatable=True}">
+      d:DataContext="{d:DesignInstance cs:CosmicStationScene, IsDesignTimeCreatable=True}">
 
     <Grid>
         <Grid.RowDefinitions>

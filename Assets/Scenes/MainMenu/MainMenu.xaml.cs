@@ -6,11 +6,11 @@ namespace RECOVER.Assets.Scenes.MainMenu;
 public partial class MainMenu : SceneView
 {
     private MainMenuScene _menuScene;
-    
+
     public MainMenu()
     {
         InitializeComponent();
-        _menuScene = new MainMenuScene();
+        DataContext = _menuScene = new MainMenuScene();
     }
 
     public override Scene Scene => _menuScene;
