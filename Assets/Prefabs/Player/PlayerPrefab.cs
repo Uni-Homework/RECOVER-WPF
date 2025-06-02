@@ -28,4 +28,20 @@ public class PlayerPrefab : GameObject
         AddComponent(new WaterResourcePlayer());
         AddComponent(new TrashResourcePlayer());
     }
+    
+    /// <summary>
+    /// Fires on player's death.
+    /// </summary>
+    public void Die()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Fires on player's victory.
+    /// </summary>
+    public void Win()
+    {
+        throw new NotImplementedException();
+    }
 }
