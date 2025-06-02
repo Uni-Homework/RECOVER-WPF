@@ -23,7 +23,7 @@ public abstract class CommonResourcePlayer : Component, IResourcePlayer
     public abstract double Min { get; }
     public abstract string Name { get; }
 
-    public double Current
+    public virtual double Current
     {
         get => _current;
         set => Set(ref _current, value);

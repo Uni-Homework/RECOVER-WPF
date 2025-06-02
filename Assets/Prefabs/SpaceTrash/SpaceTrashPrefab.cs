@@ -25,7 +25,5 @@ public class SpaceTrashPrefab : ItemPrefab
         GetComponent<SpriteComponent>().MakeInvisible();
         Transform.Position = new Vector(-9999, -9999);
         _fillerComponent.Replenish();
-
-        // todo increment score
     }
 }

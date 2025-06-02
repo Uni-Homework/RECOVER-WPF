@@ -12,4 +12,18 @@ public class WaterResourcePlayer : CommonResourcePlayer
     public override double Min { get; } = 0;
     public override string Name { get; } = "Вода";
     public override ImageSource ImageSource { get; } = null;
+
+    public override double Current
+    {
+        get => base.Current;
+        set
+        {
+            if (Current <= Min)
+            {
+                var player = (PlayerPrefab)GameObject;
+                player.Die();
+            }
+            base.Current = value;
+        }
+    }
 }
