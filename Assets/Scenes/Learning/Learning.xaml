@@ -28,10 +28,15 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0"
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0"
                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                  Text="{Binding SelectedItem.Title}"
-                 IsReadOnly="True" TextAlignment="Center" VerticalContentAlignment="Center" TextWrapping="Wrap" />
+                 TextAlignment="Center" TextWrapping="Wrap"
+                 FontSize="36" Foreground="White">
+            <TextBlock.Background>
+                <SolidColorBrush Color="#90000000"/>
+            </TextBlock.Background>
+        </TextBlock>
 
         <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
@@ -47,10 +52,14 @@
         </Border>
 
 
-        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
-                 IsReadOnly="True" Text="{Binding SelectedItem.Text}" TextWrapping="Wrap"
-                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        </TextBox>
+        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
+                 Text="{Binding SelectedItem.Text}" TextWrapping="Wrap"
+                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                 FontSize="25" Foreground="White">
+            <TextBlock.Background>
+                <SolidColorBrush Color="#90000000"/>
+            </TextBlock.Background>
+        </TextBlock>
 
         <Button Grid.Row="3" Grid.Column="1" Content="Назад" Command="{Binding BackCommand}"></Button>
         <Button Grid.Row="3" Grid.Column="2" Content="В главное меню" Command="{Binding BackMainScreenCommand}"></Button>
