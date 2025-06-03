@@ -24,7 +24,8 @@
             Mode=TwoWay, 
             UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
-            <Button Content="Начать играть" Command="{Binding StartGameCommand}" />
+            <Button HorizontalAlignment="Stretch" Content="Начать играть" Command="{Binding StartGameCommand}" />
+            <Button HorizontalAlignment="Stretch" Content="Обучение" Command="{Binding LearningCommand}" />
         </StackPanel>
     </Grid>
 </commonScene:SceneView>
