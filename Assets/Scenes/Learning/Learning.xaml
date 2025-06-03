@@ -10,7 +10,7 @@
               d:DataContext="{d:DesignInstance l:LearningScene, IsDesignTimeCreatable=True}">
 
     <cs:SceneView.Background>
-        <ImageBrush Stretch="UniformToFill" ImageSource="{StaticResource MainMenuBackground}"/>
+        <ImageBrush Stretch="UniformToFill" ImageSource="{StaticResource MainMenuBackground}" />
     </cs:SceneView.Background>
 
     <Grid>
@@ -26,12 +26,12 @@
         </Grid.ColumnDefinitions>
 
         <Image Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="0"
-               Grid.ColumnSpan="2">
+               Grid.ColumnSpan="2" Source="{Binding SelectedItem.ImageSource}">
         </Image>
         <TextBox Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1"
-                 IsReadOnly="True">
+                 IsReadOnly="True" Text="{Binding SelectedItem.Text}">
         </TextBox>
-        <Button Grid.Row="2" Grid.Column="0" Content="Назад"></Button>
-        <Button Grid.Row="2" Grid.Column="2" Content="Далее"></Button>
+        <Button Grid.Row="2" Grid.Column="0" Content="Назад" Command="{Binding BackCommand}"></Button>
+        <Button Grid.Row="2" Grid.Column="2" Content="Далее" Command="{Binding NextCommand}"></Button>
     </Grid>
 </cs:SceneView>
