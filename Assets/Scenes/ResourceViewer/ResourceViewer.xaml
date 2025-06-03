@@ -6,6 +6,7 @@
         mc:Ignorable="d"
         Name="ThisWindow"
         Title="Ресурсы" Height="230" Width="240"
+        WindowStyle="None"
         ResizeMode="NoResize">
     <Grid Background="Black">
         <ItemsControl Background="Black" ItemsSource="{Binding ElementName=ThisWindow, Path=ResourcePlayers}">
