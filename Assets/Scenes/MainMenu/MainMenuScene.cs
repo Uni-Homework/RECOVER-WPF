@@ -19,11 +19,7 @@ public class MainMenuScene : Scene
     public string PlayerName
     {
         get => playerName;
-        set
-        {
-            Set(ref playerName, value);
-            StartGameCommand.CanExecute(playerName);
-        }
+        set => Set(ref playerName, value);
     }
 
     public ICommand StartGameCommand
