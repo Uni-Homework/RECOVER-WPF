@@ -6,6 +6,8 @@
         xmlns:t="clr-namespace:RECOVER.Assets.Prefabs.Terminal"
         mc:Ignorable="d"
         Title="Терминал" Height="450" Width="800"
+        WindowStyle="None"
+        ResizeMode="NoResize"
         d:DataContext="{d:DesignInstance t:TerminalComponent, IsDesignTimeCreatable=True}">
 
     <Grid Background="Black">
