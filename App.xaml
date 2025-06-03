@@ -44,6 +44,12 @@
         Background
         <!-->
         <BitmapImage UriSource="/Assets/Resources/Background/MainMenu/mainmenu.png" x:Key="MainMenuBackground"></BitmapImage>
+        
+        <!-->
+        Learning
+        <!-->
+        <BitmapImage UriSource="./Assets/Resources/Learning/control.png" x:Key="LearningAboutControl"></BitmapImage>
+        <BitmapImage UriSource="./Assets/Resources/Learning/winofrec.jpg" x:Key="LearningAboutResources"></BitmapImage>
 
         <!-->
         Styles

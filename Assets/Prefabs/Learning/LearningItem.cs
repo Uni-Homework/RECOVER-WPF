@@ -3,15 +3,21 @@ using RECOVER.Engine.WPFTools;
 
 namespace RECOVER.Assets.Prefabs.Learning;
 
-public class LearningItem : DeafNotificationObject
+public class LearningItem(string title, string text, ImageSource imageSource = null) : DeafNotificationObject
 {
-    private ImageSource _imageSource;
-    private string _text;
+    private ImageSource _imageSource = imageSource;
+    private string _title = title;
+    private string _text = text;
 
-    public LearningItem(ImageSource imageSource, string text)
+    public LearningItem(string title, string text, string resourceKey)
+        : this(title, text, (ImageSource)App.Current.Resources[resourceKey])
     {
-        ImageSource = imageSource;
-        Text = text;
+    }
+
+    public string Title
+    {
+        get => _title;
+        set => Set(ref _title, value);
     }
 
     public ImageSource ImageSource

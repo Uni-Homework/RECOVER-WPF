@@ -19,16 +19,36 @@ public class Deque<T>
 
     public void InsertFirst(T item)
     {
-        _head = new DequeImplItemNode(item, null, _head);
-        _head.Next.Previous = _head;
+        if (IsEmpty())
+        {
+            SetFirstElement(item);
+        }
+        else
+        {
+            _head = new DequeImplItemNode(item, null, _head);
+            _head.Next.Previous = _head;
+            _size = _size + 1;
+        }
+    }
+
+    private void SetFirstElement(T item)
+    {
+        _head = _tail = new DequeImplItemNode(item);
         _size = _size + 1;
     }
 
     public void InsertLast(T item)
     {
-        _tail = new DequeImplItemNode(item, _tail, null);
-        _tail.Previous.Next = _tail;
-        _size = _size + 1;
+        if (IsEmpty())
+        {
+            SetFirstElement(item);
+        }
+        else
+        {
+            _tail = new DequeImplItemNode(item, _tail, null);
+            _tail.Previous.Next = _tail;
+            _size = _size + 1;
+        }
     }
 
     public T TakeFirst()
@@ -39,9 +59,12 @@ public class Deque<T>
         }
 
         T retItem = _head.Item;
+        _size = _size - 1;
+
+        if (IsEmpty()) return retItem;
+
         _head = _head.Next;
         _head.Previous = null;
-        _size = _size - 1;
 
         return retItem;
     }
@@ -54,11 +77,24 @@ public class Deque<T>
         }
 
         T retItem = _tail.Item;
-        _tail = _tail.Previous;
-        _tail.Previous = null;
         _size = _size - 1;
 
+        if (IsEmpty()) return retItem;
+        
+        _tail = _tail.Previous;
+        _tail.Previous = null;
+
         return retItem;
+    }
+
+    public T PeekFirst()
+    {
+        return _head.Item;
+    }
+    
+    public T PeekLast()
+    {
+        return _head.Item;
     }
 
     public bool IsEmpty()
@@ -80,26 +116,17 @@ public class Deque<T>
         }
     }
 
-    private class DequeImplItemNode
+    private class DequeImplItemNode(T item, DequeImplItemNode previous = null, DequeImplItemNode next = null)
     {
-        private readonly T _item;
-
-        public DequeImplItemNode(T item, DequeImplItemNode previous, DequeImplItemNode next)
-        {
-            this._item = item;
-            this.Next = next;
-            this.Previous = previous;
-        }
-
         public DequeImplItemNode(DequeImplItemNode previous, DequeImplItemNode next)
             : this(default, previous, next)
         {
         }
 
-        public T Item => _item;
+        public T Item => item;
 
-        public DequeImplItemNode Next { get; set; }
+        public DequeImplItemNode Next { get; set; } = next;
 
-        public DequeImplItemNode Previous { get; set; }
+        public DequeImplItemNode Previous { get; set; } = previous;
     }
 }

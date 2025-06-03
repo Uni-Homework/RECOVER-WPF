@@ -11,12 +11,27 @@ public class LearningScene : Scene
     private LearningItem _selectedItem;
     private ICommand _nextCommand;
     private ICommand _backCommand;
+    private ICommand _backMainScreenCommand;
 
     public LearningScene()
     {
-        _items = new Deque<LearningItem>();
+        _items = new Deque<LearningItem>([
+            new LearningItem("Управление",
+                "Управление персонажем происходит в главном окне игры.\n" +
+                "Для перемещение отвечают клавиши A,D,S,W - право, влево, взад, вперед.\n" +
+                "Для попорота вправо влево отвечают кнопки Q, E соответственно.\n",
+                "LearningAboutControl"),
+            new LearningItem("Цель игры",
+                "В игре вам необходимо собрать весь мусор до того момента пока у вас не закончатся все ресурсы." +
+                "Если ресурсы закончатся раньше - вы проиграете. Если раньше соберете мусор - выиграете.\n" +
+                "Количество собранного мусора и оставшихся ресурсов можно посмотреть в окошечке, нажав на Tab.\n" +
+                "В окошечек отраженно минимальное, максимальное количества, а также справа текущее количество ресурсов.\n",
+                "LearningAboutResources"),
+        ]);
         NextCommand = new LambdaCommand<object, object>(_ => _items.InsertLast(SelectedItem = _items.TakeFirst()));
         BackCommand = new LambdaCommand<object, object>(_ => _items.InsertFirst(SelectedItem = _items.TakeLast()));
+        BackMainScreenCommand = new LambdaCommand<object, object>(_ => ((App)App.Current).SetScene(SceneType.MainMenu));
+        SelectedItem = _items.PeekFirst();
     }
 
     public LearningItem SelectedItem
@@ -35,5 +50,11 @@ public class LearningScene : Scene
     {
         get => _backCommand;
         private set => Set(ref _backCommand, value);
+    }
+
+    public ICommand BackMainScreenCommand
+    {
+        get => _backMainScreenCommand;
+        private set => Set(ref _backMainScreenCommand, value);
     }
 }

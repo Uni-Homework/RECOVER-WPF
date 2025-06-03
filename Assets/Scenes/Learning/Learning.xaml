@@ -15,23 +15,45 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
             <RowDefinition Height="60*" />
             <RowDefinition Height="20*" />
-            <RowDefinition Height="20*" />
+            <RowDefinition Height="10*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Image Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="0"
-               Grid.ColumnSpan="2" Source="{Binding SelectedItem.ImageSource}">
-        </Image>
-        <TextBox Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1"
-                 IsReadOnly="True" Text="{Binding SelectedItem.Text}">
+        <TextBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0"
+                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                 Text="{Binding SelectedItem.Title}"
+                 IsReadOnly="True" TextAlignment="Center" VerticalContentAlignment="Center" TextWrapping="Wrap" />
+
+        <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                Margin="0, 5, 0,0">
+            <Image Source="{Binding SelectedItem.ImageSource}" Stretch="Fill"></Image>
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="#FFBF00" />
+                    <Setter Property="BorderBrush" Value="#A67C00" />
+                    <Setter Property="BorderThickness" Value="5" />
+                </Style>
+            </Border.Style>
+        </Border>
+
+
+        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
+                 IsReadOnly="True" Text="{Binding SelectedItem.Text}" TextWrapping="Wrap"
+                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         </TextBox>
-        <Button Grid.Row="2" Grid.Column="0" Content="Назад" Command="{Binding BackCommand}"></Button>
-        <Button Grid.Row="2" Grid.Column="2" Content="Далее" Command="{Binding NextCommand}"></Button>
+
+        <Button Grid.Row="3" Grid.Column="1" Content="Назад" Command="{Binding BackCommand}"></Button>
+        <Button Grid.Row="3" Grid.Column="2" Content="В главное меню" Command="{Binding BackMainScreenCommand}"></Button>
+        <Button Grid.Row="3" Grid.Column="3" Content="Далее" Command="{Binding NextCommand}"></Button>
     </Grid>
 </cs:SceneView>

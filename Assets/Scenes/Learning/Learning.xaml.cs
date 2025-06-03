@@ -9,8 +9,8 @@ public partial class Learning : SceneView
 
     public Learning()
     {
-        _learningScene = new LearningScene();
         InitializeComponent();
+        DataContext = _learningScene = new LearningScene();
     }
 
     public override Scene Scene => _learningScene;
