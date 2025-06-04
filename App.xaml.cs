@@ -73,7 +73,7 @@ public partial class App : Application, INotifyPropertyChanged
             cacheScenes[type] = CurrentScene;
         }
     }
-    
+
     public static bool IsCachedScene(SceneType type)
     {
         return ((App)Current).cacheScenes.ContainsKey(type);
@@ -95,5 +95,10 @@ public partial class App : Application, INotifyPropertyChanged
         double deltaTime = (currentFrameTime - lastFrameTime).TotalSeconds;
         CurrentScene.Scene.Update(deltaTime);
         lastFrameTime = currentFrameTime;
+    }
+
+    public static void DropScene(SceneType type)
+    {
+        ((App)Current).cacheScenes.Remove(type);
     }
 }
