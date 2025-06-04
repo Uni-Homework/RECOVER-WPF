@@ -14,7 +14,7 @@ public class MainMenuScene : Scene
 
     public MainMenuScene()
     {
-        LearningCommand = new LambdaCommand<object, object>(_ => ((App)App.Current).SetScene(SceneType.Learning));
+        LearningCommand = new LambdaCommand<object, object>(_ => ((App)App.Current).SetSceneInternal(SceneType.Learning));
         StartGameCommand = new LambdaCommand<object, object>(
             _ => App.CreateScene(SceneType.CosmicStation),
             _ => !string.IsNullOrWhiteSpace(PlayerName)
