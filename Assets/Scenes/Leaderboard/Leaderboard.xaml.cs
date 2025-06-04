@@ -1,4 +1,5 @@
 using RECOVER.Assets.Scenes.CommonScene;
+using RECOVER.Engine;
 
 namespace RECOVER.Assets.Scenes.Leaderboard;
 
@@ -9,8 +10,8 @@ public partial class Leaderboard : SceneView
     public Leaderboard()
     {
         InitializeComponent();
-        DataContext = new LeaderboardScene();
+        DataContext = _leaderboardScene = new LeaderboardScene();
     }
 
-    public override LeaderboardScene Scene => _leaderboardScene;
+    public override Scene Scene => _leaderboardScene;
 }

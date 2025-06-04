@@ -3,6 +3,7 @@ using System.Windows.Input;
 using RECOVER.Engine;
 using RECOVER.Engine.Models;
 using RECOVER.Engine.Serialization;
+using RECOVER.Engine.WPFTools;
 
 namespace RECOVER.Assets.Scenes.Leaderboard;
 public class LeaderboardScene : Scene
@@ -12,6 +13,7 @@ public class LeaderboardScene : Scene
 
     public LeaderboardScene()
     {
+        _commandMenu = new LambdaCommand<object, object>(_ => App.SetScene(SceneType.MainMenu));
         LeaderboardEntries = new ObservableCollection<LeaderboardEntry>();
         LoadLeaderboard();
     }

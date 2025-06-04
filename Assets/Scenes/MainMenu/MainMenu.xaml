@@ -28,6 +28,7 @@
             <Button HorizontalAlignment="Stretch"
                     Content="Продолжить игру" Command="{Binding ContinuedGameCommand}" />
             <Button HorizontalAlignment="Stretch" Content="Обучение" Command="{Binding LearningCommand}" />
+            <Button HorizontalAlignment="Stretch" Content="Таблица лидеров" Command="{Binding LeaderboardCommand}" />
             <Button HorizontalAlignment="Stretch"
                     Content="Выйти из игры" Command="{Binding ExitCommand}" />
         </StackPanel>

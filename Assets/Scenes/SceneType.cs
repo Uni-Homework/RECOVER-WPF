@@ -6,5 +6,6 @@ public enum SceneType
     CosmicStation,
     GameOver,
     Pause,
-    Learning
+    Learning,
+    Leaderboard
 }
