@@ -80,7 +80,7 @@ public class CosmicStationScene : Scene
     public DetectedItemsComponent DetectorItems
     {
         get => _detectorItems;
-        private set { Set(ref _detectorItems, value); }
+        private set => Set(ref _detectorItems, value);
     }
 
     public PlayerController PlayerController

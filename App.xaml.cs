@@ -5,6 +5,7 @@ using RECOVER.Assets.Scenes;
 using RECOVER.Assets.Scenes.CommonScene;
 using RECOVER.Assets.Scenes.CosmicStation;
 using RECOVER.Assets.Scenes.GameOver;
+using RECOVER.Assets.Scenes.Learning;
 using RECOVER.Assets.Scenes.MainMenu;
 
 namespace RECOVER;
@@ -45,7 +46,8 @@ public partial class App : Application, INotifyPropertyChanged
             {
                 SceneType.MainMenu => new MainMenu(),
                 SceneType.CosmicStation => new CosmicStation(),
-                SceneType.GameOver => new GameOver(isWin)
+                SceneType.GameOver => new GameOver(isWin),
+                SceneType.Learning => new Learning()
             };
             CurrentScene.Scene.Start();
         }
