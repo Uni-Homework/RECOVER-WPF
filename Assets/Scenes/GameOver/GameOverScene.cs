@@ -13,12 +13,15 @@ public class GameOverScene : Scene
     public GameOverScene(bool isWin)
     {
         Message = isWin ? "Победа!" : "Поражение!";
-        
+
         RestartCommand = new LambdaCommand<object, object>(
-            _ => ((App)App.Current).SetScene(SceneType.CosmicStation));
-            
+            _ => App.CreateScene(SceneType.CosmicStation));
         MainMenuCommand = new LambdaCommand<object, object>(
-            _ => ((App)App.Current).SetScene(SceneType.MainMenu));
+            _ =>
+            {
+                App.DropScene(SceneType.CosmicStation);
+                App.SetScene(SceneType.MainMenu);
+            });
     }
 
     public string Message
@@ -38,4 +41,4 @@ public class GameOverScene : Scene
         get => _mainMenuCommand;
         private set => Set(ref _mainMenuCommand, value);
     }
-} 
+}

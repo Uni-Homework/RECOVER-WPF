@@ -35,7 +35,6 @@
         Item resources
         <!-->
         <BitmapImage UriSource="/Assets/Resources/Item/terminal.png" x:Key="ItemTerminalTile"></BitmapImage>
-        <BitmapImage UriSource="/Assets/Resources/Item/itemtarget.png" x:Key="ItemTarget"></BitmapImage>
         <BitmapImage UriSource="/Assets/Resources/Item/energytile.png" x:Key="EnetgyPlayerResourceEnricherTile"></BitmapImage>
         <BitmapImage UriSource="/Assets/Resources/Item/coolerTile.png" x:Key="CoolerTile"></BitmapImage>
         <BitmapImage UriSource="/Assets/Resources/Item/debris.png" x:Key="Debris"></BitmapImage>
@@ -44,7 +43,7 @@
         Background
         <!-->
         <BitmapImage UriSource="/Assets/Resources/Background/MainMenu/mainmenu.png" x:Key="MainMenuBackground"></BitmapImage>
-        
+
         <!-->
         Learning
         <!-->
@@ -71,6 +70,15 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="25" />
+        </Style>
+        <Style TargetType="Border" x:Key="CommonAppBorderStyle">
+            <Setter Property="Background" Value="#FFBF00" />
+            <Setter Property="BorderBrush" Value="#A67C00" />
+            <Setter Property="BorderThickness" Value="5" />
+        </Style>
+        <Style TargetType="Border" BasedOn="{StaticResource CommonAppBorderStyle}" x:Key="TargetItemBorderStyle">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
         </Style>
     </Application.Resources>
 </Application>

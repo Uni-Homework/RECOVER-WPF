@@ -30,7 +30,7 @@ public class LearningScene : Scene
         ]);
         NextCommand = new LambdaCommand<object, object>(_ => _items.InsertLast(SelectedItem = _items.TakeFirst()));
         BackCommand = new LambdaCommand<object, object>(_ => _items.InsertFirst(SelectedItem = _items.TakeLast()));
-        BackMainScreenCommand = new LambdaCommand<object, object>(_ => ((App)App.Current).SetScene(SceneType.MainMenu));
+        BackMainScreenCommand = new LambdaCommand<object, object>(_ => App.SetScene(SceneType.MainMenu));
         SelectedItem = _items.PeekFirst();
     }
 

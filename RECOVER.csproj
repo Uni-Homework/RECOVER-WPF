@@ -15,8 +15,6 @@
       <None Remove="Assets\Resources\Tile\floor.png" />
       <Resource Include="Assets\Resources\Tile\floor.png" />
       <None Remove="Assets\Resources\Player\Spacesuit.png" />
-      <None Remove="Assets\Resources\Item\itemtarget.png" />
-      <Resource Include="Assets\Resources\Item\itemtarget.png" />
       <None Remove="Assets\Resources\Item\terminal.png" />
       <Resource Include="Assets\Resources\Item\terminal.png" />
       <None Remove="Assets\Resources\Item\energytile.png" />

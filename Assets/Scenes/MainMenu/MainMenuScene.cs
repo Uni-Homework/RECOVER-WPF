@@ -6,22 +6,30 @@ namespace RECOVER.Assets.Scenes.MainMenu;
 
 public class MainMenuScene : Scene
 {
-    private string playerName;
+    private string _playerName;
     private ICommand _startGameCommand;
+    private ICommand _continuedGameCommand;
     private ICommand _learningCommand;
+    private ICommand _exitCommand;
 
     public MainMenuScene()
     {
-        LearningCommand = new LambdaCommand<object, object>(_ => ((App)App.Current).SetScene(SceneType.Learning));
+        LearningCommand = new LambdaCommand<object, object>(_ => App.SetScene(SceneType.Learning));
+        ExitCommand = new LambdaCommand<object, object>(_ => App.Current.Shutdown(0));
         StartGameCommand = new LambdaCommand<object, object>(
-            _ => ((App)App.Current).SetScene(SceneType.CosmicStation),
-            _ => !string.IsNullOrWhiteSpace(PlayerName));
+            _ => App.CreateScene(SceneType.CosmicStation),
+            _ => !string.IsNullOrWhiteSpace(PlayerName)
+        );
+        ContinuedGameCommand = new LambdaCommand<object, object>(
+            _ => App.SetScene(SceneType.CosmicStation),
+            _ => App.IsCachedScene(SceneType.CosmicStation)
+        );
     }
 
     public string PlayerName
     {
-        get => playerName;
-        set => Set(ref playerName, value);
+        get => _playerName;
+        set => Set(ref _playerName, value);
     }
 
     public ICommand StartGameCommand
@@ -30,9 +38,21 @@ public class MainMenuScene : Scene
         private set => Set(ref _startGameCommand, value);
     }
 
+    public ICommand ContinuedGameCommand
+    {
+        get => _continuedGameCommand;
+        private set => Set(ref _continuedGameCommand, value);
+    }
+
     public ICommand LearningCommand
     {
         get => _learningCommand;
         private set => Set(ref _learningCommand, value);
+    }
+
+    public ICommand ExitCommand
+    {
+        get => _exitCommand;
+        private set => Set(ref _exitCommand, value);
     }
 }

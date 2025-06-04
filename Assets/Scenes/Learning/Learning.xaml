@@ -13,6 +13,13 @@
         <ImageBrush Stretch="UniformToFill" ImageSource="{StaticResource MainMenuBackground}" />
     </cs:SceneView.Background>
 
+    <cs:SceneView.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="Opacity" Value="0.1" />
+        </Style>
+    </cs:SceneView.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*" />
@@ -29,36 +36,24 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0"
-                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                 Text="{Binding SelectedItem.Title}"
-                 TextAlignment="Center" TextWrapping="Wrap"
-                 FontSize="36" Foreground="White">
-            <TextBlock.Background>
-                <SolidColorBrush Color="#90000000"/>
-            </TextBlock.Background>
+                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                   Text="{Binding SelectedItem.Title}"
+                   TextAlignment="Center" TextWrapping="Wrap"
+                   FontSize="36" Foreground="White">
         </TextBlock>
 
         <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                Style="{StaticResource CommonAppBorderStyle}"
                 Margin="0, 5, 0,0">
             <Image Source="{Binding SelectedItem.ImageSource}" Stretch="Fill"></Image>
-            <Border.Style>
-                <Style TargetType="Border">
-                    <Setter Property="Background" Value="#FFBF00" />
-                    <Setter Property="BorderBrush" Value="#A67C00" />
-                    <Setter Property="BorderThickness" Value="5" />
-                </Style>
-            </Border.Style>
         </Border>
 
 
         <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
-                 Text="{Binding SelectedItem.Text}" TextWrapping="Wrap"
-                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                 FontSize="25" Foreground="White">
-            <TextBlock.Background>
-                <SolidColorBrush Color="#90000000"/>
-            </TextBlock.Background>
+                   Text="{Binding SelectedItem.Text}" TextWrapping="Wrap"
+                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                   FontSize="25" Foreground="White">
         </TextBlock>
 
         <Button Grid.Row="3" Grid.Column="1" Content="Назад" Command="{Binding BackCommand}"></Button>
