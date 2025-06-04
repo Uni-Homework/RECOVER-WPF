@@ -69,6 +69,10 @@
       <Resource Include="Assets\Resources\Learning\control.png" />
       <None Remove="Assets\Resources\Learning\winofrec.jpg" />
       <Resource Include="Assets\Resources\Learning\winofrec.jpg" />
+      <None Remove="Assets\Resources\Learning\fillerresources.jpg" />
+      <Resource Include="Assets\Resources\Learning\fillerresources.jpg" />
+      <None Remove="Assets\Resources\Learning\targetofobject.jpg" />
+      <Resource Include="Assets\Resources\Learning\targetofobject.jpg" />
     </ItemGroup>
 
     <ItemGroup>
