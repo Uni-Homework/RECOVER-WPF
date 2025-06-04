@@ -51,7 +51,7 @@ public class GameObject : DeafNotificationObject
 
     public virtual void Update(double deltaTime)
     {
-        Debug.WriteLine($"GameObject.Update() called for {GetType().Name}, deltaTime: {deltaTime}");
+        // Debug.WriteLine($"GameObject.Update() called for {GetType().Name}, deltaTime: {deltaTime}");
         foreach (var component in components) 
         {
             if (component == null)
@@ -59,7 +59,8 @@ public class GameObject : DeafNotificationObject
                 Debug.WriteLine($"Warning: Null component found in {GetType().Name}");
                 continue;
             }
-            Debug.WriteLine($"Updating component {component.GetType().Name}");
+            // that thing ate too much performance
+            // Debug.WriteLine($"Updating component {component.GetType().Name}");
             component.Update(deltaTime);
         }
         Transform.Position += Transform.Velocity;
