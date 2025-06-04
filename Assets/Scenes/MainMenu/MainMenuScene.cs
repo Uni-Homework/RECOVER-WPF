@@ -33,7 +33,11 @@ public class MainMenuScene : Scene
     public string PlayerName
     {
         get => _playerName;
-        set => Set(ref _playerName, value);
+        set
+        {
+            Set(ref _playerName, value);
+            StaticValuesContainer.Nickname = value;
+        }
     }
 
     public ICommand StartGameCommand

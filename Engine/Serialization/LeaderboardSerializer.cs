@@ -57,7 +57,7 @@ namespace RECOVER.Engine.Serialization
             }
         }
 
-        public static void AddEntry(string playerName, string score)
+        public static void AddEntry(string playerName, int score) 
         {
             var entries = LoadLeaderboard();
             entries.Add(new LeaderboardEntry(playerName, score));

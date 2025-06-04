@@ -4,15 +4,24 @@ using RECOVER.Assets.Prefabs.Player.PlayerResource;
 using RECOVER.Assets.Scenes;
 using RECOVER.Engine;
 using RECOVER.Engine.Components;
+using RECOVER.Engine.Models;
+using RECOVER.Engine.Serialization;
 
 namespace RECOVER.Assets.Prefabs.Player;
 
 public class PlayerPrefab : GameObject
 {
-    public PlayerPrefab(Vector position) : base()
+    TrashResourcePlayer trashResourceComponent;
+    private string _nickname;
+
+    public PlayerPrefab(Vector position, string nickname) : base()
     {
+        _nickname = nickname;
+        
         Transform.Position = position;
         Transform.Origin = new Point(0.5, 0.5);
+        
+        trashResourceComponent = new TrashResourcePlayer();
 
         // Initialize components properly using AddComponent
         var rigidBody = new RigidBody { IsKinematic = false };
@@ -27,7 +36,7 @@ public class PlayerPrefab : GameObject
         AddComponent(new PlayerResourceViewer());
         AddComponent(new EnergyResourcePlayer());
         AddComponent(new WaterResourcePlayer());
-        AddComponent(new TrashResourcePlayer());
+        AddComponent(trashResourceComponent);
     }
 
     /// <summary>
@@ -35,6 +44,7 @@ public class PlayerPrefab : GameObject
     /// </summary>
     public void Die()
     {
+        LeaderboardSerializer.AddEntry(_nickname, (int) trashResourceComponent.Current);
         App.SetScene(SceneType.GameOver);
     }
 
@@ -43,6 +53,7 @@ public class PlayerPrefab : GameObject
     /// </summary>
     public void Win()
     {
+        LeaderboardSerializer.AddEntry(_nickname, (int) trashResourceComponent.Current);
         App.SetScene(SceneType.GameOver, true);
     }
 }
