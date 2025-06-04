@@ -13,6 +13,13 @@
         <ImageBrush Stretch="UniformToFill" ImageSource="{StaticResource MainMenuBackground}" />
     </cs:SceneView.Background>
 
+    <cs:SceneView.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="Opacity" Value="0.1" />
+        </Style>
+    </cs:SceneView.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*" />
@@ -33,9 +40,6 @@
                    Text="{Binding SelectedItem.Title}"
                    TextAlignment="Center" TextWrapping="Wrap"
                    FontSize="36" Foreground="White">
-            <TextBlock.Background>
-                <SolidColorBrush Color="#900000" />
-            </TextBlock.Background>
         </TextBlock>
 
         <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
@@ -50,9 +54,6 @@
                    Text="{Binding SelectedItem.Text}" TextWrapping="Wrap"
                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                    FontSize="25" Foreground="White">
-            <TextBlock.Background>
-                <SolidColorBrush Color="#900000" />
-            </TextBlock.Background>
         </TextBlock>
 
         <Button Grid.Row="3" Grid.Column="1" Content="Назад" Command="{Binding BackCommand}"></Button>
