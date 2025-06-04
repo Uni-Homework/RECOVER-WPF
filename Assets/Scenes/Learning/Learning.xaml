@@ -32,7 +32,7 @@
                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                  Text="{Binding SelectedItem.Title}"
                  TextAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center"
-                 FontSize="36" Foreground="DarkBlue" Focusable="False">
+                 FontSize="36" Focusable="False">
         </TextBox>
 
         <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
@@ -46,7 +46,7 @@
         <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
                  Text="{Binding SelectedItem.Text}" TextWrapping="Wrap"
                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"
-                 FontSize="25" Foreground="DarkBlue" IsReadOnly="True" Focusable="False">
+                 IsReadOnly="True" Focusable="False">
         </TextBox>
 
         <Button Grid.Row="3" Grid.Column="1" Content="Назад" Command="{Binding BackCommand}"></Button>
