@@ -15,6 +15,7 @@
 
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
         <Button HorizontalAlignment="Stretch" Content="Продолжить" Command="{Binding ContinuedCommand}"/>
+        <Button HorizontalAlignment="Stretch" Content="Обучение" Command="{Binding TutorialCommand}"/>
         <Button HorizontalAlignment="Stretch" Content="Выйти в главное меню" Command="{Binding ToMainScreenCommand}"/>
         <Button HorizontalAlignment="Stretch" Content="Выйти из игры" Command="{Binding ExitCommand}"/>
     </StackPanel>
