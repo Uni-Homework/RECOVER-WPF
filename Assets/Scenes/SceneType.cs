@@ -4,5 +4,6 @@ public enum SceneType
 {
     MainMenu,
     CosmicStation,
-    GameOver
+    GameOver,
+    Pause
 }

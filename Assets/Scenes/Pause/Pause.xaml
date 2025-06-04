@@ -4,15 +4,18 @@
                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                        xmlns:commonScene="clr-namespace:RECOVER.Assets.Scenes.CommonScene"
+                       xmlns:p="clr-namespace:RECOVER.Assets.Scenes.Pause"
                        mc:Ignorable="d"
-                       Title="Pause" Height="450" Width="800">
+                       Title="Pause"
+                       Focusable="True"
+                       d:DataContext="{d:DesignInstance p:PauseScene, IsDesignTimeCreatable=True}">
     <commonScene:SceneView.Background>
         <ImageBrush Stretch="UniformToFill" ImageSource="{StaticResource MainMenuBackground}" />
     </commonScene:SceneView.Background>
 
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <Button HorizontalAlignment="Stretch" Content="Продолжить" />
-        <Button HorizontalAlignment="Stretch" Content="Выйти в главное меню" />
-        <Button HorizontalAlignment="Stretch" Content="Выйти из игры" />
+        <Button HorizontalAlignment="Stretch" Content="Продолжить" Command="{Binding ContinuedCommand}"/>
+        <Button HorizontalAlignment="Stretch" Content="Выйти в главное меню" Command="{Binding ToMainScreenCommand}"/>
+        <Button HorizontalAlignment="Stretch" Content="Выйти из игры" Command="{Binding ExitCommand}"/>
     </StackPanel>
 </commonScene:SceneView>

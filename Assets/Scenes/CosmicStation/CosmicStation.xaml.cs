@@ -63,6 +63,9 @@ public partial class CosmicStation : SceneView
             case Key.Q:
                 _baseScene.PlayerController.RotateLeft = true;
                 break;
+            case Key.Escape:
+                App.SetScene(SceneType.Pause);
+                break;
             default:
                 foreach (var surroundingItem in _baseScene.DetectorItems.SurroundingItems)
                 {
