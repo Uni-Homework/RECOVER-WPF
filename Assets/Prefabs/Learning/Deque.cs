@@ -76,7 +76,7 @@ public class Deque<T>
         if (IsEmpty()) return retItem;
         
         _tail = _tail.Previous;
-        _tail.Previous = null;
+        _tail.Next = null;
 
         return retItem;
     }
