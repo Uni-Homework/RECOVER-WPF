@@ -16,6 +16,9 @@ public class LeaderboardScene : Scene
         _commandMenu = new LambdaCommand<object, object>(_ => App.SetScene(SceneType.MainMenu));
         LeaderboardEntries = new ObservableCollection<LeaderboardEntry>();
         LoadLeaderboard();
+        
+        // Subscribe to leaderboard updates
+        LeaderboardSerializer.LeaderboardUpdated += (sender, args) => LoadLeaderboard();
     }
 
     private void LoadLeaderboard()

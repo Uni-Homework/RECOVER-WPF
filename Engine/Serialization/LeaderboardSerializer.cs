@@ -13,6 +13,8 @@ namespace RECOVER.Engine.Serialization
             "RECOVER",
             "leaderboard.json");
 
+        public static event EventHandler LeaderboardUpdated;
+
         public static void SaveLeaderboard(List<LeaderboardEntry> entries)
         {
             try
@@ -29,6 +31,8 @@ namespace RECOVER.Engine.Serialization
                     WriteIndented = true
                 });
                 File.WriteAllText(LeaderboardPath, json);
+                
+                LeaderboardUpdated?.Invoke(null, EventArgs.Empty);
             }
             catch (Exception ex)
             {
