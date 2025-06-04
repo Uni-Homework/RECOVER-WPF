@@ -14,7 +14,8 @@ public class MainMenuScene : Scene
 
     public MainMenuScene()
     {
-        LearningCommand = new LambdaCommand<object, object>(_ => ((App)App.Current).SetScene(SceneType.Learning));
+        LearningCommand = new LambdaCommand<object, object>(_ => App.SetScene(SceneType.Learning));
+        ExitCommand = new LambdaCommand<object, object>(_ => App.Current.Shutdown(0));
         StartGameCommand = new LambdaCommand<object, object>(
             _ => App.CreateScene(SceneType.CosmicStation),
             _ => !string.IsNullOrWhiteSpace(PlayerName)
@@ -23,7 +24,6 @@ public class MainMenuScene : Scene
             _ => App.SetScene(SceneType.CosmicStation),
             _ => App.IsCachedScene(SceneType.CosmicStation)
         );
-        ExitCommand = new LambdaCommand<object, object>(_ => App.Current.Shutdown(0));
     }
 
     public string PlayerName
@@ -43,13 +43,13 @@ public class MainMenuScene : Scene
         get => _continuedGameCommand;
         private set => Set(ref _continuedGameCommand, value);
     }
-    
+
     public ICommand LearningCommand
     {
         get => _learningCommand;
         private set => Set(ref _learningCommand, value);
     }
-    
+
     public ICommand ExitCommand
     {
         get => _exitCommand;

@@ -29,35 +29,29 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0"
-                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                 Text="{Binding SelectedItem.Title}"
-                 TextAlignment="Center" TextWrapping="Wrap"
-                 FontSize="36" Foreground="White">
+                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                   Text="{Binding SelectedItem.Title}"
+                   TextAlignment="Center" TextWrapping="Wrap"
+                   FontSize="36" Foreground="White">
             <TextBlock.Background>
-                <SolidColorBrush Color="#90000000"/>
+                <SolidColorBrush Color="#900000" />
             </TextBlock.Background>
         </TextBlock>
 
         <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                Style="{StaticResource CommonAppBorderStyle}"
                 Margin="0, 5, 0,0">
             <Image Source="{Binding SelectedItem.ImageSource}" Stretch="Fill"></Image>
-            <Border.Style>
-                <Style TargetType="Border">
-                    <Setter Property="Background" Value="#FFBF00" />
-                    <Setter Property="BorderBrush" Value="#A67C00" />
-                    <Setter Property="BorderThickness" Value="5" />
-                </Style>
-            </Border.Style>
         </Border>
 
 
         <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
-                 Text="{Binding SelectedItem.Text}" TextWrapping="Wrap"
-                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                 FontSize="25" Foreground="White">
+                   Text="{Binding SelectedItem.Text}" TextWrapping="Wrap"
+                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                   FontSize="25" Foreground="White">
             <TextBlock.Background>
-                <SolidColorBrush Color="#90000000"/>
+                <SolidColorBrush Color="#900000" />
             </TextBlock.Background>
         </TextBlock>
 

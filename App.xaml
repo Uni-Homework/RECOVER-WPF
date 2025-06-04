@@ -43,7 +43,7 @@
         Background
         <!-->
         <BitmapImage UriSource="/Assets/Resources/Background/MainMenu/mainmenu.png" x:Key="MainMenuBackground"></BitmapImage>
-        
+
         <!-->
         Learning
         <!-->
@@ -71,10 +71,12 @@
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="25" />
         </Style>
-        <Style TargetType="Border" x:Key="TargetItemBorderStyle">
+        <Style TargetType="Border" x:Key="CommonAppBorderStyle">
             <Setter Property="Background" Value="#FFBF00" />
             <Setter Property="BorderBrush" Value="#A67C00" />
             <Setter Property="BorderThickness" Value="5" />
+        </Style>
+        <Style TargetType="Border" BasedOn="{StaticResource CommonAppBorderStyle}" x:Key="TargetItemBorderStyle">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
         </Style>
