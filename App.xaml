@@ -68,8 +68,8 @@
 
             <Style.Triggers>
                 <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="Background" Value="#FFD173	" />
-                    <Setter Property="BorderBrush" Value="#FFC040	" />
+                    <Setter Property="Background" Value="#FFD173" />
+                    <Setter Property="BorderBrush" Value="#FFC040" />
                     <Setter Property="Foreground" Value="#466FD5" />
                 </Trigger>
             </Style.Triggers>
