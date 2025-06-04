@@ -7,6 +7,7 @@ using RECOVER.Assets.Scenes.CosmicStation;
 using RECOVER.Assets.Scenes.GameOver;
 using RECOVER.Assets.Scenes.Learning;
 using RECOVER.Assets.Scenes.MainMenu;
+using RECOVER.Assets.Scenes.Pause;
 
 namespace RECOVER;
 
@@ -18,7 +19,7 @@ public partial class App : Application, INotifyPropertyChanged
     private DateTime lastFrameTime;
     private Dictionary<SceneType, SceneView> cacheScenes = new Dictionary<SceneType, SceneView>();
     private SceneView _currentScene;
-    
+
     public event PropertyChangedEventHandler PropertyChanged;
 
     protected override void OnStartup(StartupEventArgs e)
@@ -34,7 +35,12 @@ public partial class App : Application, INotifyPropertyChanged
         CompositionTarget.Rendering += GameLoop;
     }
 
-    public void SetScene(SceneType type, bool isWin = false)
+    public static void SetScene(SceneType type, bool isWin = false)
+    {
+        ((App)Current).SetSceneInternal(type, isWin);
+    }
+
+    public void SetSceneInternal(SceneType type, bool isWin = false)
     {
         if (cacheScenes.TryGetValue(type, out var sceneView))
         {
@@ -42,15 +48,35 @@ public partial class App : Application, INotifyPropertyChanged
         }
         else
         {
-            CurrentScene = type switch
-            {
-                SceneType.MainMenu => new MainMenu(),
-                SceneType.CosmicStation => new CosmicStation(),
-                SceneType.GameOver => new GameOver(isWin),
-                SceneType.Learning => new Learning()
-            };
-            CurrentScene.Scene.Start();
+            CreateSceneInternal(type, isWin);
         }
+    }
+
+    public static void CreateScene(SceneType type, bool isWin = false)
+    {
+        ((App)Current).CreateSceneInternal(type, isWin);
+    }
+
+    public void CreateSceneInternal(SceneType type, bool isWin)
+    {
+        CurrentScene = type switch
+        {
+            SceneType.MainMenu => new MainMenu(),
+            SceneType.CosmicStation => new CosmicStation(),
+            SceneType.GameOver => new GameOver(isWin),
+            SceneType.Pause => new Pause(),
+            SceneType.Learning => new Learning()
+        };
+        CurrentScene.Scene.Start();
+        if (!cacheScenes.TryAdd(type, CurrentScene))
+        {
+            cacheScenes[type] = CurrentScene;
+        }
+    }
+    
+    public static bool IsCachedScene(SceneType type)
+    {
+        return ((App)Current).cacheScenes.ContainsKey(type);
     }
 
     public SceneView CurrentScene

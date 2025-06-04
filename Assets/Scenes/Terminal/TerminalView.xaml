@@ -6,6 +6,8 @@
         xmlns:t="clr-namespace:RECOVER.Assets.Prefabs.Terminal"
         mc:Ignorable="d"
         Title="Терминал" Height="450" Width="800"
+        WindowStyle="None"
+        ResizeMode="NoResize"
         d:DataContext="{d:DesignInstance t:TerminalComponent, IsDesignTimeCreatable=True}">
 
     <Grid Background="Black">
@@ -34,7 +36,7 @@
             <TextBox Text=">" Foreground="Green" VerticalAlignment="Center" Grid.Column="0" FontSize="20"
                      BorderThickness="0" Background="Black" IsReadOnly="True" />
             <TextBox Name="CommandLine" FontSize="20" Text="{Binding Command, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     TextAlignment="Left" Foreground="Green" Background="Black"
+                     TextAlignment="Left" HorizontalAlignment="Stretch" Foreground="Green" Background="Black"
                      Grid.Column="1" VerticalAlignment="Center" BorderThickness="0" KeyDown="ClickEnter" />
         </Grid>
     </Grid>
