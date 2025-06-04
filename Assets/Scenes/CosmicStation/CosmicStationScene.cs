@@ -40,8 +40,10 @@ public class CosmicStationScene : Scene
         {
             objects.Add(wallTile);
         }
+        
+        var nickname = StaticValuesContainer.Nickname;
 
-        var player = new PlayerPrefab(new Vector(400, 200));
+        var player = new PlayerPrefab(new Vector(400, 200), nickname);
         var item = new TerminalPrefab(100, 100, player);
         var enetgyenricher = new EnergyPlayerResourceFiller(100, 200);
         var waterPlayerResourceFiller = new WaterPlayerResourceFiller(200, 200);

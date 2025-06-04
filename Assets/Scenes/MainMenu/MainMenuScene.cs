@@ -11,6 +11,7 @@ public class MainMenuScene : Scene
     private ICommand _continuedGameCommand;
     private ICommand _learningCommand;
     private ICommand _exitCommand;
+    private ICommand _leaderboardCommand;
 
     public MainMenuScene()
     {
@@ -24,12 +25,19 @@ public class MainMenuScene : Scene
             _ => App.SetScene(SceneType.CosmicStation),
             _ => App.IsCachedScene(SceneType.CosmicStation)
         );
+        LeaderboardCommand = new LambdaCommand<object, object>(_ => App.SetScene(SceneType.Leaderboard));
+
     }
+
 
     public string PlayerName
     {
         get => _playerName;
-        set => Set(ref _playerName, value);
+        set
+        {
+            Set(ref _playerName, value);
+            StaticValuesContainer.Nickname = value;
+        }
     }
 
     public ICommand StartGameCommand
@@ -54,5 +62,11 @@ public class MainMenuScene : Scene
     {
         get => _exitCommand;
         private set => Set(ref _exitCommand, value);
+    }
+    
+    public ICommand LeaderboardCommand
+    {
+        get => _leaderboardCommand;
+        private set => Set(ref _leaderboardCommand, value);
     }
 }
