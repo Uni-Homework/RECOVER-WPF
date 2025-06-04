@@ -4,17 +4,11 @@ public class Deque<T>
 {
     private DequeImplItemNode _head;
     private DequeImplItemNode _tail;
-    private DequeImplItemNode _emptyNode;
     private int _size;
 
-    public Deque()
+    public Deque(IEnumerable<T> array)
     {
-        Clear();
-    }
-
-    public Deque(IEnumerable<T> array) : this()
-    {
-        this.ToAccept(array.ToArray());
+        ToAccept(array.ToArray());
     }
 
     public void InsertFirst(T item)
@@ -82,7 +76,7 @@ public class Deque<T>
         if (IsEmpty()) return retItem;
         
         _tail = _tail.Previous;
-        _tail.Previous = null;
+        _tail.Next = null;
 
         return retItem;
     }
@@ -102,12 +96,6 @@ public class Deque<T>
         return _size == 0;
     }
 
-    public void Clear()
-    {
-        _emptyNode = _tail = _head = new DequeImplItemNode(null, null);
-        _size = 0;
-    }
-
     private void ToAccept(T[] array)
     {
         foreach (T item in array)
@@ -118,11 +106,6 @@ public class Deque<T>
 
     private class DequeImplItemNode(T item, DequeImplItemNode previous = null, DequeImplItemNode next = null)
     {
-        public DequeImplItemNode(DequeImplItemNode previous, DequeImplItemNode next)
-            : this(default, previous, next)
-        {
-        }
-
         public T Item => item;
 
         public DequeImplItemNode Next { get; set; } = next;

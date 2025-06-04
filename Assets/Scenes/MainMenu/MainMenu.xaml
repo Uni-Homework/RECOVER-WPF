@@ -7,6 +7,7 @@
                        xmlns:commonScene="clr-namespace:RECOVER.Assets.Scenes.CommonScene"
                        mc:Ignorable="d"
                        d:DataContext="{d:DesignInstance mm:MainMenuScene, IsDesignTimeCreatable=True}">
+    
     <commonScene:SceneView.Background>
         <ImageBrush Stretch="UniformToFill" ImageSource="{StaticResource MainMenuBackground}" />
     </commonScene:SceneView.Background>

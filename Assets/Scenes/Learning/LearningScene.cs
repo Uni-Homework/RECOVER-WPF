@@ -12,7 +12,7 @@ public class LearningScene : Scene
     private ICommand _nextCommand;
     private ICommand _backCommand;
     private ICommand _backMainScreenCommand;
-    
+
     public LearningScene()
     {
         _items = new Deque<LearningItem>([
@@ -27,6 +27,16 @@ public class LearningScene : Scene
                 "Количество собранного мусора и оставшихся ресурсов можно посмотреть в окне ресурсов, нажав на Tab.\n" +
                 "В окне отраженно минимальное, максимальное количества, а также справа - текущее количество ресурсов.\n",
                 "LearningAboutResources"),
+            new LearningItem("Взаимодействие с миром ",
+                "Если с объектом можно взаимодействовать, то в левом верхнем углу будет отображено сообщение " +
+                "в котором указана клавиша для активации объекта и краткое описание выполнения объекта.",
+                "LearningAboutTargetOfObject"),
+            new LearningItem("Восполнители ресурсов",
+                "Если у вас заканчиваются ресурсы, вы можете воспользоваться специальными устройствами для их восполнения.",
+                "LearningAboutFillerResources"),
+            new LearningItem("Терминал",
+                "На базе существует терминал. Чтобы получить информацию о его возможностях, используйте команду 'help'.",
+                "LearningAboutTerminal")
         ]);
         NextCommand = new LambdaCommand<object, object>(_ => _items.InsertLast(SelectedItem = _items.TakeFirst()));
         BackCommand = new LambdaCommand<object, object>(_ => _items.InsertFirst(SelectedItem = _items.TakeLast()));

@@ -49,6 +49,9 @@
         <!-->
         <BitmapImage UriSource="./Assets/Resources/Learning/control.png" x:Key="LearningAboutControl"></BitmapImage>
         <BitmapImage UriSource="./Assets/Resources/Learning/winofrec.jpg" x:Key="LearningAboutResources"></BitmapImage>
+        <BitmapImage UriSource="./Assets/Resources/Learning/targetofobject.jpg" x:Key="LearningAboutTargetOfObject"></BitmapImage>
+        <BitmapImage UriSource="./Assets/Resources/Learning/fillerresources.jpg" x:Key="LearningAboutFillerResources"></BitmapImage>
+        <BitmapImage UriSource="./Assets/Resources/Learning/terminal.jpg" x:Key="LearningAboutTerminal"></BitmapImage>
 
         <!-->
         Styles
