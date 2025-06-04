@@ -44,6 +44,12 @@
         Background
         <!-->
         <BitmapImage UriSource="/Assets/Resources/Background/MainMenu/mainmenu.png" x:Key="MainMenuBackground"></BitmapImage>
+        
+        <!-->
+        Learning
+        <!-->
+        <BitmapImage UriSource="./Assets/Resources/Learning/control.png" x:Key="LearningAboutControl"></BitmapImage>
+        <BitmapImage UriSource="./Assets/Resources/Learning/winofrec.jpg" x:Key="LearningAboutResources"></BitmapImage>
 
         <!-->
         Styles
@@ -55,7 +61,7 @@
             <Setter Property="Margin" Value="0,5,0,0" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontSize" Value="25" />
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#FFBF00" />
@@ -64,7 +70,7 @@
             <Setter Property="Margin" Value="0,5,0,0" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontSize" Value="25" />
         </Style>
     </Application.Resources>
 </Application>

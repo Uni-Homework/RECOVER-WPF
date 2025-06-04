@@ -84,9 +84,6 @@ public partial class CosmicStation : SceneView
     {
         switch (e.Key)
         {
-            case Key.F3:
-                GameObjectCanvas.IsDebug = !GameObjectCanvas.IsDebug;
-                break;
             case Key.W or Key.S:
                 _baseScene.PlayerController.Input = _baseScene.PlayerController.Input with
                 {

@@ -5,6 +5,7 @@ using RECOVER.Assets.Scenes;
 using RECOVER.Assets.Scenes.CommonScene;
 using RECOVER.Assets.Scenes.CosmicStation;
 using RECOVER.Assets.Scenes.GameOver;
+using RECOVER.Assets.Scenes.Learning;
 using RECOVER.Assets.Scenes.MainMenu;
 using RECOVER.Assets.Scenes.Pause;
 
@@ -63,7 +64,8 @@ public partial class App : Application, INotifyPropertyChanged
             SceneType.MainMenu => new MainMenu(),
             SceneType.CosmicStation => new CosmicStation(),
             SceneType.GameOver => new GameOver(isWin),
-            SceneType.Pause => new Pause()
+            SceneType.Pause => new Pause(),
+            SceneType.Learning => new Learning()
         };
         CurrentScene.Scene.Start();
         if (!cacheScenes.TryAdd(type, CurrentScene))
