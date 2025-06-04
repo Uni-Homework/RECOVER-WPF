@@ -65,6 +65,10 @@
       </Resource>
       <None Remove="Assets\Resources\Background\MainMenu\mainmenu.png" />
       <Resource Include="Assets\Resources\Background\MainMenu\mainmenu.png" />
+      <None Remove="Assets\Resources\Learning\control.png" />
+      <Resource Include="Assets\Resources\Learning\control.png" />
+      <None Remove="Assets\Resources\Learning\winofrec.jpg" />
+      <Resource Include="Assets\Resources\Learning\winofrec.jpg" />
     </ItemGroup>
 
     <ItemGroup>
