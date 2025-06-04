@@ -46,7 +46,7 @@
         <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
                  Text="{Binding SelectedItem.Text}" TextWrapping="Wrap"
                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"
-                 IsReadOnly="True" Focusable="False">
+                 IsReadOnly="True" Focusable="False" x:Name="MainText">
         </TextBox>
 
         <Button Grid.Row="3" Grid.Column="1" Content="Назад" Command="{Binding BackCommand}"></Button>
