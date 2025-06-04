@@ -17,7 +17,7 @@ public partial class App : Application, INotifyPropertyChanged
     private DateTime lastFrameTime;
     private Dictionary<SceneType, SceneView> cacheScenes = new Dictionary<SceneType, SceneView>();
     private SceneView _currentScene;
-    
+
     public event PropertyChangedEventHandler PropertyChanged;
 
     protected override void OnStartup(StartupEventArgs e)
@@ -33,7 +33,12 @@ public partial class App : Application, INotifyPropertyChanged
         CompositionTarget.Rendering += GameLoop;
     }
 
-    public void SetScene(SceneType type, bool isWin = false)
+    public static void SetScene(SceneType type, bool isWin = false)
+    {
+        ((App)Current).SetSceneInternal(type, isWin);
+    }
+
+    public void SetSceneInternal(SceneType type, bool isWin = false)
     {
         if (cacheScenes.TryGetValue(type, out var sceneView))
         {
@@ -41,14 +46,25 @@ public partial class App : Application, INotifyPropertyChanged
         }
         else
         {
-            CurrentScene = type switch
-            {
-                SceneType.MainMenu => new MainMenu(),
-                SceneType.CosmicStation => new CosmicStation(),
-                SceneType.GameOver => new GameOver(isWin)
-            };
-            CurrentScene.Scene.Start();
+            CreateSceneInternal(type, isWin);
         }
+    }
+
+    public static void CreateScene(SceneType type, bool isWin = false)
+    {
+        ((App)Current).CreateSceneInternal(type, isWin);
+    }
+
+    public void CreateSceneInternal(SceneType type, bool isWin)
+    {
+        CurrentScene = type switch
+        {
+            SceneType.MainMenu => new MainMenu(),
+            SceneType.CosmicStation => new CosmicStation(),
+            SceneType.GameOver => new GameOver(isWin)
+        };
+        CurrentScene.Scene.Start();
+        cacheScenes.Add(type, CurrentScene);
     }
 
     public SceneView CurrentScene

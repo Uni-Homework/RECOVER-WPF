@@ -16,7 +16,7 @@ public class PlayerPrefab : GameObject
 
         // Initialize components properly using AddComponent
         var rigidBody = new RigidBody { IsKinematic = false };
-        
+
         AddComponent(rigidBody);
         AddComponent(new PlayerController());
         AddComponent(new BoxCollider(40, 40));
@@ -29,13 +29,13 @@ public class PlayerPrefab : GameObject
         AddComponent(new WaterResourcePlayer());
         AddComponent(new TrashResourcePlayer());
     }
-    
+
     /// <summary>
     /// Fires on player's death.
     /// </summary>
     public void Die()
     {
-        ((App)App.Current).SetScene(SceneType.GameOver, false);
+        App.SetScene(SceneType.GameOver);
     }
 
     /// <summary>
@@ -43,6 +43,6 @@ public class PlayerPrefab : GameObject
     /// </summary>
     public void Win()
     {
-        ((App)App.Current).SetScene(SceneType.GameOver, true);
+        App.SetScene(SceneType.GameOver, true);
     }
 }

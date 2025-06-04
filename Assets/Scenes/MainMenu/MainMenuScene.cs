@@ -12,7 +12,7 @@ public class MainMenuScene : Scene
     public MainMenuScene()
     {
         StartGameCommand = new LambdaCommand<object, object>(
-            _ => ((App)App.Current).SetScene(SceneType.CosmicStation),
+            _ => App.SetScene(SceneType.CosmicStation),
             _ => !string.IsNullOrWhiteSpace(PlayerName));
     }
 
