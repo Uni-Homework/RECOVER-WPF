@@ -32,8 +32,11 @@ public class LearningScene : Scene
                 "в котором указана клавиша для активации объекта и краткое описание выполнения объекта.",
                 "LearningAboutTargetOfObject"),
             new LearningItem("Восполнители ресурсов",
-                "Если у вса заканчиваются ресурсы мы можете воспользоваться специальными устроствами для их восполнения.",
-                "LearningAboutFillerResources")
+                "Если у вса заканчиваются ресурсы мы можете воспользоваться специальными устройствами для их восполнения.",
+                "LearningAboutFillerResources"),
+            new LearningItem("Терминал",
+                "На базе существует терминал. Для того, что бы получить информацию о его возможности используйте команду 'help'.",
+                "LearningAboutTerminal")
         ]);
         NextCommand = new LambdaCommand<object, object>(_ => _items.InsertLast(SelectedItem = _items.TakeFirst()));
         BackCommand = new LambdaCommand<object, object>(_ => _items.InsertFirst(SelectedItem = _items.TakeLast()));

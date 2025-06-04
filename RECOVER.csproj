@@ -73,6 +73,8 @@
       <Resource Include="Assets\Resources\Learning\fillerresources.jpg" />
       <None Remove="Assets\Resources\Learning\targetofobject.jpg" />
       <Resource Include="Assets\Resources\Learning\targetofobject.jpg" />
+      <None Remove="Assets\Resources\Learning\terminal.jpg" />
+      <Resource Include="Assets\Resources\Learning\terminal.jpg" />
     </ItemGroup>
 
     <ItemGroup>
