@@ -37,6 +37,14 @@ public class BoxCollider(double width, double height) : Collider
 
     public override Rect Bounds => GameObject.Transform.GetRectWithOrigin(width, height);
 
+    public IEnumerable<Point> GetBoundsPoints()
+    {
+        yield return Bounds.TopLeft;
+        yield return Bounds.TopRight;
+        yield return Bounds.BottomLeft;
+        yield return Bounds.BottomRight;
+    }
+
     public override bool Intersects(Collider other)
     {
         if (other is BoxCollider boxCollider)

@@ -53,10 +53,12 @@ public class CosmicStationScene : Scene
         objects.Add(enetgyenricher);
         objects.Add(waterPlayerResourceFiller);
 
+        // Spawning debris without them intersecting with each other
+        List<SpaceTrashPrefab> trashPrefabs = new List<SpaceTrashPrefab>();
         for (int i = 0; i < MaxTrashCount; i++)
         {
             Random r = new Random();
-
+        
             int x;
             int y;
             x = y = 0;
@@ -68,13 +70,25 @@ public class CosmicStationScene : Scene
                 x = r.Next(-1000, 1900);
                 y = r.Next(-1000, 1900);
                 c = (x > -300 && x < 900) && (y > -300 && y < 900);
+                var tmp = new SpaceTrashPrefab(x, y);
+                foreach (var trashPrefab in trashPrefabs)
+                {
+                    if (tmp.Intersects(trashPrefab))
+                    {
+                        c = true;
+                        break;
+                    }
+                }
             }
             
             var prefab = new SpaceTrashPrefab(x, y);
+            
             prefab.Transform.Rotation = r.Next(0, 360);
             prefab.Transform.Velocity = new Vector(0.08, 0);
-            objects.Add(prefab);
+            trashPrefabs.Add(prefab);
         }
+        
+        foreach (var trash in trashPrefabs) objects.Add(trash);
     }
 
     public DetectedItemsComponent DetectorItems

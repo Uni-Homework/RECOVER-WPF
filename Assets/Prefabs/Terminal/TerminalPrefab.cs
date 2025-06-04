@@ -17,7 +17,7 @@ public class TerminalPrefab : ItemPrefab
     {
         Player = player;
         Transform.Origin = new Point(0.5, 1);
-        TerminalComponent component = new TerminalComponent();
+        TerminalComponent component = new TerminalComponent(player);
         Action = component.OpenTerminal;
         AddComponent(component);
         AddComponent(new SpriteComponent((ImageSource)App.Current.Resources["ItemTerminalTile"]));

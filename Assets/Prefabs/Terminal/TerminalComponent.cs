@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
+using RECOVER.Assets.Prefabs.Player;
 using RECOVER.Assets.Scenes.Terminal;
 using RECOVER.Engine.Components;
 
@@ -10,9 +11,12 @@ public class TerminalComponent : Component
     private bool _isShow;
     private ObservableCollection<string> history;
     private string command;
+    private PlayerPrefab _player;
+    private Window _terminalWindow;
 
-    public TerminalComponent()
+    public TerminalComponent(PlayerPrefab player)
     {
+        _player = player;
         history = new ObservableCollection<string>();
         command = String.Empty;
     }
@@ -43,7 +47,8 @@ public class TerminalComponent : Component
         }
 
         IsShow = true;
-        TerminalView view = new TerminalView(this);
+        var view = new TerminalView(this);
+        _terminalWindow = view;
         view.Closed += OnClosedTerminal;
         view.ShowDialog();
     }
@@ -53,6 +58,7 @@ public class TerminalComponent : Component
         (sender as Window).Closed -= OnClosedTerminal;
         ClearCommand();
         IsShow = false;
+        _terminalWindow = null;
     }
 
     private void ClearCommand()
@@ -64,12 +70,13 @@ public class TerminalComponent : Component
     {
         History.Add(Command);
 
-        switch (Command)
+        switch (Command.ToLower())
         {
             case "help":
                 History.Add("Рассказ об управлении - get control\n" +
                             "Выйти из игры - exit\n" +
-                            "Отчистка истории терминала - clear");
+                            "Отчистка истории терминала - clear\n" +
+                            "Убить игрока - kill");
                 break;
             case "get control":
                 History.Add("Ходьба - W, A, S, D\n" +
@@ -79,11 +86,21 @@ public class TerminalComponent : Component
             case "exit":
                 App.Current.Shutdown(0);
                 break;
-
             case "clear":
                 History.Clear();
                 break;
-            
+            case "kill":
+                if (_player != null)
+                {
+                    _player.Die();
+                    History.Add("Player terminated.");
+                    _terminalWindow?.Close();
+                }
+                else
+                {
+                    History.Add("Error: Player reference not found.");
+                }
+                break;
             default:
                 History.Add($"Unknown command: {Command}.\nType \"help\" for a list of available commands.");
                 break;

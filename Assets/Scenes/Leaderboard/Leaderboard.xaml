@@ -63,7 +63,7 @@
         </ListView>
 
         <Button Grid.Row="2" 
-                Content="Back to Main Menu" 
+                Content="Назад" 
                 Command="{Binding BackCommand}"
                 Width="200"
                 Height="50"
