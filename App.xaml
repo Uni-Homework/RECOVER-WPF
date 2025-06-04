@@ -61,13 +61,23 @@
             <Setter Property="BorderBrush" Value="#A67C00" />
             <Setter Property="BorderThickness" Value="5" />
             <Setter Property="Margin" Value="0,5,0,0" />
+            <Setter Property="Foreground" Value="#06246F" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="25" />
+
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="#FFD173" />
+                    <Setter Property="BorderBrush" Value="#FFC040" />
+                    <Setter Property="Foreground" Value="#466FD5" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#FFBF00" />
             <Setter Property="BorderBrush" Value="#A67C00" />
+            <Setter Property="Foreground" Value="#06246F" />
             <Setter Property="BorderThickness" Value="5" />
             <Setter Property="Margin" Value="0,5,0,0" />
             <Setter Property="VerticalAlignment" Value="Center" />
