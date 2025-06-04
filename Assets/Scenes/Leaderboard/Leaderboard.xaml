@@ -1,0 +1,72 @@
+<cs:SceneView x:Class="RECOVER.Assets.Scenes.Leaderboard.Leaderboard"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:cs="clr-namespace:RECOVER.Assets.Scenes.CommonScene"
+              xmlns:l="clr-namespace:RECOVER.Assets.Scenes.Leaderboard"
+              mc:Ignorable="d"
+              Title="Leaderboard"
+              d:DataContext="{d:DesignInstance l:LeaderboardScene, IsDesignTimeCreatable=True}">
+
+    <cs:SceneView.Background>
+        <ImageBrush Stretch="UniformToFill" ImageSource="{StaticResource MainMenuBackground}" />
+    </cs:SceneView.Background>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="70*" />
+            <RowDefinition Height="20*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" 
+                   Text="Leaderboard" 
+                   FontSize="48" 
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+            <TextBlock.Background>
+                <SolidColorBrush Color="#80000000"/>
+            </TextBlock.Background>
+        </TextBlock>
+
+        <ListView Grid.Row="1" 
+                  ItemsSource="{Binding LeaderboardEntries}"
+                  Background="#80000000"
+                  Margin="20">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Player Name" Width="200">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding PlayerName}" Foreground="White" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Score" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Score}" Foreground="White" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Date" Width="200">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Date, StringFormat=dd.MM.yyyy HH:mm}" Foreground="White" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Grid.Row="2" 
+                Content="Back to Main Menu" 
+                Command="{Binding BackCommand}"
+                Width="200"
+                Height="50"
+                Margin="0,10,0,0"/>
+    </Grid>
+</cs:SceneView> 
