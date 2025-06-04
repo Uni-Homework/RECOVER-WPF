@@ -20,11 +20,14 @@
 
         <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBox HorizontalAlignment="Stretch"
-                     Text="{Binding PlayerName, 
-            Mode=TwoWay, 
-            UpdateSourceTrigger=PropertyChanged}">
+                     Text="{Binding PlayerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
-            <Button Content="Начать играть" Command="{Binding StartGameCommand}" />
+            <Button HorizontalAlignment="Stretch"
+                    Content="Начать играть" Command="{Binding StartGameCommand}" />
+            <Button HorizontalAlignment="Stretch"
+                    Content="Продолжить игру" Command="{Binding ContinuedGameCommand}" />
+            <Button HorizontalAlignment="Stretch"
+                    Content="Выйти из игры" Command="{Binding ExitCommand}" />
         </StackPanel>
     </Grid>
 </commonScene:SceneView>

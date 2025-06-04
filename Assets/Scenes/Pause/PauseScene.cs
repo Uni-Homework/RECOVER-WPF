@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using RECOVER.Engine;
 using RECOVER.Engine.WPFTools;
 
@@ -7,9 +6,9 @@ namespace RECOVER.Assets.Scenes.Pause;
 
 public class PauseScene : Scene
 {
-    private ICommand continuedCommand;
-    private ICommand toMainScreenCommand;
-    private ICommand exitCommand;
+    private ICommand _continuedCommand;
+    private ICommand _toMainScreenCommand;
+    private ICommand _exitCommand;
 
     public PauseScene()
     {
@@ -20,20 +19,20 @@ public class PauseScene : Scene
 
     public ICommand ExitCommand
     {
-        get => exitCommand;
-        private set { Set(ref exitCommand, value); }
+        get => _exitCommand;
+        private set => Set(ref _exitCommand, value);
     }
 
     public ICommand ContinuedCommand
     {
-        get => continuedCommand;
-        private set { Set(ref continuedCommand, value); }
+        get => _continuedCommand;
+        private set => Set(ref _continuedCommand, value);
     }
 
     public ICommand ToMainScreenCommand
     {
-        get => toMainScreenCommand;
-        private set { Set(ref toMainScreenCommand, value); }
+        get => _toMainScreenCommand;
+        private set => Set(ref _toMainScreenCommand, value);
     }
 
     public void ContinuedExecute(object _)

@@ -66,7 +66,15 @@ public partial class App : Application, INotifyPropertyChanged
             SceneType.Pause => new Pause()
         };
         CurrentScene.Scene.Start();
-        cacheScenes.Add(type, CurrentScene);
+        if (!cacheScenes.TryAdd(type, CurrentScene))
+        {
+            cacheScenes[type] = CurrentScene;
+        }
+    }
+    
+    public static bool IsCachedScene(SceneType type)
+    {
+        return ((App)Current).cacheScenes.ContainsKey(type);
     }
 
     public SceneView CurrentScene
