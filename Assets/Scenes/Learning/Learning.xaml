@@ -13,13 +13,6 @@
         <ImageBrush Stretch="UniformToFill" ImageSource="{StaticResource MainMenuBackground}" />
     </cs:SceneView.Background>
 
-    <cs:SceneView.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="Background" Value="Black" />
-            <Setter Property="Opacity" Value="0.1" />
-        </Style>
-    </cs:SceneView.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*" />
@@ -35,12 +28,12 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0"
-                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                   Text="{Binding SelectedItem.Title}"
-                   TextAlignment="Center" TextWrapping="Wrap"
-                   FontSize="36" Foreground="White">
-        </TextBlock>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0"
+                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                 Text="{Binding SelectedItem.Title}"
+                 TextAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center"
+                 FontSize="36" Foreground="White" Focusable="False">
+        </TextBox>
 
         <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
@@ -50,11 +43,11 @@
         </Border>
 
 
-        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
-                   Text="{Binding SelectedItem.Text}" TextWrapping="Wrap"
-                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                   FontSize="25" Foreground="White">
-        </TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
+                 Text="{Binding SelectedItem.Text}" TextWrapping="Wrap"
+                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"
+                 FontSize="25" Foreground="White" IsReadOnly="True" Focusable="False">
+        </TextBox>
 
         <Button Grid.Row="3" Grid.Column="1" Content="Назад" Command="{Binding BackCommand}"></Button>
         <Button Grid.Row="3" Grid.Column="2" Content="В главное меню" Command="{Binding BackMainScreenCommand}"></Button>
