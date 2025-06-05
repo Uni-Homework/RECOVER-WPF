@@ -6,6 +6,7 @@ using RECOVER.Engine.Serialization;
 using RECOVER.Engine.WPFTools;
 
 namespace RECOVER.Assets.Scenes.Leaderboard;
+
 public class LeaderboardScene : Scene
 {
     private ICommand _commandMenu;
@@ -16,14 +17,14 @@ public class LeaderboardScene : Scene
         _commandMenu = new LambdaCommand<object, object>(_ => App.SetScene(SceneType.MainMenu));
         LeaderboardEntries = new ObservableCollection<LeaderboardEntry>();
         LoadLeaderboard();
-        
+
         // Subscribe to leaderboard updates
         LeaderboardSerializer.LeaderboardUpdated += (sender, args) => LoadLeaderboard();
     }
 
     private void LoadLeaderboard()
     {
-        var entries = LeaderboardSerializer.LoadLeaderboard();
+        var entries = LeaderboardSerializer.LoadLeaderboard().OrderByDescending(le => le.Score);
         LeaderboardEntries.Clear();
         foreach (var entry in entries)
         {
