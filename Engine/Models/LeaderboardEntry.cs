@@ -1,5 +1,3 @@
-using System;
-
 namespace RECOVER.Engine.Models
 {
     public class LeaderboardEntry

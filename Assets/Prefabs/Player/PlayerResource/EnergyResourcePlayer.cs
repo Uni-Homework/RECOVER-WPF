@@ -19,12 +19,12 @@ public class EnergyResourcePlayer : CommonResourcePlayer
         get => base.Current;
         set
         {
+            base.Current = value;
             if (Current <= Min)
             {
                 var player = (PlayerPrefab)GameObject;
                 player.Die();
             }
-            base.Current = value;
         }
     }
 }
