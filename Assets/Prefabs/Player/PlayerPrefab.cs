@@ -45,7 +45,7 @@ public class PlayerPrefab : GameObject
     public void Die()
     {
         LeaderboardSerializer.AddEntry(_nickname, (int) trashResourceComponent.Current);
-        App.SetScene(SceneType.GameOver);
+        App.CreateScene(SceneType.GameOver);
     }
 
     /// <summary>
@@ -54,6 +54,6 @@ public class PlayerPrefab : GameObject
     public void Win()
     {
         LeaderboardSerializer.AddEntry(_nickname, (int) trashResourceComponent.Current);
-        App.SetScene(SceneType.GameOver, true);
+        App.CreateScene(SceneType.GameOver, true);
     }
 }
